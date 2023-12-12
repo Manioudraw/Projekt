@@ -16,9 +16,6 @@ class Warrior{
     draw(context){
         const warriorImg = document.getElementById("warrior");
         context.drawImage(warriorImg, this.x, this.y, this.width, this.height);
-
-        // var heart = document.getElementById("heart");
-        // heart.setAttribute("src", "./images/heartDamage.png");
     }
 
     move(){
@@ -42,10 +39,6 @@ class Warrior{
         this.y += moveY;
 
         this.borderCheck();
-    }
-
-    damage(){
-
     }
 
     //Verhindern, dass der Warrior aus dem Spielfeld laufen kann.

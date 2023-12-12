@@ -1,5 +1,5 @@
 body{
-    background-color: rgb(70, 98, 138);
+    background-color: rgb(197, 197, 197);
 }
 
 #canvas{
@@ -8,12 +8,11 @@ body{
     top: 50%;
     left: 50%;
     translate: -50% -50%;
-
-    background: url("./images/background.png");
-    background-size: 110px;
+    background-color: rgb(160, 160, 160);
+    /* background: url("./images/background.png"); */
 }
 
-#warrior, #zombie, #boss, #heart, #heartDamage{
+#warrior, #zombie, #boss, #heart, #heartDamage, #warriorBullet{
     display: none; 
 }
 
