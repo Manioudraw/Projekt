@@ -43,17 +43,13 @@ class Warrior{
 
     //Verhindern, dass der Warrior aus dem Spielfeld laufen kann.
     borderCheck(){
-        //rechte Border
-        if(this.x >= (this.borderX - this.width * 0.4)){
+        if(this.x >= (this.borderX - this.width * 0.4)){ //rechte Border
             this.x = this.borderX - this.width * 0.4;
-        }//linke Border
-        else if(this.x <= (0 - this.width * 0.4)){
+        } else if(this.x <= (0 - this.width * 0.4)){ //linke Border
             this.x = 0 - this.width * 0.4;
-        }//untere Border
-        else if(this.y >= (this.borderY - this.height * 0.8)){
+        } else if(this.y >= (this.borderY - this.height * 0.8)){ //untere Border
             this.y = this.borderY - this.height * 0.8;
-        }//obere Border
-        else if(this.y <= (0 - this.height * 0.4)){
+        } else if(this.y <= (0 - this.height * 0.4)){ //obere Border
             this.y = 0 - this.height * 0.4;
         }
     }

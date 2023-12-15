@@ -8,9 +8,10 @@ class Game{
         this.width = this.gameCanvas.width;
         this.height = this.gameCanvas.height;
         this.warrior = new Warrior(this);
-        this.bullet = new Bullet(this.warrior);
+        this.warriorBullet = new Bullet(this.warrior, this.warrior);
         this.enemy = new Zombie(this, this.warrior);
         this.boss = new Boss(this, this.warrior);
+        this.bossBullet = new Bullet(this.boss, this.warrior);
         this.gui = new GUI();
     }
 
@@ -21,8 +22,10 @@ class Game{
         this.enemy.move();
         this.boss.draw(context, "boss");
         this.boss.move();
-        this.bullet.draw(context);
-        this.bullet.shoot();
+        this.warriorBullet.draw(context, "warriorBullet", this.warrior);
+        this.warriorBullet.shoot();
+        this.bossBullet.draw(context, "heartDamage", this.boss);
+        this.bossBullet.shoot();
     }
 }
 

@@ -8,6 +8,7 @@ class Zombie extends Enemy {
         this.borderX = game.width;
         this.borderY = game.height;
         this.speed = 0.7;
+        this.health = 10;
         super.spawn(this.width, this.height);
     }
 

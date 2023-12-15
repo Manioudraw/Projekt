@@ -12,24 +12,20 @@ class Enemy{
         
     }
 
-    //Enemies spawnen am Rand. An welchem Rand oder bei welchen Koordinaten genau ist random.
+    //Enemies spawnen am Rand. An welchem Rand oder bei welchen Koordinaten ist random.
     spawn(width, height){
         let random = Math.random();
 
-        //oben
-        if(random >= 0 && random <= 0.25){
+        if(random >= 0 && random <= 0.25){ //oben
             this.x = Math.floor(Math.random() * this.borderX);
-            this.y = 0 - height;
-        } //rechts
-        else if(random > 0.25 && random <= 0.5){
+            this.y = 0 - height ;
+        } else if(random > 0.25 && random <= 0.5){ //rechts
             this.x = this.borderX;
             this.y = Math.floor(Math.random() * this.borderY);
-        } //unten
-        else if(random > 0.5 && random <= 0.75){
+        } else if(random > 0.5 && random <= 0.75){ //unten
             this.x = Math.floor(Math.random() * this.borderX);
             this.y = this.borderY;
-        } //links
-        else if(random > 0.75 && random <= 1){
+        } else if(random > 0.75 && random <= 1){ //links
             this.x = 0 - width;
             this.y = Math.floor(Math.random() * this.borderY);
         }
@@ -52,6 +48,6 @@ class Enemy{
     }
 
     damage(){
-
+        
     }
 }
