@@ -1,6 +1,6 @@
 class Boss extends Enemy {
-    constructor(game, warrior) {
-        super(game, warrior);
+    constructor(game, warrior, bullet) {
+        super(game, warrior, bullet);
         this.width = 200;
         this.height = 200;
         this.x = 0;

@@ -1,5 +1,5 @@
 body{
-    background-color: rgb(197, 197, 197);
+    background-color: rgb(143, 143, 143);
 }
 
 #canvas{
@@ -8,7 +8,7 @@ body{
     top: 50%;
     left: 50%;
     translate: -50% -50%;
-    background-color: rgb(160, 160, 160);
+    background-color: rgb(197, 197, 197);
     /* background: url("./images/background.png"); */
 }
 

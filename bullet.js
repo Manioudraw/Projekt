@@ -122,6 +122,20 @@ class Bullet{
         }
     }
 
+    bulletOnCharacter(character){
+        for (const bullet of this.bullets) {
+            if (
+                bullet.x < character.x + character.width &&
+                bullet.x + bullet.width > character.x &&
+                bullet.y < character.y + character.height &&
+                bullet.y + bullet.height > character.y
+            ) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     getBulletX(){
         return this.x;
     }

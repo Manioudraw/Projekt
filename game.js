@@ -9,8 +9,8 @@ class Game{
         this.height = this.gameCanvas.height;
         this.warrior = new Warrior(this);
         this.warriorBullet = new Bullet(this.warrior, this.warrior);
-        this.enemy = new Zombie(this, this.warrior);
-        this.boss = new Boss(this, this.warrior);
+        this.zombie = new Zombie(this, this.warrior, this.warriorBullet);
+        this.boss = new Boss(this, this.warrior, this.warriorBullet);
         this.bossBullet = new Bullet(this.boss, this.warrior);
         this.gui = new GUI();
     }
@@ -18,14 +18,29 @@ class Game{
     render(context){
         this.warrior.draw(context);
         this.warrior.move(context);
-        this.enemy.draw(context, "zombie");
-        this.enemy.move();
+        this.zombie.draw(context, "zombie");
+        this.zombie.move();
+        // const zombieCreationInterval = setInterval(() => {
+        // this.zombie.manageZombies();
+        // }, 1500);
+        this.zombie.damage();
         this.boss.draw(context, "boss");
         this.boss.move();
         this.warriorBullet.draw(context, "warriorBullet", this.warrior);
         this.warriorBullet.shoot();
         this.bossBullet.draw(context, "heartDamage", this.boss);
         this.bossBullet.shoot();
+    }
+
+    checkCollisions() {
+        // Überprüfe Kollisionen zwischen Kugeln und Zombies
+        for (const bullet of this.warriorBullet.bullets) {
+            for (const zombie of this.zombie.zombies) {
+                if (bullet.bulletOnCharacter(zombie)) {
+                    zombie.health -= 1;
+                }
+            }
+        }
     }
 }
 
