@@ -10,17 +10,20 @@ class Zombie extends Enemy {
         this.speed = 0.7;
         this.health = 10;
         this.zombies = [];
-        super.spawn(this.width, this.height);
+        this.zombieSpawnInterval = 1500;
+        this.lastZombieSpawnTime = 0;
     }
 
     draw(context, image){
-        // for (const zombie of this.zombies){
-        //     const enemyImg = document.getElementById(image);
-        //     context.drawImage(enemyImg, zombie.x, zombie.y, zombie.width, zombie.height);
-        // }
+        console.log("Drawing zombies...");
 
-        const enemyImg = document.getElementById(image);
-        context.drawImage(enemyImg, this.x, this.y, this.width, this.height);
+        for (const zombie of this.zombies){
+            const enemyImg = document.getElementById(image);
+            context.drawImage(enemyImg, zombie.x, zombie.y, zombie.width, zombie.height);
+        }
+
+        // const enemyImg = document.getElementById(image);
+        // context.drawImage(enemyImg, this.x, this.y, this.width, this.height);
     }
 
     createZombie(){
@@ -32,39 +35,50 @@ class Zombie extends Enemy {
             speed: this.speed,
             health: this.health,
         };
+        
         super.spawn(newZombie.width, newZombie.height);
         this.zombies.push(newZombie);
 
-        for (const zombie of this.zombies){
-            if(this.warrior.x > zombie.x){
-                zombie.x += zombie.speed;
-            }
-            if(this.warrior.x < zombie.x){
-                zombie.x -= zombie.speed;
-            }
-            if(this.warrior.y > zombie.y){
-                zombie.y += zombie.speed;
-            }
-            if(this.warrior.y < zombie.y){
-                zombie.y -= zombie.speed;
-            }
+        for (const zombie of this.zombies) {
+            this.updateZombiePosition(zombie);
         }
     }
 
-    manageZombies(){
-        for (let i = 0; i < this.zombies.length; i++){
-            const zombie = this.zombies[i];
-
-            if(zombie.health <= 0){
-                this.zombies.splice(i, 1);
-                i--;
-            }
+    move() {
+        for (const zombie of this.zombies) {
+            this.updateZombiePosition(zombie);
         }
-
-        const zombieCreationInterval = setInterval(() => {
-            this.createZombie();
-        }, 1500);
     }
+
+    updateZombiePosition(zombie) {
+        if (this.warrior.x > zombie.x) {
+            zombie.x += zombie.speed;
+        }
+        if (this.warrior.x < zombie.x) {
+            zombie.x -= zombie.speed;
+        }
+        if (this.warrior.y > zombie.y) {
+            zombie.y += zombie.speed;
+        }
+        if (this.warrior.y < zombie.y) {
+            zombie.y -= zombie.speed;
+        }
+    }
+
+    // manageZombies(){
+    //     for (let i = 0; i < this.zombies.length; i++){
+    //         const zombie = this.zombies[i];
+
+    //         if(zombie.health <= 0){
+    //             this.zombies.splice(i, 1);
+    //             i--;
+    //         }
+    //     }
+
+    //     const zombieCreationInterval = setInterval(() => {
+    //         this.createZombie();
+    //     }, 1500);
+    // }
 
     damage(){
         console.log(1);

@@ -105,20 +105,30 @@ class Bullet{
     deleteBulletOutOfRange(character){
         for (let i = 0; i < this.bullets.length; i++){
             const bullet = this.bullets[i];
-            
-            if(bullet.x >= character.borderX){ //rechte Border
-                this.bullets.splice(i, 1);
-                i--;
-            } else if(bullet.x <= (0 - this.width)){ //linke Border
-                this.bullets.splice(i, 1);
-                i--;
-            } else if(bullet.y >= character.borderY){ //untere Border
-                this.bullets.splice(i, 1);
-                i--;
-            } else if(bullet.y <= (0 - this.height)){ //obere Border
+
+            if (
+                bullet.x >= character.borderX || //rechte Border
+                bullet.x <= (0 - this.width) || //linke Border
+                bullet.y >= character.borderY || //untere Border
+                bullet.y <= (0 - this.height) //obere Border
+            ) {
                 this.bullets.splice(i, 1);
                 i--;
             }
+            
+            // if(bullet.x >= character.borderX){ 
+            //     this.bullets.splice(i, 1);
+            //     i--;
+            // } else if(bullet.x <= (0 - this.width)){ 
+            //     this.bullets.splice(i, 1);
+            //     i--;
+            // } else if(bullet.y >= character.borderY){ 
+            //     this.bullets.splice(i, 1);
+            //     i--;
+            // } else if(bullet.y <= (0 - this.height)){ 
+            //     this.bullets.splice(i, 1);
+            //     i--;
+            // }
         }
     }
 

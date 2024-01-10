@@ -13,6 +13,16 @@ class Game{
         this.boss = new Boss(this, this.warrior, this.warriorBullet);
         this.bossBullet = new Bullet(this.boss, this.warrior);
         this.gui = new GUI();
+        this.startZombieSpawning();
+    }
+
+    startZombieSpawning() {
+        const spawnZombie = () => {
+            this.zombie.createZombie();
+            setTimeout(spawnZombie, this.zombie.zombieSpawnInterval);
+        };
+
+        spawnZombie();
     }
 
     render(context){
@@ -20,9 +30,6 @@ class Game{
         this.warrior.move(context);
         this.zombie.draw(context, "zombie");
         this.zombie.move();
-        // const zombieCreationInterval = setInterval(() => {
-        // this.zombie.manageZombies();
-        // }, 1500);
         this.zombie.damage();
         this.boss.draw(context, "boss");
         this.boss.move();
@@ -32,7 +39,7 @@ class Game{
         this.bossBullet.shoot();
     }
 
-    checkCollisions() {
+    checkCollisions(){
         // Überprüfe Kollisionen zwischen Kugeln und Zombies
         for (const bullet of this.warriorBullet.bullets) {
             for (const zombie of this.zombie.zombies) {
