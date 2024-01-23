@@ -16,7 +16,7 @@ body{
     display: none; 
 }
 
-#warriorHeart{
+#warriorHeart0, #warriorHeart1, #warriorHeart2, #warriorHeart3, #warriorHeart4{
     width: 50px;
     height: 50px;
     position: relative;

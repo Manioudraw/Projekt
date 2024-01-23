@@ -7,7 +7,7 @@ class Warrior{
         this.y = (game.height * 0.5) - (this.height * 0.5);
         this.borderX = game.width;
         this.borderY = game.height;
-        this.speed = 3;
+        this.speed = 5;
         this.health = 5;
         this.keyPressed = {};
         this.controlSetup();
@@ -19,6 +19,7 @@ class Warrior{
         this.bulletSpeed = 3.5;
         this.speedX = 0;
         this.speedY = 0;
+        this.canCollide = true;
         this.bulletControlSetup();
     }
 
@@ -74,7 +75,6 @@ class Warrior{
             this.keyPressed[event.key] = false;
         });
     }
-
     //Bullet-Management
 
     drawBullet(context, imgName){
@@ -83,6 +83,13 @@ class Warrior{
             context.drawImage(bulletImg, bullet.x, bullet.y, bullet.width, bullet.height);
         }
         this.deleteBulletOutOfRange();
+    }
+
+    checkHealth(){
+        if(this.health <= 0){
+            let warriorDead = document.getElementById("warrior");
+            warriorDead.remove();
+        }
     }
 
     bulletControlSetup(){
@@ -122,6 +129,57 @@ class Warrior{
         for (const bullet of this.bullets){
             bullet.x += bullet.speedX * this.bulletSpeed;
             bullet.y += bullet.speedY * this.bulletSpeed;
+        }
+    }
+
+    checkBulletCollisionBoss(enemy){
+        for (const bullet of this.bullets){
+            if (
+                this.canCollide &&
+                bullet.x < enemy.x + enemy.width &&
+                bullet.x + bullet.width > enemy.x &&
+                bullet.y < enemy.y + enemy.height &&
+                bullet.y + bullet.height > enemy.y
+            ) {
+                enemy.health -= 1;
+
+                this.canCollide = false;
+                setTimeout(() => {
+                    this.canCollide = true;
+                }, 500);
+
+                if(enemy.health <= 0){
+                    enemy.bullets = [];
+
+                    let enemyElement = document.getElementById("boss");
+                    enemyElement.remove();
+                }
+            }
+        }
+    }
+
+    checkBulletCollisionZombie(zombieArray){
+        for(const enemy of zombieArray){
+            for (const bullet of this.bullets){
+                if (
+                    this.canCollide &&
+                    bullet.x < enemy.x + enemy.width &&
+                    bullet.x + bullet.width > enemy.x &&
+                    bullet.y < enemy.y + enemy.height &&
+                    bullet.y + bullet.height > enemy.y
+                ) {
+                    enemy.health -= 1;
+
+                    this.canCollide = false;
+                    setTimeout(() => {
+                        this.canCollide = true;
+                    }, 50);
+
+                    if(enemy.health <= 0){
+                        zombieArray.splice(zombieArray.indexOf(enemy), 1);
+                    }
+                }
+            }
         }
     }
 

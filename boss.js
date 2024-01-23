@@ -8,7 +8,7 @@ class Boss extends Enemy {
         this.borderX = game.width;
         this.borderY = game.height;
         this.speed = 0.5;
-        this.health = 150;
+        this.health = 2;
         super.spawn(this.width, this.height);
 
         //Bullet-Management
@@ -18,12 +18,30 @@ class Boss extends Enemy {
         this.bulletSpeed = 3.5;
         this.speedX = 0;
         this.speedY = 0;
+        this.canCollide = true;
         this.bulletControlSetup();
     }
 
     draw(context, image){
         const enemyImg = document.getElementById(image);
         context.drawImage(enemyImg, this.x, this.y, this.width, this.height);
+    }
+
+    checkBodyCollision(warrior){
+        if (
+            this.canCollide &&
+            this.x < warrior.x + warrior.width &&
+            this.x + this.width > warrior.x &&
+            this.y < warrior.y + warrior.height &&
+            this.y + this.height > warrior.y
+        ) {
+            warrior.health -= 1;
+
+            this.canCollide = false;
+            setTimeout(() => {
+                this.canCollide = true;
+            }, 500);
+        }
     }
 
     //Bullet-Management
@@ -105,6 +123,25 @@ class Boss extends Enemy {
             ) {
                 this.bullets.splice(i, 1);
                 i--;
+            }
+        }
+    }
+
+    checkBulletCollision(warrior){
+        for (const bullet of this.bullets){
+            if (
+                this.canCollide &&
+                bullet.x < warrior.x + warrior.width &&
+                bullet.x + bullet.width > warrior.x &&
+                bullet.y < warrior.y + warrior.height &&
+                bullet.y + bullet.height > warrior.y
+            ) {
+                warrior.health -= 1;
+
+                this.canCollide = false;
+                setTimeout(() => {
+                    this.canCollide = true;
+                }, 1500);
             }
         }
     }

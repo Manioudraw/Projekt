@@ -8,9 +8,9 @@ class Game{
         this.width = this.gameCanvas.width;
         this.height = this.gameCanvas.height;
         this.warrior = new Warrior(this);
-        this.zombie = new Zombie(this, this.warrior, this.warriorBullet);
-        this.boss = new Boss(this, this.warrior, this.warriorBullet);
-        this.gui = new GUI();
+        this.gui = new GUI(this.warrior, gameCanvas);
+        this.zombie = new Zombie(this, this.warrior);
+        this.boss = new Boss(this, this.warrior);
         this.startZombieSpawning();
     }
 
@@ -23,16 +23,27 @@ class Game{
     }
 
     render(context){
-        this.warrior.draw(context);
-        this.warrior.move(context);
-        this.warrior.drawBullet(context, "warriorBullet");
-        this.warrior.bulletShoot();
-        this.zombie.draw(context, "zombie");
-        this.zombie.move();
-        this.boss.draw(context, "boss");
-        this.boss.move();
-        this.boss.drawBullet(context, "heartDamage");
-        this.boss.bulletShoot();
+        if(this.warrior.health > 0){
+            this.warrior.draw(context);
+            this.warrior.move(context);
+            this.warrior.drawBullet(context, "warriorBullet");
+            this.warrior.bulletShoot();
+            this.zombie.draw(context, "zombie");
+            this.zombie.move();
+            this.zombie.checkBodyCollision(this.warrior);
+            this.warrior.checkBulletCollisionZombie(this.zombie.zombies);
+    
+
+            if(this.gui.countdown <= (4*60+60) && this.boss.health > 0){
+                this.boss.draw(context, "boss");
+                this.boss.move();
+                this.boss.drawBullet(context, "heartDamage");
+                this.boss.bulletShoot();
+                this.boss.checkBulletCollision(this.warrior);
+                this.boss.checkBodyCollision(this.warrior);
+                this.warrior.checkBulletCollisionBoss(this.boss);
+            }
+        }
     }
 }
 
@@ -55,7 +66,13 @@ window.addEventListener("load", function(){
     function update(){
         canvContext.clearRect(0, 0, gameCanvas.width, gameCanvas.height)
         game.render(canvContext);
+        game.gui.deleteWarriorHearts(this.warrior.health);
         requestAnimationFrame(update);
+
+        // if(game.warrior.health <= 0){
+        //     console.log("drinnen");
+        //     canvContext.clearRect(0, 0, this.width, this.height);
+        // }
     }
     update();
     

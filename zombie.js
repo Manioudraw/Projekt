@@ -8,10 +8,12 @@ class Zombie extends Enemy {
         this.borderX = game.width;
         this.borderY = game.height;
         this.speed = 0.7;
-        this.health = 10;
+        this.health = 15;
         this.zombies = [];
-        this.zombieSpawnInterval = 1500;
+        this.zombieSpawnInterval = 2000;
         this.lastZombieSpawnTime = 0;
+        this.canCollide = true;
+        super.spawn(this.width, this.height);
     }
 
     draw(context, image){
@@ -33,8 +35,6 @@ class Zombie extends Enemy {
         
         super.spawn(newZombie.width, newZombie.height);
         this.zombies.push(newZombie);
-
-        console.log("Zombie-Array-Length:" + this.zombies.length);
 
         for (const zombie of this.zombies) {
             this.updateZombiePosition(zombie);
@@ -62,16 +62,22 @@ class Zombie extends Enemy {
         }
     }
 
-    // damage(){
-    //     console.log(1);
-    //     for (const bullet of this.bullet.bullets) {
-    //         for (const zombie of this.zombies){
-    //             if(bullet.bulletOnCharacter(zombie)){
-    //                 console.log(this.health);
-    //                 this.health -= 1;
-    //                 console.log(this.health);
-    //             }
-    //         }
-    //     }
-    // }
+    checkBodyCollision(warrior){
+        for (const zombie of this.zombies) {
+            if (
+                this.canCollide &&
+                zombie.x < warrior.x + warrior.width &&
+                zombie.x + zombie.width > warrior.x &&
+                zombie.y < warrior.y + warrior.height &&
+                zombie.y + zombie.height > warrior.y
+            ) {
+                warrior.health -= 1;
+
+                this.canCollide = false;
+                setTimeout(() => {
+                    this.canCollide = true;
+                }, 1000);
+            }
+        }
+    }
 }

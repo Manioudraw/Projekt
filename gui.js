@@ -1,10 +1,25 @@
 class GUI{
+    constructor(warrior, gameCanvas){
+        this.warrior = warrior;
+        this.gameCanvas = gameCanvas;
+        this.countdown = 0;
+        this.healthCounter = this.warrior.health;
+    }
+
     warriorHearts(warriorHealth){
         for(let i = 0; i < warriorHealth; i++){
             var heart = new Image();
             heart.src = "./images/heart.png";
             document.getElementById("body").appendChild(heart);
-            heart.id = "warriorHeart";
+            heart.id = "warriorHeart" + i;
+        }
+    }
+
+    deleteWarriorHearts(){
+        if(this.warrior.health < this.healthCounter && this.warrior.health >= 0){
+            let currentWarriorHeart = document.getElementById("warriorHeart" + this.warrior.health);
+            currentWarriorHeart.remove();
+            this.healthCounter -= 1;
         }
     }
     
@@ -22,6 +37,12 @@ class GUI{
                 timer.textContent = "Time is Over!";
                 clearInterval(interval);
             }
+            if(this.warrior.health <= 0){
+                timer.textContent = "You Died!";
+                clearInterval(interval);
+            }
+
+            this.countdown = countdownSec;
         }, 1000);
     }
 
