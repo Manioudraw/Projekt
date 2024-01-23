@@ -10,10 +10,102 @@ class Boss extends Enemy {
         this.speed = 0.5;
         this.health = 150;
         super.spawn(this.width, this.height);
+
+        //Bullet-Management
+        this.bullets = [];
+        this.bulletWidth = 80;
+        this.bulletHeight = 80;
+        this.bulletSpeed = 3.5;
+        this.speedX = 0;
+        this.speedY = 0;
+        this.bulletControlSetup();
     }
 
     draw(context, image){
         const enemyImg = document.getElementById(image);
         context.drawImage(enemyImg, this.x, this.y, this.width, this.height);
+    }
+
+    //Bullet-Management
+
+    drawBullet(context, imgName){
+        for (const bullet of this.bullets){
+            const bulletImg = document.getElementById(imgName);
+            context.drawImage(bulletImg, bullet.x, bullet.y, bullet.width, bullet.height);
+        }
+        this.deleteBulletOutOfRange();
+    }
+
+    bulletControlSetup(){
+        let speedX = 0;
+        let speedY = 0;
+        let speed = 0.1;
+
+        const interval = setInterval(() =>{
+            let warriorX = this.warrior.x + (this.warrior.width / 2);
+            let warriorY = this.warrior.y + (this.warrior.height / 2);
+            let charX = this.x + (this.width / 2);
+            let charY = this.y + (this.height / 2);
+
+            if(charX > warriorX && charY > warriorY){ //Schuss nach links & oben
+                speedX = Math.sqrt(charX - warriorX) * -speed;
+                speedY = Math.sqrt(charY - warriorY) * -speed;
+            } else if(charX > warriorX && charY < warriorY){ //Schuss nach links & unten
+                speedX = Math.sqrt(charX - warriorX) * -speed;
+                speedY = Math.sqrt(warriorY - charY) * speed;
+            } else if(charX < warriorX && charY > warriorY){ //Schuss nach rechts & oben
+                speedX = Math.sqrt(warriorX - charX) * speed;
+                speedY = Math.sqrt(charY - warriorY) * -speed;
+            } else if(charX < warriorX && charY < warriorY){ //Schuss nach rechts & unten
+                speedX = Math.sqrt(warriorX - charX) * speed;
+                speedY = Math.sqrt(warriorY - charY) * speed;
+            }
+
+            if(this.health <= 0){
+                clearInterval(interval);
+            } else {
+               this.createBossBullet(speedX, speedY); 
+            }
+        }, 1500);
+    }
+
+    createBossBullet(xSpeed, ySpeed){
+        this.speedX = 0;
+        this.speedY = 0;
+        let startX = this.x + this.width / 2 - this.bulletWidth / 2;
+        let startY = this.y + this.height / 2 - this.bulletHeight / 2;
+
+        const newBullet = {
+            x: startX,
+            y: startY,
+            width: this.bulletWidth,
+            height: this.bulletHeight,
+            speedX: xSpeed,
+            speedY: ySpeed,
+        };
+        this.bullets.push(newBullet);
+    }
+
+    bulletShoot(){
+        for (const bullet of this.bullets){
+            bullet.x += bullet.speedX * this.bulletSpeed;
+            bullet.y += bullet.speedY * this.bulletSpeed;
+        }
+    }
+
+    deleteBulletOutOfRange(){
+        for (let i = 0; i < this.bullets.length; i++){
+            const bullet = this.bullets[i];
+
+            if (
+                bullet.x >= this.borderX || //rechte Border
+                bullet.x <= (0 - this.bulletWidth) || //linke Border
+                bullet.y >= this.borderY || //untere Border
+                bullet.y <= (0 - this.bulletHeight) //obere Border
+            ) {
+                this.bullets.splice(i, 1);
+                i--;
+            }
+        }
     }
 }

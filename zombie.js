@@ -15,15 +15,10 @@ class Zombie extends Enemy {
     }
 
     draw(context, image){
-        console.log("Drawing zombies...");
-
         for (const zombie of this.zombies){
             const enemyImg = document.getElementById(image);
             context.drawImage(enemyImg, zombie.x, zombie.y, zombie.width, zombie.height);
         }
-
-        // const enemyImg = document.getElementById(image);
-        // context.drawImage(enemyImg, this.x, this.y, this.width, this.height);
     }
 
     createZombie(){
@@ -38,6 +33,8 @@ class Zombie extends Enemy {
         
         super.spawn(newZombie.width, newZombie.height);
         this.zombies.push(newZombie);
+
+        console.log("Zombie-Array-Length:" + this.zombies.length);
 
         for (const zombie of this.zombies) {
             this.updateZombiePosition(zombie);
@@ -65,31 +62,16 @@ class Zombie extends Enemy {
         }
     }
 
-    // manageZombies(){
-    //     for (let i = 0; i < this.zombies.length; i++){
-    //         const zombie = this.zombies[i];
-
-    //         if(zombie.health <= 0){
-    //             this.zombies.splice(i, 1);
-    //             i--;
+    // damage(){
+    //     console.log(1);
+    //     for (const bullet of this.bullet.bullets) {
+    //         for (const zombie of this.zombies){
+    //             if(bullet.bulletOnCharacter(zombie)){
+    //                 console.log(this.health);
+    //                 this.health -= 1;
+    //                 console.log(this.health);
+    //             }
     //         }
     //     }
-
-    //     const zombieCreationInterval = setInterval(() => {
-    //         this.createZombie();
-    //     }, 1500);
     // }
-
-    damage(){
-        console.log(1);
-        for (const bullet of this.bullet.bullets) {
-            for (const zombie of this.zombies){
-                if(bullet.bulletOnCharacter(zombie)){
-                    console.log(this.health);
-                    this.health -= 1;
-                    console.log(this.health);
-                }
-            }
-        }
-    }
 }
