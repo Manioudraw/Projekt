@@ -4,15 +4,145 @@
         <meta charset="UTF-8">
         <meta name="viewport", content="width=device-width, initial-scale=1.0">
         <title>Settings</title>
-        <link rel="stylesheet" href="game.css">
+        <link rel="stylesheet" href="settings.css">
     </head>
 
     <body id="body">
-        <img src="./images/back.png" alt="backToGame" id="backToGame" onclick="window.open('start.html', '_self');"/>
+        <div class="header">
+            <img src="./images/back.png" alt="backToGame" id="backToGame" onclick="window.open('start.html', '_self');"/>
+            <h1>Einstellungen</h1>
+        </div>
 
-        <h1 id="headline">Settings</h1>
+        <div class="row">
+            <div class="column side">
+                <ul>
+                    <li><a href="#visual" onclick="showSettings('visual')">Visuelles</a></li>
+                    <li><a href="#audio" onclick="showSettings('audio')">Audio</a></li>
+                    <li><a href="#gamesettings" onclick="showSettings('gamesettings')">Spieleinstellungen</a></li>
+                    <li><a href="#controls" onclick="showSettings('controls')">Tastenbelegung</a></li>
+                    <li><a href="#backToGame" onclick="showSettings('backToGame')">Zurück zum Spiel</a></li>
+                </ul>
+            </div>
+            
+            <div class="column middle">
+                <div id="visual-settings" class="settings-container visible"> 
+                    <h2>Visuelles</h2>
+                    
+                    <form action="">
+                        <div class="row">
+                            <div class="label">
+                                <label for="font-size">Schriftgröße</label>
+                            </div>
+                            <div class="input">
+                                <input type="text" id="font-size" name="schriftgröße" placeholder="Schriftgröße eingeben">
+                            </div>
+                        </div>
 
-        <p>Text, Text, Text, Text</p>
-        <p>[...]</p>
+                        <div class="row">
+                            <div class="label">
+                                <label for="contrast">Kontrast</label>
+                            </div>
+                            <div class="input">
+                                <input type="text" id="contrast" name="kontrast" placeholder="Kontrast auswählen">
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <!-- Änderungen speichern -->
+                        <div class="row">
+                            <input type="submit" value="Änderungen speichern">
+                        </div>
+                    </form>
+                </div>
+                
+                <div id="audio-settings" class="settings-container">
+                    <h2>Audio</h2>
+
+                    <form action="">
+                        <div class="row">
+                            <div class="label">
+                                <label for="volume">Lautstärke</label>
+                            </div>
+                            <div class="input">
+                                <input type="text" id="volume" name="vorname" placeholder="Lautstärke einstellen">
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <!-- Änderungen speichern -->
+                        <div class="row">
+                            <input type="submit" value="Änderungen speichern">
+                        </div>
+                    </form>
+                </div>
+
+                <div id="gamesettings-settings" class="settings-container">
+                    <h2>Spieleinstellungen</h2>
+
+                    <form action="">
+                        <div class="row">
+                            <div class="label">
+                                <label for="fname">Schwierigkeitsgrad</label>
+                            </div>
+                            <div class="input">
+                                <input type="text" id="fname" name="schwierigkeit" placeholder="Schwierigkeitsgrad eingeben">
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <!-- Änderungen speichern -->
+                        <div class="row">
+                            <input type="submit" value="Änderungen speichern">
+                        </div>
+                    </form>
+                </div>
+
+                <div id="controls-settings" class="settings-container">
+                    <h2>Tastenbelegung</h2>
+
+                    <form action="">
+                        <div class="row">
+                            <div class="label">
+                                <label for="fname">Taste vorwärts</label>
+                            </div>
+                            <div class="input">
+                                <input type="text" id="fname" name="taste" placeholder="Taste eingeben">
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <!-- Änderungen speichern -->
+                        <div class="row">
+                            <input type="submit" value="Änderungen speichern">
+                        </div>
+                    </form>
+                </div>
+
+                <div id="backToGame-settings" class="settings-container">
+                    <h2>Willst du wirklich zurück zum Spiel?</h2>
+                    <br>
+                    
+                    <div>
+                        <div class="row">
+                            <a href="#" onclick="window.open('start.html', '_self');" class="button">Ja, zurück zum Spiel</a>
+                            <a href="#visual" onclick="showSettings('visual')" class="button">Nein, in den Einstellungen bleiben</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function showSettings(category) {
+              document.querySelectorAll('.settings-container').forEach(container => {
+                container.classList.remove('visible');
+              });
+              document.getElementById(`${category}-settings`).classList.add('visible');
+            }
+        </script>
     </body>
 </html>

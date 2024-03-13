@@ -1,0 +1,169 @@
+/* Allgemeiner Aufbau der Seite */
+* {
+    box-sizing: border-box;
+
+    font-family: "Arial";
+    font-weight: bold;
+  }
+  
+body {
+    margin: 0;
+  }
+
+.header {
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+    /* position: sticky; */
+    top: 0;
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 25px;
+  }
+
+.column {
+    float: left;
+    padding: 10px;
+  }
+  
+.column.side {
+    width: 30%;
+  }
+
+.column.middle {
+    width: 50%;
+  }
+
+.row::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+
+/* Zurück-Button */
+#backToGame {
+    width: 60px;
+    height: 60px;
+    float: right;
+    user-select: none;
+    cursor: pointer;
+}
+
+#backGame {
+    font-size: 20px;
+}
+
+
+/* Menü-Bar */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 70%;
+  background-color: #f1f1f1;
+  text-align: center;
+  font-size: 20px;
+}
+
+li a {
+  display: block;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
+
+li a:focus {
+    border: 3px solid #6e1f1f;
+    background-color: #e4bec1;
+  }
+
+.settings-container {
+    display: none;
+  }
+  .visible {
+    display: block;
+  }
+
+
+/* Formular-Settings */
+  input[type=text], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    font-size: 20px;
+  }
+
+  input[type=text]:focus {
+    border: 3px solid #555;
+    background-color: #b8b1d4;
+  }
+  
+  label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+    font-size: 20px;
+  }
+
+  input[type=submit] {
+    background-color: #04AA6D;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+    font-size: 20px;
+  }
+  
+  input[type=submit]:hover {
+    background-color: #45a049;
+  }
+
+  input[type=submit]:focus{
+    border: 3px solid #46083c;
+    background-color: #972da8;
+  }
+
+  .container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
+  
+  .label {
+    float: left;
+    width: 30%;
+    margin-top: 6px;
+  }
+  
+  .input {
+    float: left;
+    width: 70%;
+    margin-top: 6px;
+  }
+
+  .button {
+    background-color: #04AA6D;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 20px;
+  }
+
+  .button:focus{
+    border: 3px solid #46083c;
+    background-color: #972da8;
+  }
