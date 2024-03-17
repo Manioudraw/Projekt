@@ -30,34 +30,58 @@
                     <h2>Visuelles</h2>
                     
                     <form action="">
-                        <div class="row">
-                            <div class="label">
-                                <label for="fontSize">Schriftgröße</label>
-                            </div>
-                            <div class="input">
-                                <select id="fontSize" name="fontSize" onchange="updateFontSize()">
-                                    <option value="16">16</option>
-                                    <option value="18">18</option>
-                                    <option value="20">20</option>
-                                    <option value="22" selected>22</option>
-                                    <option value="24">24</option>
-                                    <option value="26">26</option>
-                                </select>
-                            </div>    
-                        </div>
+                        <fieldset>
+                            <legend>Text</legend>
 
-                        <div class="row">
-                            <div class="label">
-                                <label for="contrast">Kontrast</label>
+                            <div class="row">
+                                <div class="label">
+                                    <label for="fontSize">Schriftgröße</label>
+                                </div>
+                                <div class="input">
+                                    <select id="fontSize" name="fontSize" onchange="updateFontSize()">
+                                        <option value="16">16</option>
+                                        <option value="18">18</option>
+                                        <option value="20">20</option>
+                                        <option value="22" selected>22</option>
+                                        <option value="24">24</option>
+                                        <option value="26">26</option>
+                                    </select>
+                                </div>    
                             </div>
-                            <div class="input">
-                                <input type="text" id="contrast" name="kontrast" placeholder="Kontrast auswählen">
+
+                            <div class="row">
+                                <div class="label">
+                                    <label for="fontStyle">Schriftgröße</label>
+                                </div>
+                                <div class="input">
+                                    <select id="fontStyle" name="fontStyle" onchange="updateFontStyle()">
+                                        <option value="Arial">Arial</option>
+                                        <option value="Arial Black">Arial Black</option>
+                                        <option value="Georgia">Georgia</option>
+                                        <option value="Times New Roman">Times New Roman</option>
+                                        <option value="Verdana">Verdana</option>
+                                    </select>
+                                </div>    
                             </div>
-                        </div>
+                        </fieldset>
 
                         <br>
 
-                        <!-- Änderungen speichern -->
+                        <fieldset>
+                            <legend>Kontrast</legend>
+
+                            <div class="row">
+                                <div class="label">
+                                    <label for="contrast">Kontrast</label>
+                                </div>
+                                <div class="input">
+                                    <input type="text" id="contrast" name="kontrast" placeholder="Kontrast auswählen">
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <br>
+
                         <div class="row">
                             <button type="button" onclick="updateVisual()">Änderungen speichern</button>
                         </div>
@@ -112,20 +136,94 @@
                     <h2>Tastenbelegung</h2>
 
                     <form action="">
-                        <div class="row">
-                            <div class="label">
-                                <label for="fname">Taste vorwärts</label>
+                        <fieldset>
+                            <legend>Bewegen</legend>
+
+                            <div class="row">
+                                <div class="label">
+                                    <label for="up">Hoch:</label>
+                                </div>
+                                <div class="input">
+                                    <input type="text" id="up" name="up" value="w" onfocus="this. value=''" oninput="updateKeySettings('up')" maxlength="1">
+                                </div>
                             </div>
-                            <div class="input">
-                                <input type="text" id="fname" name="taste" placeholder="Taste eingeben">
+
+                            <div class="row">
+                                <div class="label">
+                                    <label for="down">Runter:</label>
+                                </div>
+                                <div class="input">
+                                    <input type="text" id="down" name="down" value="s" onfocus="this. value=''" oninput="updateKeySettings('down')" maxlength="1">
+                                </div>
                             </div>
-                        </div>
+
+                            <div class="row">
+                                <div class="label">
+                                    <label for="right">Rechts:</label>
+                                </div>
+                                <div class="input">
+                                    <input type="text" id="right" name="right" value="d" onfocus="this. value=''" oninput="updateKeySettings('right')" maxlength="1">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="label">
+                                    <label for="left">Links:</label>
+                                </div>
+                                <div class="input">
+                                    <input type="text" id="left" name="left" value="a" onfocus="this. value=''" oninput="updateKeySettings('left')" maxlength="1">
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <br>
+
+                        <fieldset>
+                            <legend>Schießen</legend>
+                            
+                            <div class="row">
+                                <div class="label">
+                                    <label for="upShot">Nach oben schießen:</label>
+                                </div>
+                                <div class="input">
+                                    <input type="text" id="upShot" name="upShot" value="ArrowUp" onfocus="this. value=''" oninput="updateKeySettings('upShot')" maxlength="1">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="label">
+                                    <label for="downShot">Nach unten schießen:</label>
+                                </div>
+                                <div class="input">
+                                    <input type="text" id="downShot" name="downShot" value="ArrowDown" onfocus="this. value=''" oninput="updateKeySettings('downShot')" maxlength="1">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="label">
+                                    <label for="rightShot">Nach rechts schießen:</label>
+                                </div>
+                                <div class="input">
+                                    <input type="text" id="rightShot" name="rightShot" value="ArrowRight" onfocus="this. value=''" oninput="updateKeySettings('rightShot')" maxlength="1">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="label">
+                                    <label for="leftShot">Nach links schießen:</label>
+                                </div>
+                                <div class="input">
+                                    <input type="text" id="leftShot" name="leftShot" value="Arrowleft" onfocus="this. value=''" oninput="updateKeySettings('leftShot')" maxlength="1">
+                                </div>
+                            </div>
+                        </fieldset>
 
                         <br>
 
                         <!-- Änderungen speichern -->
                         <div class="row">
-                            <input type="submit" value="Änderungen speichern">
+                            <input type="reset" value="Reset" onclick="resetKeyBindings()">
+                            <button type="button" onclick="loadCurrentKeyBindings()">Änderungen speichern</button>
                         </div>
                     </form>
                 </div>
@@ -135,8 +233,8 @@
                     <br>
                     <div>
                         <div class="row">
-                            <a href="#" onclick="window.open('start.html', '_self');" class="button">Ja, zurück zum Spiel</a>
-                            <a href="#visual" onclick="showSettings('visual')" class="button">Nein, in den Einstellungen bleiben</a>
+                            <a href="#" onclick="window.open('start.html', '_self');" class="button">Zurück zum Spiel</a>
+                            <a href="#visual" onclick="showSettings('visual')" class="button">In den Einstellungen bleiben</a>
                         </div>
                     </div>
                 </div>
@@ -151,6 +249,8 @@
               document.getElementById(`${category}-settings`).classList.add('visible');
             }
 
+            // Visuelles
+
             function updateFontSize() {
                 var textSize = document.getElementById("fontSize").value;
                 localStorage.setItem("fontSize", textSize);
@@ -159,9 +259,50 @@
                 document.querySelector(':root').style.setProperty('--fontHeadline', (textSize * 1.6) + "px");
             }
 
+            function updateFontStyle() {
+                var fontStyle = document.getElementById("fontStyle").value;
+                localStorage.setItem("fontSize", fontStyle);
+                document.querySelector(':root').style.setProperty('--fontStyle', fontStyle);
+            }
+
             function updateVisual() {
                 updateFontSize();
             }
+
+            //Tastenbelegungen
+
+            function updateKeySettings(element) {
+                var key = document.getElementById(element).value;
+                localStorage.setItem(element, key);
+            }
+
+            function updateValue(element) {
+                var key = localStorage.getItem(element);
+                document.getElementById(element).placeholder = key;
+                document.getElementById(element).value = key;
+                return key;
+            }
+
+            function loadCurrentKeyBindings() {
+                if(localStorage.getItem("up") != null) {
+                    updateValue("up");
+                    updateValue("down");
+                    updateValue("right");
+                    updateValue("left");
+
+                    updateValue("upShot");
+                    updateValue("downShot");
+                    updateValue("rightShot");
+                    updateValue("leftShot");
+                }
+            }
+
+            function resetKeyBindings() {
+                localStorage.clear();
+                loadCurrentKeyBindings();
+            }
+
+            loadCurrentKeyBindings();
         </script>
     </body>
 </html>

@@ -1,6 +1,7 @@
 :root {
   --fontsize: 22px;
   --fontHeadline: 26px;
+  --fontStyle: "Arial";
 }
 
 
@@ -8,7 +9,7 @@
 * {
     box-sizing: border-box;
 
-    font-family: "Arial";
+    font-family: var(--fontStyle);
     font-weight: bold;
   }
   
@@ -26,6 +27,10 @@ body {
 
   h2 {
     font-size: var(--fontHeadline);
+  }
+
+  legend {
+    font-size: var(--fontsize);
   }
 
 .column {
@@ -119,7 +124,7 @@ li a:focus {
     font-size: var(--fontsize);
   }
 
-  input[type=submit], button {
+  button {
     background-color: #04AA6D;
     color: white;
     padding: 12px 20px;
@@ -129,14 +134,39 @@ li a:focus {
     float: right;
     font-size: var(--fontsize);
   }
+
+  .button {
+    background-color: #04AA6D;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: var(--fontsize);
+    text-decoration: none;
+  }
   
-  input[type=submit]:hover, button:hover {
+  button:hover, .button:hover {
     background-color: #275629;
   }
 
-  input[type=submit]:focus, button:focus {
+  button:focus, input[type=reset]:focus, .button:focus {
     border: 3px solid #46083c;
     background-color: #972da8;
+  }
+
+  input[type=reset] {
+    background-color: #a43d2d;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: var(--fontsize);
+  }
+
+  input[type=reset]:hover {
+    background-color: #652116;
   }
 
   .container {
@@ -155,20 +185,4 @@ li a:focus {
     float: left;
     width: 60%;
     margin-top: 6px;
-  }
-
-  .button {
-    background-color: #04AA6D;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    text-decoration: none;
-    font-size: 20px;
-  }
-
-  .button:focus{
-    border: 3px solid #46083c;
-    background-color: #972da8;
   }

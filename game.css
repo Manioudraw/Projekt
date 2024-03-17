@@ -1,6 +1,7 @@
 :root {
     --fontsize: 22px;
-  }
+    --fontStyle: "Arial";
+}
 
 #canvas {
     border: 5px solid black;
@@ -47,10 +48,10 @@
 
     text-align: center;
     font-size: 250%;
-    font-family: "Arial";
+    font-family: var(--fontStyle);
     font-weight: bold;
 }
 
 #headline {
-    font-family: "Arial";
+    font-family: var(--fontStyle);
 }

@@ -1,0 +1,25 @@
+:root {
+    --fontsize: 22px;
+    --fontHeadline: 26px;
+    --fontStyle: "Arial";
+}
+
+* {
+    font-family: var(--fontStyle);
+    font-size: var(--fontsize);
+}
+
+h1 {
+    font-size: var(--fontHeadline);
+}
+
+#backToGame {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    right: 1%;
+    float: right;
+    user-select: none;
+    cursor: pointer;
+}
+  

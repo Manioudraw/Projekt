@@ -32,16 +32,40 @@ class Warrior{
         let moveX = 0;
         let moveY = 0;
 
-        if(this.keyPressed["w"]){
+        var up = localStorage.getItem("up");
+        var down = localStorage.getItem("down");
+        var right = localStorage.getItem("right");
+        var left = localStorage.getItem("left");
+
+        //Standard-Tastenbelegung, falls diese nicht indiviualisiert ist
+        if (up == null){
+            up = "w";
+            localStorage.setItem("up", up);
+        }
+        if (down == null){
+            down = "s";
+            localStorage.setItem("down", down);
+        }
+        if (right == null){
+            right = "d";
+            localStorage.setItem("right", right);
+        }
+        if (left == null){
+            left = "a";
+            localStorage.setItem("left", left);
+        }
+
+        //Bewegung nach der Tastenbelegung
+        if(this.keyPressed[up]){
             moveY -= this.speed;
         }
-        if(this.keyPressed["a"]){
+        if(this.keyPressed[left]){
             moveX -= this.speed;
         }
-        if(this.keyPressed["s"]){
+        if(this.keyPressed[down]){
             moveY += this.speed;
         }
-        if(this.keyPressed["d"]){
+        if(this.keyPressed[right]){
             moveX += this.speed;
         }
 
@@ -97,16 +121,40 @@ class Warrior{
 
         document.addEventListener("keydown", (event) => {
             if (this.speedX == 0 && this.speedY == 0 && canShoot){
-                if (event.key == "ArrowUp" || event.key == "i"){
+
+                var upShot = localStorage.getItem("upShot");
+                var downShot = localStorage.getItem("downShot");
+                var rightShot = localStorage.getItem("rightShot");
+                var leftShot = localStorage.getItem("leftShot");
+
+                //Standard-Tastenbelegung, falls diese nicht indiviualisiert ist
+                if (upShot == null){
+                    upShot = "ArrowUp";
+                    localStorage.setItem("upShot", upShot);
+                }
+                if (downShot == null){
+                    downShot = "ArrowDown";
+                    localStorage.setItem("downShot", downShot);
+                }
+                if (rightShot == null){
+                    rightShot = "ArrowRight";
+                    localStorage.setItem("rightShot", rightShot);
+                }
+                if (leftShot == null){
+                    leftShot = "ArrowLeft";
+                    localStorage.setItem("leftShot", leftShot);
+                }
+
+                if (event.key == upShot){
                     this.createWarriorBullet(0, -2);
                     this.playShotSound();
-                } else if (event.key == "ArrowDown" || event.key == "k"){
+                } else if (event.key == downShot){
                     this.createWarriorBullet(0, 2);
                     this.playShotSound();
-                } else if (event.key == "ArrowLeft" || event.key == "j"){
+                } else if (event.key == leftShot){
                     this.createWarriorBullet(-2, 0);
                     this.playShotSound();
-                } else if (event.key == "ArrowRight" || event.key == "l"){
+                } else if (event.key == rightShot){
                     this.createWarriorBullet(2, 0);
                     this.playShotSound();
                 }
