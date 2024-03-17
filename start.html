@@ -27,6 +27,7 @@
         <script src="game.js"></script>
         <script src="gui.js"></script>
         <script src="bullet.js"></script>
+        
 
         <audio loop autoplay> <source src="./audio/music/backgroundMusic.mp3" type="audio/mpeg"> </audio>
 
@@ -39,14 +40,16 @@
         <img src="./images/settings.png" alt="settings" id="settings" onclick="window.open('settings.html', '_self')"/>
         <img src="./images/gamerules.png" alt="gamerules" id="gamerules" onclick="window.open('gamerules.html', '_self')"/>
 
-        <script>
-            // Lade Einstellungen aus localStorage und wende sie an
-            console.log("game yes");
-            var textSize = localStorage.getItem("textSize");
+        <!-- <script>
+            //FontSize auf der Seite anpassen
+            var textSize = localStorage.getItem("fontSize");
+            console.log(textSize);
             if (textSize) {
               document.querySelector(':root').style.setProperty('--fontsize', textSize + "px");
               document.querySelector(':root').style.setProperty('--fontHeadline', (textSize * 1.6) + "px");
             }
-          </script>
+          </script> -->
+
+          <script scr="settingUpdate.js"></script>
     </body>
 </html>

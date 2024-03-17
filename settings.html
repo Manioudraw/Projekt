@@ -32,11 +32,18 @@
                     <form action="">
                         <div class="row">
                             <div class="label">
-                                <label for="font-size">Schriftgröße</label>
+                                <label for="fontSize">Schriftgröße</label>
                             </div>
                             <div class="input">
-                                <input type="text" id="font-size" name="schriftgröße" placeholder="Schriftgröße eingeben">
-                            </div>
+                                <select id="fontSize" name="fontSize" onchange="updateFontSize()">
+                                    <option value="16">16</option>
+                                    <option value="18">18</option>
+                                    <option value="20">20</option>
+                                    <option value="22" selected>22</option>
+                                    <option value="24">24</option>
+                                    <option value="26">26</option>
+                                </select>
+                            </div>    
                         </div>
 
                         <div class="row">
@@ -46,22 +53,6 @@
                             <div class="input">
                                 <input type="text" id="contrast" name="kontrast" placeholder="Kontrast auswählen">
                             </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="label">
-                                <label for="fontsize3">Schriftgröße</label>
-                            </div>
-                            <div class="input">
-                                <select id="fontsize3" name="fontsize3" onchange="updateFontSize()">
-                                    <option value="16">16</option>
-                                    <option value="18">18</option>
-                                    <option value="20">20</option>
-                                    <option value="22" selected="selected">22</option>
-                                    <option value="24">24</option>
-                                    <option value="26">26</option>
-                                </select>
-                            </div>    
                         </div>
 
                         <br>
@@ -161,17 +152,14 @@
             }
 
             function updateFontSize() {
-                console.log("settings");
-                var textSize = document.getElementById("fontsize3").value;
-                localStorage.setItem("fontsize3", textSize);
+                var textSize = document.getElementById("fontSize").value;
+                localStorage.setItem("fontSize", textSize);
 
                 document.querySelector(':root').style.setProperty('--fontsize', textSize + "px");
                 document.querySelector(':root').style.setProperty('--fontHeadline', (textSize * 1.6) + "px");
-                console.log("Hello world!");
             }
 
             function updateVisual() {
-                console.log("alles");
                 updateFontSize();
             }
         </script>
