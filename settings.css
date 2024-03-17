@@ -1,3 +1,9 @@
+:root {
+  --fontsize: 22px;
+  --fontHeadline: 26px;
+}
+
+
 /* Allgemeiner Aufbau der Seite */
 * {
     box-sizing: border-box;
@@ -14,13 +20,12 @@ body {
     background-color: #f1f1f1;
     padding: 20px;
     text-align: center;
-    /* position: sticky; */
-    top: 0;
-    font-size: 20px;
+    position: sticky;
+    font-size: var(--fontsize);
   }
 
   h2 {
-    font-size: 25px;
+    font-size: var(--fontHeadline);
   }
 
 .column {
@@ -53,7 +58,7 @@ body {
 }
 
 #backGame {
-    font-size: 20px;
+    font-size: var(--fontsize);
 }
 
 
@@ -65,7 +70,7 @@ ul {
   width: 70%;
   background-color: #f1f1f1;
   text-align: center;
-  font-size: 20px;
+  font-size: var(--fontsize);
 }
 
 li a {
@@ -100,7 +105,7 @@ li a:focus {
     border: 1px solid #ccc;
     border-radius: 4px;
     resize: vertical;
-    font-size: 20px;
+    font-size: var(--fontsize);
   }
 
   input[type=text]:focus {
@@ -111,10 +116,10 @@ li a:focus {
   label {
     padding: 12px 12px 12px 0;
     display: inline-block;
-    font-size: 20px;
+    font-size: var(--fontsize);
   }
 
-  input[type=submit] {
+  input[type=submit], button {
     background-color: #04AA6D;
     color: white;
     padding: 12px 20px;
@@ -122,14 +127,14 @@ li a:focus {
     border-radius: 4px;
     cursor: pointer;
     float: right;
-    font-size: 20px;
+    font-size: var(--fontsize);
   }
   
-  input[type=submit]:hover {
-    background-color: #45a049;
+  input[type=submit]:hover, button:hover {
+    background-color: #275629;
   }
 
-  input[type=submit]:focus{
+  input[type=submit]:focus, button:focus {
     border: 3px solid #46083c;
     background-color: #972da8;
   }
@@ -142,13 +147,13 @@ li a:focus {
   
   .label {
     float: left;
-    width: 30%;
+    width: 40%;
     margin-top: 6px;
   }
   
   .input {
     float: left;
-    width: 70%;
+    width: 60%;
     margin-top: 6px;
   }
 

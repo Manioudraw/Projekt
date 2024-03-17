@@ -93,20 +93,36 @@ class Warrior{
     }
 
     bulletControlSetup(){
+        var canShoot = true;
+
         document.addEventListener("keydown", (event) => {
-            if (this.speedX == 0 && this.speedY == 0){
+            if (this.speedX == 0 && this.speedY == 0 && canShoot){
                 if (event.key == "ArrowUp" || event.key == "i"){
                     this.createWarriorBullet(0, -2);
+                    this.playShotSound();
                 } else if (event.key == "ArrowDown" || event.key == "k"){
                     this.createWarriorBullet(0, 2);
+                    this.playShotSound();
                 } else if (event.key == "ArrowLeft" || event.key == "j"){
                     this.createWarriorBullet(-2, 0);
+                    this.playShotSound();
                 } else if (event.key == "ArrowRight" || event.key == "l"){
                     this.createWarriorBullet(2, 0);
+                    this.playShotSound();
                 }
+
+                canShoot = false;
+                setTimeout(function() {
+                    canShoot = true; // Setze die Möglichkeit zum Schießen nach 1,5 Sekunden zurück
+                }, 500);
             }
         });
     }
+
+    playShotSound() {
+        var audio = document.getElementById("punchWarrior");
+        audio.play();
+      }
 
     createWarriorBullet(xSpeed, ySpeed){
         this.speedX = 0;
@@ -122,6 +138,7 @@ class Warrior{
             speedX: xSpeed,
             speedY: ySpeed,
         };
+
         this.bullets.push(newBullet);
     }
 

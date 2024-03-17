@@ -4,10 +4,11 @@
         <meta charset="UTF-8">
         <meta name="viewport", content="width=device-width, initial-scale=1.0">
         <title>Settings</title>
+        <link rel="stylesheet" href="game.css">
         <link rel="stylesheet" href="settings.css">
     </head>
 
-    <body id="body">
+    <body>
         <div class="header">
             <img src="./images/back.png" alt="backToGame" id="backToGame" onclick="window.open('start.html', '_self');"/>
             <h1>Einstellungen</h1>
@@ -47,11 +48,27 @@
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="label">
+                                <label for="fontsize3">Schriftgröße</label>
+                            </div>
+                            <div class="input">
+                                <select id="fontsize3" name="fontsize3" onchange="updateFontSize()">
+                                    <option value="16">16</option>
+                                    <option value="18">18</option>
+                                    <option value="20">20</option>
+                                    <option value="22" selected="selected">22</option>
+                                    <option value="24">24</option>
+                                    <option value="26">26</option>
+                                </select>
+                            </div>    
+                        </div>
+
                         <br>
 
                         <!-- Änderungen speichern -->
                         <div class="row">
-                            <input type="submit" value="Änderungen speichern">
+                            <button type="button" onclick="updateVisual()">Änderungen speichern</button>
                         </div>
                     </form>
                 </div>
@@ -125,7 +142,6 @@
                 <div id="backToGame-settings" class="settings-container">
                     <h2>Willst du wirklich zurück zum Spiel?</h2>
                     <br>
-                    
                     <div>
                         <div class="row">
                             <a href="#" onclick="window.open('start.html', '_self');" class="button">Ja, zurück zum Spiel</a>
@@ -142,6 +158,21 @@
                 container.classList.remove('visible');
               });
               document.getElementById(`${category}-settings`).classList.add('visible');
+            }
+
+            function updateFontSize() {
+                console.log("settings");
+                var textSize = document.getElementById("fontsize3").value;
+                localStorage.setItem("fontsize3", textSize);
+
+                document.querySelector(':root').style.setProperty('--fontsize', textSize + "px");
+                document.querySelector(':root').style.setProperty('--fontHeadline', (textSize * 1.6) + "px");
+                console.log("Hello world!");
+            }
+
+            function updateVisual() {
+                console.log("alles");
+                updateFontSize();
             }
         </script>
     </body>
