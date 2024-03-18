@@ -8,16 +8,36 @@
     </head>
 
     <body id="body">
+        <!-- Canvas -->
         <canvas id="canvas"></canvas>
 
+        <!-- Timer -->
         <p id="timer"></p>
 
+        <!-- Audio -->
         <audio autoplay loop id="backgroundMusic"> 
             <source src="./audio/music/backgroundMusic.mp3" type="audio/mpeg"> 
             Dein Browser unterstützt die Audiodatei leider nicht.
         </audio>
         <audio id="punchWarrior"> <source src="./audio/soundFiles/punchWarrior.mp3" type="audio/mpeg"> </audio>
         
+        <script>
+            function loadAudio(element) {
+                var audioElement = document.getElementById(element);
+                audioElement.volume = 0;
+
+                if(parseFloat(localStorage.getItem(element)) != null) {
+                    audioElement.volume = localStorage.getItem(element);
+                }
+
+                localStorage.setItem(element, audioElement.volume);
+            }
+
+            loadAudio("backgroundMusic");
+            // loadAudio("punchWarrior");
+        </script>
+
+        <!-- JS-Dateien -->
         <script src="warrior.js"></script>
         <script src="enemy.js"></script>
         <script src="zombie.js"></script>
@@ -26,6 +46,7 @@
         <script src="gui.js"></script>
         <script src="settingUpdate.js"></script>
 
+        <!-- IMG-Dateien -->
         <img src="./images/warrior.png" alt="warrior" id="warrior"/>
         <img src="./images/warriorShot.png" alt="warriorBullet" id="warriorBullet"/>
         <img src="./images/zombie.png" alt="zombie" id="zombie"/>

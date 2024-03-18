@@ -92,20 +92,26 @@
                     <h2>Audio</h2>
 
                     <form action="">
-                        <div class="row">
-                            <div class="label">
-                                <label for="volume">Lautstärke</label>
+                        <fieldset>
+                            <legend>Musik</legend>
+
+                            <div class="row">
+                                <div class="label">
+                                    <label for="volume">Hintergrundmusik</label>
+                                </div>
+                                <div class="input">
+                                    <span id="output" class="output"></span>
+                                    <div class="slidecontainer">
+                                        <input type="range" id="volume" name="volume" min="0" max="100" class="slider" id="myRange" onchange="updateAudioSettings()"/>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="input">
-                                <input type="text" id="volume" name="vorname" placeholder="Lautstärke einstellen">
-                            </div>
-                        </div>
+                        </fieldset>
 
                         <br>
 
-                        <!-- Änderungen speichern -->
                         <div class="row">
-                            <input type="submit" value="Änderungen speichern">
+                            <button type="button" onclick="updateAudioSettings()">Änderungen speichern</button>
                         </div>
                     </form>
                 </div>

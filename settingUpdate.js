@@ -6,6 +6,7 @@ window.onload = function () {
         if (textSize) {
             document.querySelector(':root').style.setProperty('--fontsize', textSize + "px");
             document.querySelector(':root').style.setProperty('--fontHeadline', (textSize * 1.6) + "px");
+            document.querySelector(':root').style.setProperty('--fontTitel', (textSize * 1.2) + "px");
         }
     }
 

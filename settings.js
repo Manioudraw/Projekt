@@ -1,3 +1,4 @@
+//Menü
 
 function showSettings(category) {
     document.querySelectorAll('.settings-container').forEach(container => {
@@ -13,6 +14,7 @@ function updateFontSize() {
     localStorage.setItem("fontSize", textSize);
     document.querySelector(':root').style.setProperty('--fontsize', textSize + "px");
     document.querySelector(':root').style.setProperty('--fontHeadline', (textSize * 1.6) + "px");
+    document.querySelector(':root').style.setProperty('--fontTitel', (textSize * 1.2) + "px");
 }
 
 function updateFontStyle() {
@@ -32,6 +34,7 @@ function loadCurrentVisualSettings() {
         document.getElementById("fontSize").value = textSize; 
         document.querySelector(':root').style.setProperty('--fontsize', textSize + "px");
         document.querySelector(':root').style.setProperty('--fontHeadline', (textSize * 1.6) + "px");
+        document.querySelector(':root').style.setProperty('--fontTitel', (textSize * 1.2) + "px");
     }
 
     if(localStorage.getItem("fontStyle") != null) {
@@ -42,6 +45,52 @@ function loadCurrentVisualSettings() {
 }
 
 loadCurrentVisualSettings();
+
+
+
+
+
+//Audio
+function updateAudioSettings() {
+    var backgroundVolume = parseFloat(localStorage.getItem("backgroundMusic"));
+    var slider = document.getElementById("volume");
+    var output = document.getElementById("output");
+    output.innerHTML = slider.value;
+
+    slider.oninput = function() {
+        output.innerHTML = this.value;
+        backgroundVolume = this.value;
+        slider.value = this.value;
+    }
+
+    backgroundVolume = slider.value/100;
+    localStorage.setItem("backgroundMusic", backgroundVolume);
+}
+
+function loadCurrentAudioSettings() {
+    if(localStorage.getItem("backgroundMusic") != null) {
+        var backgroundVolume = parseFloat(localStorage.getItem("backgroundMusic"));
+        var slider = document.getElementById("volume");
+        var output = document.getElementById("output");
+
+        slider.value = backgroundVolume*100;
+        output.innerHTML = backgroundVolume*100;
+    }
+    
+}
+
+loadCurrentAudioSettings();
+
+
+
+
+
+
+//Spieleinstellungen
+
+
+
+
 
 //Tastenbelegungen
 
@@ -57,6 +106,19 @@ function updateValue(element) {
     return key;
 }
 
+function resetKeyBindings() {
+    localStorage.setItem("up", "w");
+    localStorage.setItem("down", "s");
+    localStorage.setItem("right", "d");
+    localStorage.setItem("left", "a");
+
+    localStorage.setItem("upShot", "ArrowUp");
+    localStorage.setItem("downShot", "ArrowDown");
+    localStorage.setItem("rightShot", "ArrowRight");
+    localStorage.setItem("leftShot", "ArrowLeft");
+    loadCurrentKeyBindings();
+}
+
 function loadCurrentKeyBindings() {
     if(localStorage.getItem("up") != null) {
         updateValue("up");
@@ -69,19 +131,6 @@ function loadCurrentKeyBindings() {
         updateValue("rightShot");
         updateValue("leftShot");
     }
-}
-
-function resetKeyBindings() {
-    localStorage.setItem("up", "w");
-    localStorage.setItem("down", "s");
-    localStorage.setItem("right", "d");
-    localStorage.setItem("left", "a");
-
-    localStorage.setItem("upShot", "ArrowUp");
-    localStorage.setItem("downShot", "ArrowDown");
-    localStorage.setItem("rightShot", "ArrowRight");
-    localStorage.setItem("leftShot", "ArrowLeft");
-    loadCurrentKeyBindings();
 }
 
 loadCurrentKeyBindings();
