@@ -1,7 +1,7 @@
 window.onload = function () {
     //Visuelles
 
-    function updateFontSize(){
+    function updateFontSize() {
         var textSize = localStorage.getItem("fontSize");
         if (textSize) {
             document.querySelector(':root').style.setProperty('--fontsize', textSize + "px");
@@ -9,7 +9,7 @@ window.onload = function () {
         }
     }
 
-    function updateFontStyle(){
+    function updateFontStyle() {
         var fontStyle = localStorage.getItem("fontStyle");
         if (fontStyle) {
             document.querySelector(':root').style.setProperty('--fontStyle', fontStyle);
