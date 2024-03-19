@@ -196,6 +196,7 @@ li a:focus {
   /* Slider - Audio-Seite */
 
   .slider {
+  appearance: none;
   -webkit-appearance: none;
   width: 100%;
   height: var(--fontsize);
@@ -231,5 +232,5 @@ li a:focus {
 
 .output {
   font-size: var(--fontsize);
-  padding: 48%;
+  padding: 47%;
 }

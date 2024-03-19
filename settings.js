@@ -55,10 +55,10 @@ function updateAudioSettings() {
     var backgroundVolume = parseFloat(localStorage.getItem("backgroundMusic"));
     var slider = document.getElementById("volume");
     var output = document.getElementById("output");
-    output.innerHTML = slider.value;
+    output.innerHTML = slider.value + "%";
 
     slider.oninput = function() {
-        output.innerHTML = this.value;
+        output.innerHTML = this.value + "%";
         backgroundVolume = this.value;
         slider.value = this.value;
     }
@@ -74,7 +74,7 @@ function loadCurrentAudioSettings() {
         var output = document.getElementById("output");
 
         slider.value = backgroundVolume*100;
-        output.innerHTML = backgroundVolume*100;
+        output.innerHTML = backgroundVolume*100 + "%";
     }
     
 }

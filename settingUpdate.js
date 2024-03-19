@@ -19,6 +19,4 @@ window.onload = function () {
 
     updateFontSize();
     updateFontStyle();
-
-    //Nicht-Visuelles
 }   
