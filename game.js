@@ -62,14 +62,6 @@ window.addEventListener("load", function(){
 
     const game = new Game(gameCanvas);
 
-    window.addEventListener('click', () => {
-        var backgroundMusic = document.getElementById("backgroundMusic");
-        if(localStorage.getItem("backgroundMusic") != null) {
-            backgroundMusic.volume = localStorage.getItem("backgroundMusic");
-        }
-        backgroundMusic.play();
-    });
-    
     //Der Warrior wird gelöscht und danach neu gerendert/gezeichnet
     function update(){
         canvContext.clearRect(0, 0, gameCanvas.width, gameCanvas.height)

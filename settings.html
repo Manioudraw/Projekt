@@ -94,7 +94,6 @@
                     <form action="">
                         <fieldset>
                             <legend>Musik</legend>
-
                             <div class="row">
                                 <div class="label">
                                     <label for="volume">Hintergrundmusik</label>
@@ -102,7 +101,25 @@
                                 <div class="input">
                                     <span id="output" class="output"></span>
                                     <div class="slidecontainer">
-                                        <input type="range" id="volume" name="volume" min="0" max="100" class="slider" id="myRange" onchange="updateAudioSettings()"/>
+                                        <input type="range" id="volume" name="volume" min="0" max="100" class="slider" id="myRange" onchange="updateBackgroundSettings()"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <br>
+
+                        <fieldset>
+                            <legend>Sound-Effekte</legend>
+
+                            <div class="row">
+                                <div class="label">
+                                    <label for="soundEffects">Sound-Effekte</label>
+                                </div>
+                                <div class="input">
+                                    <span id="outputEffects" class="output"></span>
+                                    <div class="slidecontainer">
+                                        <input type="range" id="soundEffects" name="soundEffects" min="0" max="100" class="slider" onchange="updateSoundEffects()"/>
                                     </div>
                                 </div>
                             </div>
@@ -111,7 +128,7 @@
                         <br>
 
                         <div class="row">
-                            <button type="button" onclick="updateAudioSettings()">Änderungen speichern</button>
+                            <button type="button" onclick="updateAudio()">Änderungen speichern</button>
                         </div>
                     </form>
                 </div>

@@ -51,35 +51,57 @@ loadCurrentVisualSettings();
 
 
 //Audio
-function updateAudioSettings() {
-    var backgroundVolume = parseFloat(localStorage.getItem("backgroundMusic"));
-    var slider = document.getElementById("volume");
-    var output = document.getElementById("output");
+var sliderValue;
+
+function confSlider(idSlider, idOutput) {
+    var slider = document.getElementById(idSlider);
+    var output = document.getElementById(idOutput);
     output.innerHTML = slider.value + "%";
 
     slider.oninput = function() {
         output.innerHTML = this.value + "%";
-        backgroundVolume = this.value;
         slider.value = this.value;
     }
 
-    backgroundVolume = slider.value/100;
+    sliderValue = slider.value;
+}
+
+function updateBackgroundSettings() {
+    confSlider("volume", "output");
+    var backgroundVolume = parseFloat(localStorage.getItem("backgroundMusic"));
+    backgroundVolume = sliderValue/100;
     localStorage.setItem("backgroundMusic", backgroundVolume);
 }
 
-function loadCurrentAudioSettings() {
-    if(localStorage.getItem("backgroundMusic") != null) {
-        var backgroundVolume = parseFloat(localStorage.getItem("backgroundMusic"));
-        var slider = document.getElementById("volume");
-        var output = document.getElementById("output");
+function updateSoundEffects() {
+    confSlider("soundEffects", "outputEffects");
+    var punchWarrior = localStorage.getItem("punchWarrior");
+    punchWarrior = sliderValue/100;
+    localStorage.setItem("punchWarrior", punchWarrior);
 
-        slider.value = backgroundVolume*100;
-        output.innerHTML = backgroundVolume*100 + "%";
-    }
-    
+    var bossShot = localStorage.getItem("bossShot");
+    bossShot = sliderValue/100;
+    localStorage.setItem("bossShot", bossShot);
 }
 
-loadCurrentAudioSettings();
+function updateAudio() {
+    updateBackgroundSettings();
+    updateSoundEffects();
+}
+
+function loadCurrentAudioSettings(elementId, sliderId, outputId) {
+    if(localStorage.getItem(elementId) != null){
+        var element = parseFloat(localStorage.getItem(elementId));
+        var slider = document.getElementById(sliderId);
+        var output = document.getElementById(outputId);
+
+        slider.value = element*100;
+        output.innerHTML = element*100 + "%";
+    }
+}
+
+loadCurrentAudioSettings("backgroundMusic", "volume", "output");
+loadCurrentAudioSettings("punchWarrior", "soundEffects", "outputEffects");
 
 
 

@@ -58,6 +58,7 @@ class Boss extends Enemy {
         let speedX = 0;
         let speedY = 0;
         let speed = 0.1;
+        var shot = false;
 
         const interval = setInterval(() =>{
             let warriorX = this.warrior.x + (this.warrior.width / 2);
@@ -68,16 +69,28 @@ class Boss extends Enemy {
             if(charX > warriorX && charY > warriorY){ //Schuss nach links & oben
                 speedX = Math.sqrt(charX - warriorX) * -speed;
                 speedY = Math.sqrt(charY - warriorY) * -speed;
+                // this.playShotSound();
+                shot = true;
             } else if(charX > warriorX && charY < warriorY){ //Schuss nach links & unten
                 speedX = Math.sqrt(charX - warriorX) * -speed;
                 speedY = Math.sqrt(warriorY - charY) * speed;
+                // this.playShotSound();
+                shot = true;
             } else if(charX < warriorX && charY > warriorY){ //Schuss nach rechts & oben
                 speedX = Math.sqrt(warriorX - charX) * speed;
                 speedY = Math.sqrt(charY - warriorY) * -speed;
+                // this.playShotSound();
+                shot = true;
             } else if(charX < warriorX && charY < warriorY){ //Schuss nach rechts & unten
                 speedX = Math.sqrt(warriorX - charX) * speed;
                 speedY = Math.sqrt(warriorY - charY) * speed;
+                // this.playShotSound();
+                shot = true;
             }
+
+            localStorage.setItem("shot", shot);
+            shot = false;
+            localStorage.setItem("shot", shot);
 
             if(this.health <= 0){
                 clearInterval(interval);
@@ -85,6 +98,18 @@ class Boss extends Enemy {
                this.createBossBullet(speedX, speedY); 
             }
         }, 1500);
+    }
+
+    shotSound() {
+        var audio = document.getElementById("bossShot");
+        audio.play();
+        console.log("------------------------------");
+    }
+
+    playShotSound(){
+        document.addEventListener('keydown', this.shotSound);
+        console.log("hiiiiiiiiiiiiiiiiiiiiiiii");
+        document.removeEventListener('keydown', this.shotSound);
     }
 
     createBossBullet(xSpeed, ySpeed){

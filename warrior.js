@@ -170,7 +170,7 @@ class Warrior{
     playShotSound() {
         var audio = document.getElementById("punchWarrior");
         audio.play();
-      }
+    }
 
     createWarriorBullet(xSpeed, ySpeed){
         this.speedX = 0;

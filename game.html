@@ -15,11 +15,14 @@
         <p id="timer"></p>
 
         <!-- Audio -->
-        <audio autoplay loop id="backgroundMusic"> 
+        <audio loop id="backgroundMusic"> 
             <source src="./audio/music/backgroundMusic.mp3" type="audio/mpeg"> 
             Dein Browser unterstützt die Audiodatei leider nicht.
         </audio>
         <audio id="punchWarrior"> <source src="./audio/soundFiles/punchWarrior.mp3" type="audio/mpeg"> </audio>
+        <audio id="bossShot"> <source src="./audio/soundFiles/bossShot.mp3" type="audio/mpeg"> </audio>
+
+        <button type="button" id="audio">Audio</button>
         
         <script>
             function loadAudio(element) {
@@ -33,8 +36,49 @@
                 localStorage.setItem(element, audioElement.volume);
             }
 
+            // function keyPress(){
+            //     if (event.keyCode === 13) {
+            //         document.getElementById("audio").click();
+            //     }
+
+            //     playAudio();
+            // }
+            // document.addEventListener('keydown', keyPress);
+
+            function playAudio() {
+                console.log("drinnnnnnnnnnnnnnnnnnn");
+                var backgroundMusic = document.getElementById("backgroundMusic");
+                if(localStorage.getItem("backgroundMusic") != null) {
+                    backgroundMusic.volume = localStorage.getItem("backgroundMusic");
+
+                    setTimeout(function() {
+                        backgroundMusic.play();
+                    }, 2000);
+                }
+
+                
+
+                // var bossShot = document.getElementById("bossShot");;
+                // if(localStorage.getItem("shot") != null) {
+                //     var shotAvailable = localStorage.getItem("shot");
+                    
+                //     if(shotAvailable) {
+                //         setTimeout(function() {
+                //             bossShot.play();
+                //         }, 2000);
+                //         console.log(shotAvailable);
+                //         shotAvailable = localStorage.getItem("shot");
+                //         console.log("-----------------"+shotAvailable);
+                //     }
+                // }
+            }
+
             loadAudio("backgroundMusic");
-            // loadAudio("punchWarrior");
+            loadAudio("punchWarrior");
+            loadAudio("bossShot");
+
+            // document.addEventListener('click', playAudio);
+            // document.addEventListener('keydown', playAudio);
         </script>
 
         <!-- JS-Dateien -->

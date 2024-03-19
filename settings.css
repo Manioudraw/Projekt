@@ -99,9 +99,10 @@ li a:focus {
 .settings-container {
     display: none;
   }
+
   .visible {
     display: block;
-  }
+}
 
 
 /* Formular-Settings */
@@ -234,3 +235,4 @@ li a:focus {
   font-size: var(--fontsize);
   padding: 47%;
 }
+
