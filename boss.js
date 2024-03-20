@@ -69,27 +69,27 @@ class Boss extends Enemy {
             if(charX > warriorX && charY > warriorY){ //Schuss nach links & oben
                 speedX = Math.sqrt(charX - warriorX) * -speed;
                 speedY = Math.sqrt(charY - warriorY) * -speed;
-                // this.playShotSound();
+                this.shotSound();
                 shot = true;
             } else if(charX > warriorX && charY < warriorY){ //Schuss nach links & unten
                 speedX = Math.sqrt(charX - warriorX) * -speed;
                 speedY = Math.sqrt(warriorY - charY) * speed;
-                // this.playShotSound();
+                this.shotSound();
                 shot = true;
             } else if(charX < warriorX && charY > warriorY){ //Schuss nach rechts & oben
                 speedX = Math.sqrt(warriorX - charX) * speed;
                 speedY = Math.sqrt(charY - warriorY) * -speed;
-                // this.playShotSound();
+                this.shotSound();
                 shot = true;
             } else if(charX < warriorX && charY < warriorY){ //Schuss nach rechts & unten
                 speedX = Math.sqrt(warriorX - charX) * speed;
                 speedY = Math.sqrt(warriorY - charY) * speed;
-                // this.playShotSound();
+                this.shotSound();
                 shot = true;
             }
 
-            localStorage.setItem("shot", shot);
-            shot = false;
+            console.log("hieeeeer");
+
             localStorage.setItem("shot", shot);
 
             if(this.health <= 0){
@@ -101,15 +101,16 @@ class Boss extends Enemy {
     }
 
     shotSound() {
-        var audio = document.getElementById("bossShot");
-        audio.play();
-        console.log("------------------------------");
-    }
+        var myAudio = document.getElementById("bossShot");
+        var myControl = document.getElementById("buttonAudio");
 
-    playShotSound(){
-        document.addEventListener('keydown', this.shotSound);
-        console.log("hiiiiiiiiiiiiiiiiiiiiiiii");
-        document.removeEventListener('keydown', this.shotSound);
+        console.log("value"+myControl.innerHTML);
+
+        if (myControl.innerHTML == "Pause") {
+            myAudio.play();
+        } else if (myControl.innerHTML == "Play"){
+            myAudio.pause();
+        }
     }
 
     createBossBullet(xSpeed, ySpeed){
