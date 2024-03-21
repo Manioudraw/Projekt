@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
-            "url": "file:///C:/Users/evely/OneDrive/Documents/Studium/Projekt/start.html",
+            "url": "file:///C:/Users/evely/OneDrive/Documents/Studium/Projekt/index.html",
             "webRoot": "${workspaceFolder}"
         }
     ]

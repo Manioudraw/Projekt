@@ -161,7 +161,7 @@ class Warrior{
 
                 canShoot = false;
                 setTimeout(function() {
-                    canShoot = true; // Setze die Möglichkeit zum Schießen nach 1,5 Sekunden zurück
+                    canShoot = true;
                 }, 500);
             }
         });
@@ -169,7 +169,20 @@ class Warrior{
 
     playShotSound() {
         var audio = document.getElementById("punchWarrior");
-        audio.play();
+        var button = document.getElementById("buttonAudio");
+        var audioVolume = localStorage.getItem("soundEffect");
+
+        if(audioVolume != null) {
+            audio.volume = audioVolume;
+        } else {
+            audio.volume = 0.3;
+        }
+
+        if (button.innerHTML == "Pause Audio") {
+            audio.play();
+        } else if (button.innerHTML == "Play Audio"){
+            audio.pause();
+        }
     }
 
     createWarriorBullet(xSpeed, ySpeed){

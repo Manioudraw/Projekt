@@ -88,8 +88,6 @@ class Boss extends Enemy {
                 shot = true;
             }
 
-            console.log("hieeeeer");
-
             localStorage.setItem("shot", shot);
 
             if(this.health <= 0){
@@ -101,15 +99,20 @@ class Boss extends Enemy {
     }
 
     shotSound() {
-        var myAudio = document.getElementById("bossShot");
-        var myControl = document.getElementById("buttonAudio");
+        var audio = document.getElementById("bossShot");
+        var button = document.getElementById("buttonAudio");
+        var audioVolume = localStorage.getItem("soundEffect");
 
-        console.log("value"+myControl.innerHTML);
+        if(audioVolume != null) {
+            audio.volume = audioVolume;
+        } else {
+            audio.volume = 0.3;
+        }
 
-        if (myControl.innerHTML == "Pause") {
-            myAudio.play();
-        } else if (myControl.innerHTML == "Play"){
-            myAudio.pause();
+        if (button.innerHTML == "Pause Audio") {
+            audio.play();
+        } else if (button.innerHTML == "Play Audio"){
+            audio.pause();
         }
     }
 

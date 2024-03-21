@@ -75,13 +75,18 @@ function updateBackgroundSettings() {
 
 function updateSoundEffects() {
     confSlider("soundEffects", "outputEffects");
-    var punchWarrior = localStorage.getItem("punchWarrior");
-    punchWarrior = sliderValue/100;
-    localStorage.setItem("punchWarrior", punchWarrior);
+    var soundEffect = localStorage.getItem("punchWarrior");
+    soundEffect = sliderValue/100;
+    localStorage.setItem("soundEffect", soundEffect);
 
-    var bossShot = localStorage.getItem("bossShot");
-    bossShot = sliderValue/100;
-    localStorage.setItem("bossShot", bossShot);
+    // confSlider("soundEffects", "outputEffects");
+    // var punchWarrior = localStorage.getItem("punchWarrior");
+    // punchWarrior = sliderValue/100;
+    // localStorage.setItem("punchWarrior", punchWarrior);
+
+    // var bossShot = localStorage.getItem("bossShot");
+    // bossShot = sliderValue/100;
+    // localStorage.setItem("bossShot", bossShot);
 }
 
 function updateAudio() {
@@ -101,7 +106,7 @@ function loadCurrentAudioSettings(elementId, sliderId, outputId) {
 }
 
 loadCurrentAudioSettings("backgroundMusic", "volume", "output");
-loadCurrentAudioSettings("punchWarrior", "soundEffects", "outputEffects");
+loadCurrentAudioSettings("soundEffect", "soundEffects", "outputEffects");
 
 
 

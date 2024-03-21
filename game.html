@@ -22,7 +22,7 @@
         <audio id="punchWarrior"> <source src="./audio/soundFiles/punchWarrior.mp3" type="audio/mpeg"> </audio>
         <audio id="bossShot"> <source src="./audio/soundFiles/bossShot.mp3" type="audio/mpeg"> </audio>
 
-        <button type="button" id="buttonAudio">Play</button>
+        <button type="button" id="buttonAudio">Play Audio</button>
         
         <script>
             function loadAudio(element) {
@@ -41,16 +41,23 @@
             loadAudio("bossShot");
 
 
-            var myAudio = document.getElementById("backgroundMusic");
-            var myControl = document.getElementById("buttonAudio");
+            var audio = document.getElementById("backgroundMusic");
+            var button = document.getElementById("buttonAudio");
+            var audioVolume = parseFloat(localStorage.getItem("backgroundMusic"));
+
+            if(audioVolume != null) {
+                audio.volume = audioVolume;
+            } else {
+                audio.volume = 0.2;
+            }
 
             function switchState() {
-                if (myAudio.paused == true) {
-                    myAudio.play();
-                    myControl.innerHTML = "Pause";
+                if (audio.paused == true) {
+                    audio.play();
+                    button.innerHTML = "Pause Audio";
                 } else {
-                    myAudio.pause();
-                    myControl.innerHTML = "Play";
+                    audio.pause();
+                    button.innerHTML = "Play Audio";
                 }
             }
 
@@ -60,28 +67,11 @@
                 }
             }
 
-            myControl.addEventListener('click', function() {
+            button.addEventListener('click', function() {
                 switchState();
             }, false);
 
             window.addEventListener("keypress", checkKey, false);
-
-
-            
-            // if(localStorage.getItem("shot") != null) {
-            //     var shotAvailable = localStorage.getItem("shot");
-                
-            //     if(shotAvailable) {
-            //         bossShot.play();
-            //         console.log(shotAvailable);
-            //         shotAvailable = localStorage.getItem("shot");
-            //         console.log("-----------------"+shotAvailable);
-            //     }
-            // }
-
-
-            // document.addEventListener('click', playAudio);
-            // document.addEventListener('keydown', playAudio);
         </script>
 
         <!-- JS-Dateien -->
@@ -92,24 +82,6 @@
         <script src="game.js"></script>
         <script src="gui.js"></script>
         <script src="settingUpdate.js"></script>
-        <script>
-            // var audioContext = new(window.AudioContext || window.webkitAudioContext)();
-            //     var audioElement = document.getElementById('testi');
-            //     var audioSource = audioContext.createMediaElementSource(audioElement);
-            //     // var gainNode = audioContext.createGain();
-            //     // audioSource.connect(gainNode);
-            //     // gainNode.connect(audioContext.destination);
-            //     // gainNode.gain.value = 0.5;
-
-            //     audioSource.connect(audioContext.destination);
-            // function playAudio() {
-            //     audioElement.play();
-            // }
-            
-
-            // document.addEventListener('click', playAudio);
-            
-        </script>
 
         <!-- IMG-Dateien -->
         <img src="./images/warrior.png" alt="warrior" id="warrior"/>
