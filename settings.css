@@ -3,27 +3,51 @@
   --fontHeadline: 26px;
   --fontTitel: 26px;
   --fontStyle: "Arial";
+  /* --colorDark: #130627;
+  --colorLight: #f8f6fa;
+  --colorMenu: #d1cee1;
+  --colorButton: #9C89B7;
+  --colorButtonHover: #816e9b; */
+  /* --colorDark: #382119;
+  --colorLight: #e0dcd3;
+  --colorMenu: #ccbe9f;
+  --colorButton: #abc3c9;
+  --colorButtonHover: #94acb3; */
+  --colorDark: #020202;
+  --colorMiddle: #212121;
+  --colorLight: #ffffff;
+  --colorMenu: #d0d0d0;
+  --colorBorder: #c4c4c4;
+  --colorButton: #7ABEAD;
+  --colorButtonHover: #6FAD9E;
+  --colorReset: #B95252;
+  --colorResetHover: #A84A4A;
 }
 
 
 /* Allgemeiner Aufbau der Seite */
 * {
     box-sizing: border-box;
-
     font-family: var(--fontStyle);
     font-weight: bold;
+    color: var(--colorDark);
   }
   
 body {
     margin: 0;
+    background-color: var(--colorLight);
   }
 
 .header {
-    background-color: #f1f1f1;
+    background-color: var(--colorMiddle);
     padding: 20px;
     text-align: center;
     position: sticky;
     font-size: var(--fontsize);
+  }
+
+  h1 {
+    color: var(--colorLight);
   }
 
   h2 {
@@ -73,28 +97,26 @@ ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  padding-top: 1%;
   width: 70%;
-  background-color: #f1f1f1;
   text-align: center;
   font-size: var(--fontsize);
 }
 
 li a {
+  background-color: var(--colorMenu);
   display: block;
-  color: #000;
   padding: 8px 16px;
   text-decoration: none;
+  border: 2px solid var(--colorBorder);
+  border-radius: 3px;
 }
 
-li a:hover:not(.active) {
-  background-color: #555;
-  color: white;
+li a:hover:not(.active), li a:focus {
+  background-color: var(--colorMiddle);
+  border: 2px solid var(--colorDark);
+  color: var(--colorLight);
 }
-
-li a:focus {
-    border: 3px solid #6e1f1f;
-    background-color: #e4bec1;
-  }
 
 .settings-container {
     display: none;
@@ -106,18 +128,21 @@ li a:focus {
 
 
 /* Formular-Settings */
-  input[type=text], select, textarea {
+  input[type=text], select {
+    background-color: var(--colorLight);
     width: 100%;
     padding: 12px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--);
     border-radius: 4px;
     resize: vertical;
     font-size: var(--fontsize);
+    border: 2px solid var(--colorBorder);
+    cursor: pointer;
   }
 
-  input[type=text]:focus {
-    border: 3px solid #555;
-    background-color: #b8b1d4;
+  input[type=text]:hover, select:hover, input[type=text]:focus, select:focus {
+    border: 3px solid var(--colorDark);
+    background-color: var(--colorMenu);
   }
   
   label {
@@ -127,8 +152,7 @@ li a:focus {
   }
 
   button {
-    background-color: #04AA6D;
-    color: white;
+    background-color: var(--colorButton);
     padding: 12px 20px;
     border: none;
     border-radius: 4px;
@@ -138,8 +162,7 @@ li a:focus {
   }
 
   .button {
-    background-color: #04AA6D;
-    color: white;
+    background-color: var(--colorButton);
     padding: 12px 20px;
     border: none;
     border-radius: 4px;
@@ -149,17 +172,16 @@ li a:focus {
   }
   
   button:hover, .button:hover {
-    background-color: #275629;
+    background-color: var(--colorButtonHover);
   }
 
-  button:focus, input[type=reset]:focus, .button:focus {
-    border: 3px solid #46083c;
-    background-color: #972da8;
+  button:focus, .button:focus {
+    border: 3px solid var(--colorDark);
+    background-color: var(--colorButtonHover);
   }
 
   input[type=reset] {
-    background-color: #a43d2d;
-    color: white;
+    background-color: var(--colorReset);
     padding: 12px 20px;
     border: none;
     border-radius: 4px;
@@ -168,7 +190,12 @@ li a:focus {
   }
 
   input[type=reset]:hover {
-    background-color: #652116;
+    background-color: var(--colorResetHover);
+  }
+
+  input[type=reset]:focus {
+    border: 3px solid var(--colorDark);
+    background-color: var(--colorResetHover);
   }
 
   .container {
@@ -193,6 +220,11 @@ li a:focus {
     font-size: var(--fontTitel);
   }
 
+  fieldset {
+    border: 2px solid var(--colorMiddle);
+    border-radius: 4px;
+  }
+
 
   /* Slider - Audio-Seite */
 
@@ -202,15 +234,23 @@ li a:focus {
   width: 100%;
   height: var(--fontsize);
   border-radius: 5px;
-  background: #d3d3d3;
+  background: var(--colorMenu);
   outline: none;
   opacity: 0.7;
   -webkit-transition: .2s;
   transition: opacity .2s;
+  cursor: pointer;
+  border: 2px solid var(--colorBorder);
 }
 
 .slider:hover {
   opacity: 1;
+  cursor: pointer;
+}
+
+.slider:focus {
+  opacity: 1;
+  border: 2px solid var(--colorDark);
 }
 
 .slider::-webkit-slider-thumb {
@@ -221,6 +261,7 @@ li a:focus {
   border-radius: 50%;
   background: #04AA6D;
   cursor: pointer;
+  opacity: 1;
 }
 
 .slider::-moz-range-thumb {
@@ -229,6 +270,7 @@ li a:focus {
   border-radius: 50%;
   background: #04AA6D;
   cursor: pointer;
+  opacity: 1;
 }
 
 .output {

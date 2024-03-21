@@ -4,16 +4,31 @@
         <meta charset="UTF-8">
         <meta name="viewport", content="width=device-width, initial-scale=1.0">
         <title>Gamerules</title>
-        <link rel="stylesheet" href="gamerules.css">
+        <!-- <link rel="stylesheet" href="gamerules.css"> -->
+        <link rel="stylesheet" href="settings.css">
     </head>
 
     <body id="body">
-        <img src="./images/back.png" alt="backToGame" id="backToGame" onclick="window.open('index.html', '_self');"/>
+        <div class="header">
+            <img src="./images/back.png" alt="backToGame" id="backToGame" onclick="window.open('index.html', '_self');"/>
+            <h1>Gamerules - How does this game work?</h1>
+        </div>
 
-        <h1>Gamerules - How does this game work?</h1>
+        <div class="row">
+            <div class="column side">
+            </div>
 
-        <p class="text">Text, Text, Text, Text</p>
-        <p class="text">[...]</p>
+            <div class="column middle">
+                <div id="visual-settings" class="settings-container visible"> 
+                    <h2>Gamerules</h2>
+                    <br>
+                    <div class="row">
+                        <p class="text">Text, Text, Text, Text</p>
+                        <p class="text">[...]</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <script src="settingUpdate.js"></script>
     </body>
