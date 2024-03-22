@@ -15,11 +15,11 @@
 
         <div class="row">
             <div class="column side">
-                <ul> <li><a href="#visual" onclick="showSettings('visual')">Visuelles</a></li> </ul>
-                <ul> <li><a href="#audio" onclick="showSettings('audio')">Audio</a></li> </ul>
-                <ul> <li><a href="#gamesettings" onclick="showSettings('gamesettings')">Spieleinstellungen</a></li> </ul>
-                <ul> <li><a href="#controls" onclick="showSettings('controls')">Tastenbelegung</a></li> </ul>
-                <ul> <li><a href="#backToGame" onclick="showSettings('backToGame')">Zurück zum Spiel</a></li> </ul>
+                <ul> <li><a href="#visual" id="visual-menu" class="menu visible" onclick="showSettings('visual')">Visuelles</a></li> </ul>
+                <ul> <li><a href="#audio" id="audio-menu" class="menu" onclick="showSettings('audio')">Audio</a></li> </ul>
+                <ul> <li><a href="#gamesettings" id="gamesettings-menu" class="menu" onclick="showSettings('gamesettings')">Spielmechanik</a></li> </ul>
+                <ul> <li><a href="#controls" id="controls-menu" class="menu" onclick="showSettings('controls')">Tastenbelegung</a></li> </ul>
+                <ul> <li><a href="#backToGame" id="backToGame-menu" class="menu" onclick="showSettings('backToGame')">Zurück zum Spiel</a></li> </ul>
             </div>
             
             <div class="column middle">
@@ -131,7 +131,7 @@
                 </div>
 
                 <div id="gamesettings-settings" class="settings-container">
-                    <h2>Spieleinstellungen</h2>
+                    <h2>Spielmechanik</h2>
 
                     <form action="">
                         <!-- <div class="row">

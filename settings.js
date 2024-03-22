@@ -2,9 +2,14 @@
 
 function showSettings(category) {
     document.querySelectorAll('.settings-container').forEach(container => {
-    container.classList.remove('visible');
+        container.classList.remove('visible');
     });
     document.getElementById(`${category}-settings`).classList.add('visible');
+
+    document.querySelectorAll('.menu').forEach(container => {
+        container.classList.remove('visible');
+    });
+    document.getElementById(`${category}-menu`).classList.add('visible');
 }
 
 // Visuelles

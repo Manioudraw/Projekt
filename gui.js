@@ -19,6 +19,7 @@ class GUI{
         if(this.warrior.health < this.healthCounter && this.warrior.health >= 0){
             let currentWarriorHeart = document.getElementById("warriorHeart" + this.warrior.health);
             currentWarriorHeart.remove();
+            this.playSound("warriorHit");
             this.healthCounter -= 1;
         }
     }
@@ -27,6 +28,7 @@ class GUI{
         var timer = document.getElementById("timer");
 
         const interval = setInterval(() => {
+            var winOption = localStorage.getItem("bossDead");
             var minutes = Math.floor((countdownSec % 60000 / 6000) * 100);
             var seconds = countdownSec % 60;
 
@@ -35,14 +37,22 @@ class GUI{
         
             if(countdownSec <= 0){
                 timer.textContent = "Time is Over!";
+                this.playSound("losing");
                 clearInterval(interval);
             }
             if(this.warrior.health <= 0){
                 timer.textContent = "You Died!";
+                this.playSound("losing");
+                clearInterval(interval);
+            }
+            if(winOption == "true"){
+                timer.textContent = "You Win!";
+                this.playSound("winning");
                 clearInterval(interval);
             }
 
             this.countdown = countdownSec;
+            localStorage.setItem("countdown", countdownSec);
         }, 1000);
     }
 
@@ -56,6 +66,24 @@ class GUI{
             return "0" + minutes + " : " + seconds;
         } else {
             return minutes + " : " + seconds;
+        }
+    }
+
+    playSound(elementId) {
+        var audio = document.getElementById(elementId);
+        var button = document.getElementById("buttonAudio");
+        var audioVolume = localStorage.getItem("soundEffect");
+
+        if(audioVolume != null) {
+            audio.volume = audioVolume;
+        } else {
+            audio.volume = 0.3;
+        }
+
+        if (button.innerHTML == "Pause Audio") {
+            audio.play();
+        } else if (button.innerHTML == "Play Audio"){
+            audio.pause();
         }
     }
 }

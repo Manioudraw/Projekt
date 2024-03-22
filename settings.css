@@ -17,9 +17,11 @@
   --colorMiddle: #212121;
   --colorLight: #ffffff;
   --colorMenu: #d0d0d0;
+  /* --colorMenuFocus: #3C3C3C; */
+  --colorMenuFocus: #505050;
   --colorBorder: #c4c4c4;
-  --colorButton: #7ABEAD;
-  --colorButtonHover: #6FAD9E;
+  --colorButton: #4DBB8D;
+  --colorButtonHover: #409D76;
   --colorReset: #B95252;
   --colorResetHover: #A84A4A;
 }
@@ -113,16 +115,27 @@ li a {
 }
 
 li a:hover:not(.active), li a:focus {
-  background-color: var(--colorMiddle);
+  background-color: var(--colorMenuFocus);
   border: 2px solid var(--colorDark);
   color: var(--colorLight);
 }
 
+.menu.visible, .menu.visible:hover {
+  background-color: var(--colorMiddle);
+  border: 10px solid var(--colorMiddle);
+  color: var(--colorLight);
+}
+
+.menu.visible:focus {
+  background-color: var(--colorMenuFocus);
+  border: 10px solid var(--colorMenuFocus);
+}
+
 .settings-container {
     display: none;
-  }
+}
 
-  .visible {
+.visible {
     display: block;
 }
 

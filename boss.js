@@ -8,7 +8,7 @@ class Boss extends Enemy {
         this.borderX = game.width;
         this.borderY = game.height;
         this.speed = 0.5;
-        this.health = 2;
+        this.health = 10;
         super.spawn(this.width, this.height);
 
         //Bullet-Management
@@ -58,7 +58,6 @@ class Boss extends Enemy {
         let speedX = 0;
         let speedY = 0;
         let speed = 0.1;
-        var shot = false;
 
         const interval = setInterval(() =>{
             let warriorX = this.warrior.x + (this.warrior.width / 2);
@@ -69,51 +68,34 @@ class Boss extends Enemy {
             if(charX > warriorX && charY > warriorY){ //Schuss nach links & oben
                 speedX = Math.sqrt(charX - warriorX) * -speed;
                 speedY = Math.sqrt(charY - warriorY) * -speed;
-                this.shotSound();
-                shot = true;
             } else if(charX > warriorX && charY < warriorY){ //Schuss nach links & unten
                 speedX = Math.sqrt(charX - warriorX) * -speed;
                 speedY = Math.sqrt(warriorY - charY) * speed;
-                this.shotSound();
-                shot = true;
             } else if(charX < warriorX && charY > warriorY){ //Schuss nach rechts & oben
                 speedX = Math.sqrt(warriorX - charX) * speed;
                 speedY = Math.sqrt(charY - warriorY) * -speed;
-                this.shotSound();
-                shot = true;
             } else if(charX < warriorX && charY < warriorY){ //Schuss nach rechts & unten
                 speedX = Math.sqrt(warriorX - charX) * speed;
                 speedY = Math.sqrt(warriorY - charY) * speed;
-                this.shotSound();
-                shot = true;
             }
-
-            localStorage.setItem("shot", shot);
-
+            
+            var soundPlayed = false;
+            var bossDead = false;
+            localStorage.setItem("bossDead", bossDead);
+            var bossAppearance = localStorage.getItem("bossTime");
+            var timer = localStorage.getItem("countdown");
+            
             if(this.health <= 0){
                 clearInterval(interval);
+                bossDead = true;
+                localStorage.setItem("bossDead", bossDead);
             } else {
-               this.createBossBullet(speedX, speedY); 
+                this.createBossBullet(speedX, speedY);
+                if (!soundPlayed && timer <= bossAppearance && this.warrior.health > 0) {    
+                    this.playSound("bossShot");
+                }
             }
         }, 1500);
-    }
-
-    shotSound() {
-        var audio = document.getElementById("bossShot");
-        var button = document.getElementById("buttonAudio");
-        var audioVolume = localStorage.getItem("soundEffect");
-
-        if(audioVolume != null) {
-            audio.volume = audioVolume;
-        } else {
-            audio.volume = 0.3;
-        }
-
-        if (button.innerHTML == "Pause Audio") {
-            audio.play();
-        } else if (button.innerHTML == "Play Audio"){
-            audio.pause();
-        }
     }
 
     createBossBullet(xSpeed, ySpeed){
@@ -172,6 +154,24 @@ class Boss extends Enemy {
                     this.canCollide = true;
                 }, 1500);
             }
+        }
+    }
+
+    playSound(elementId) {
+        var audio = document.getElementById(elementId);
+        var button = document.getElementById("buttonAudio");
+        var audioVolume = localStorage.getItem("soundEffect");
+
+        if(audioVolume != null) {
+            audio.volume = audioVolume;
+        } else {
+            audio.volume = 0.3;
+        }
+
+        if (button.innerHTML == "Pause Audio") {
+            audio.play();
+        } else if (button.innerHTML == "Play Audio"){
+            audio.pause();
         }
     }
 }

@@ -19,8 +19,16 @@
             <source src="./audio/music/backgroundMusic.mp3" type="audio/mpeg"> 
             Dein Browser unterstützt die Audiodatei leider nicht.
         </audio>
-        <audio id="punchWarrior"> <source src="./audio/soundFiles/punchWarrior.mp3" type="audio/mpeg"> </audio>
-        <audio id="bossShot"> <source src="./audio/soundFiles/bossShot.mp3" type="audio/mpeg"> </audio>
+        <audio id="punchWarrior"> <source src="./audio/soundFiles/warrior/punchWarrior.mp3" type="audio/mpeg"> </audio>
+        <audio id="warriorHit"> <source src="./audio/soundFiles/warrior/warriorHit.mp3" type="audio/mpeg"> </audio>
+        <audio id="bossShot"> <source src="./audio/soundFiles/enemies/bossShot.mp3" type="audio/mpeg"> </audio>
+        <audio id="bossAppearance"> <source src="./audio/soundFiles/enemies/boss_appearance.mp3" type="audio/mpeg"> </audio>
+        <audio id="bossCountdown"> <source src="./audio/soundFiles/enemies/boss_countdown.mp3" type="audio/mpeg"> </audio>
+        <audio id="enemyHit"> <source src="./audio/soundFiles/enemies/enemyHit.mp3" type="audio/mpeg"> </audio>
+        <audio id="enemyDeath"> <source src="./audio/soundFiles/enemies/enemyDeath.mp3" type="audio/mpeg"> </audio>
+        <audio id="winning"> <source src="./audio/soundFiles/win.mp3" type="audio/mpeg"> </audio>
+        <audio id="losing"> <source src="./audio/soundFiles/losing.mp3" type="audio/mpeg"> </audio>
+        <audio id="border"> <source src="./audio/soundFiles/border.mp3" type="audio/mpeg"> </audio>
 
         <button type="button" id="buttonAudio">Play Audio</button>
         
@@ -28,17 +36,24 @@
             function loadAudio(element) {
                 var audioElement = document.getElementById(element);
                 audioElement.volume = 0;
-
                 if(parseFloat(localStorage.getItem(element)) != null) {
                     audioElement.volume = localStorage.getItem(element);
                 }
-
                 localStorage.setItem(element, audioElement.volume);
             }
 
             loadAudio("backgroundMusic");
             loadAudio("punchWarrior");
+            loadAudio("warriorHit");
             loadAudio("bossShot");
+            loadAudio("bossAppearance");
+            loadAudio("bossCountdown");
+            loadAudio("winning");
+            loadAudio("losing");
+            loadAudio("enemyDeath");
+            loadAudio("enemyHit");
+            loadAudio("border");
+            
 
 
             var audio = document.getElementById("backgroundMusic");

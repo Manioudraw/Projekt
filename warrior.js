@@ -79,12 +79,16 @@ class Warrior{
     borderCheck(){
         if(this.x >= (this.borderX - this.width * 0.4)){ //rechte Border
             this.x = this.borderX - this.width * 0.4;
+            this.playSound("border");
         } else if(this.x <= (0 - this.width * 0.4)){ //linke Border
             this.x = 0 - this.width * 0.4;
+            this.playSound("border");
         } else if(this.y >= (this.borderY - this.height * 0.8)){ //untere Border
             this.y = this.borderY - this.height * 0.8;
+            this.playSound("border");
         } else if(this.y <= (0 - this.height * 0.4)){ //obere Border
             this.y = 0 - this.height * 0.4;
+            this.playSound("border");
         }
     }
 
@@ -147,16 +151,16 @@ class Warrior{
 
                 if (event.key == upShot){
                     this.createWarriorBullet(0, -2);
-                    this.playShotSound();
+                    this.playSound("punchWarrior");
                 } else if (event.key == downShot){
                     this.createWarriorBullet(0, 2);
-                    this.playShotSound();
+                    this.playSound("punchWarrior");
                 } else if (event.key == leftShot){
                     this.createWarriorBullet(-2, 0);
-                    this.playShotSound();
+                    this.playSound("punchWarrior");
                 } else if (event.key == rightShot){
                     this.createWarriorBullet(2, 0);
-                    this.playShotSound();
+                    this.playSound("punchWarrior");
                 }
 
                 canShoot = false;
@@ -165,24 +169,6 @@ class Warrior{
                 }, 500);
             }
         });
-    }
-
-    playShotSound() {
-        var audio = document.getElementById("punchWarrior");
-        var button = document.getElementById("buttonAudio");
-        var audioVolume = localStorage.getItem("soundEffect");
-
-        if(audioVolume != null) {
-            audio.volume = audioVolume;
-        } else {
-            audio.volume = 0.3;
-        }
-
-        if (button.innerHTML == "Pause Audio") {
-            audio.play();
-        } else if (button.innerHTML == "Play Audio"){
-            audio.pause();
-        }
     }
 
     createWarriorBullet(xSpeed, ySpeed){
@@ -220,6 +206,7 @@ class Warrior{
                 bullet.y + bullet.height > enemy.y
             ) {
                 enemy.health -= 1;
+                this.playSound("enemyHit");
 
                 this.canCollide = false;
                 setTimeout(() => {
@@ -247,6 +234,7 @@ class Warrior{
                     bullet.y + bullet.height > enemy.y
                 ) {
                     enemy.health -= 1;
+                    this.playSound("enemyHit");
 
                     this.canCollide = false;
                     setTimeout(() => {
@@ -255,6 +243,7 @@ class Warrior{
 
                     if(enemy.health <= 0){
                         zombieArray.splice(zombieArray.indexOf(enemy), 1);
+                        this.playSound("enemyDeath");
                     }
                 }
             }
@@ -274,6 +263,24 @@ class Warrior{
                 this.bullets.splice(i, 1);
                 i--;
             }
+        }
+    }
+
+    playSound(elementId) {
+        var audio = document.getElementById(elementId);
+        var button = document.getElementById("buttonAudio");
+        var audioVolume = localStorage.getItem("soundEffect");
+
+        if(audioVolume != null) {
+            audio.volume = audioVolume;
+        } else {
+            audio.volume = 0.3;
+        }
+
+        if (button.innerHTML == "Pause Audio") {
+            audio.play();
+        } else if (button.innerHTML == "Play Audio"){
+            audio.pause();
         }
     }
 }
