@@ -11,7 +11,7 @@ class Game{
         this.gui = new GUI(this.warrior, gameCanvas);
         this.zombie = new Zombie(this, this.warrior);
         this.boss = new Boss(this, this.warrior);
-        this.bossTime = (3*60+30);
+        this.bossTime = (4*60+30);
         this.bossSpawned = false;
         this.startZombieSpawning();
     }

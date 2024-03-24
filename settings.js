@@ -28,11 +28,6 @@ function updateFontStyle() {
     document.querySelector(':root').style.setProperty('--fontStyle', fontStyle);
 }
 
-function updateVisual() {
-    updateFontSize();
-    updateFontStyle();
-}
-
 function loadCurrentVisualSettings() {
     if(localStorage.getItem("fontSize") != null) {
         var textSize = localStorage.getItem("fontSize");
@@ -47,6 +42,109 @@ function loadCurrentVisualSettings() {
         document.getElementById("fontStyle").value = fontStyle; 
         document.querySelector(':root').style.setProperty('--fontStyle', fontStyle);
     }
+
+    if(localStorage.getItem("colorDark") != null) {
+        var colorDark = localStorage.getItem("colorDark");
+        var colorMiddle = localStorage.getItem("colorMiddle");
+        var colorLight = localStorage.getItem("colorLight");
+        var colorMenu = localStorage.getItem("colorMenu");
+        var colorMenuFocus = localStorage.getItem("colorMenuFocus");
+        var colorBorder = localStorage.getItem("colorBorder");
+        var colorButton = localStorage.getItem("colorButton");
+        var colorButtonHover = localStorage.getItem("colorButtonHover");
+        var colorReset = localStorage.getItem("colorReset");
+        var colorResetHover = localStorage.getItem("colorResetHover");
+        var borderDepth = localStorage.getItem("borderDepth");
+
+        if(colorDark == '#020202') {
+            document.getElementById("contrast").value = "Standard"; 
+        } 
+        else if(colorDark == '#000000') {
+            document.getElementById("contrast").value = "Hoch"; 
+        } 
+
+        changeContrastValues(colorDark, colorMiddle, colorLight, colorMenu, colorMenuFocus, colorBorder, colorButton,
+            colorButtonHover, colorReset, colorResetHover, borderDepth);
+    }
+
+}
+
+function updateContrast() {
+    var contrast = document.getElementById("contrast").value;
+    var colorDark;
+    var colorMiddle;
+    var colorLight;
+    var colorMenu;
+    var colorMenuFocus;
+    var colorBorder;
+    var colorButton;
+    var colorButtonHover;
+    var colorReset;
+    var colorResetHover;
+    var borderDepth;
+
+    if(contrast == "Standard") {
+        colorDark = '#020202';
+        colorMiddle = '#212121';
+        colorLight = '#ffffff';
+        colorMenu = '#d0d0d0';
+        colorMenuFocus = '#505050';
+        colorBorder = '#c4c4c4';
+        colorButton = '#4DBB8D';
+        colorButtonHover = '#409D76';
+        colorReset = '#B95252';
+        colorResetHover = '#A84A4A';
+        borderDepth = '3px';
+    } 
+    else if(contrast == "Hoch") {
+        colorDark = '#000000';
+        colorMiddle = colorDark;
+        colorLight = '#ffffff'; //21.0:1 Kontrast zu Schwarz
+        colorMenu = colorLight;
+        colorMenuFocus = '#370b60'; //15.23:1 Kontrast zur weißen Schrift
+        colorBorder = colorDark;
+        colorButton = '#00FA8E'; //15.1:1 Kontrast zu Schwarz 
+        colorButtonHover = '#ff0571'; //Komplementärfarbe zu colorButton & dafür nur 5.51:1
+        colorReset = '#ff87ff'; //10.16:1 Kontrast zu Schwarz
+        colorResetHover = '#007800'; //Komplentärfarbe zu colorReset
+        borderDepth = '5px';
+    }
+
+    changeContrastValues(colorDark, colorMiddle, colorLight, colorMenu, colorMenuFocus, colorBorder, colorButton,
+        colorButtonHover, colorReset, colorResetHover, borderDepth);
+    
+    localStorage.setItem("colorDark", colorDark);
+    localStorage.setItem("colorMiddle", colorMiddle);
+    localStorage.setItem("colorLight", colorLight);
+    localStorage.setItem("colorMenu", colorMenu);
+    localStorage.setItem("colorMenuFocus", colorMenuFocus);
+    localStorage.setItem("colorBorder", colorBorder);
+    localStorage.setItem("colorButton", colorButton);
+    localStorage.setItem("colorButtonHover", colorButtonHover);
+    localStorage.setItem("colorReset", colorReset);
+    localStorage.setItem("colorResetHover", colorResetHover);
+    localStorage.setItem("borderDepth", borderDepth);
+}
+
+function changeContrastValues(colorDark, colorMiddle, colorLight, colorMenu, colorMenuFocus, colorBorder, colorButton,
+    colorButtonHover, colorReset, colorResetHover, borderDepth) {
+    document.querySelector(':root').style.setProperty('--colorDark', colorDark);
+    document.querySelector(':root').style.setProperty('--colorMiddle', colorMiddle);
+    document.querySelector(':root').style.setProperty('--colorLight', colorLight);
+    document.querySelector(':root').style.setProperty('--colorMenu', colorMenu);
+    document.querySelector(':root').style.setProperty('--colorMenuFocus', colorMenuFocus);
+    document.querySelector(':root').style.setProperty('--colorBorder', colorBorder);
+    document.querySelector(':root').style.setProperty('--colorButton', colorButton);
+    document.querySelector(':root').style.setProperty('--colorButtonHover', colorButtonHover);
+    document.querySelector(':root').style.setProperty('--colorReset', colorReset);
+    document.querySelector(':root').style.setProperty('--colorResetHover', colorResetHover);
+    document.querySelector(':root').style.setProperty('--borderDepth', borderDepth);
+}
+
+function updateVisual() {
+    updateFontSize();
+    updateFontStyle();
+    updateContrast();
 }
 
 loadCurrentVisualSettings();
@@ -73,7 +171,7 @@ function confSlider(idSlider, idOutput) {
 
 function updateBackgroundSettings() {
     confSlider("volume", "output");
-    var backgroundVolume = parseFloat(localStorage.getItem("backgroundMusic"));
+    var backgroundVolume = localStorage.getItem("backgroundMusic");
     backgroundVolume = sliderValue/100;
     localStorage.setItem("backgroundMusic", backgroundVolume);
 }
@@ -83,31 +181,22 @@ function updateSoundEffects() {
     var soundEffect = localStorage.getItem("punchWarrior");
     soundEffect = sliderValue/100;
     localStorage.setItem("soundEffect", soundEffect);
-
-    // confSlider("soundEffects", "outputEffects");
-    // var punchWarrior = localStorage.getItem("punchWarrior");
-    // punchWarrior = sliderValue/100;
-    // localStorage.setItem("punchWarrior", punchWarrior);
-
-    // var bossShot = localStorage.getItem("bossShot");
-    // bossShot = sliderValue/100;
-    // localStorage.setItem("bossShot", bossShot);
-}
-
-function updateAudio() {
-    updateBackgroundSettings();
-    updateSoundEffects();
 }
 
 function loadCurrentAudioSettings(elementId, sliderId, outputId) {
     if(localStorage.getItem(elementId) != null){
-        var element = parseFloat(localStorage.getItem(elementId));
+        var element = localStorage.getItem(elementId);
         var slider = document.getElementById(sliderId);
         var output = document.getElementById(outputId);
 
         slider.value = element*100;
         output.innerHTML = element*100 + "%";
     }
+}
+
+function updateAudio() {
+    updateBackgroundSettings();
+    updateSoundEffects();
 }
 
 loadCurrentAudioSettings("backgroundMusic", "volume", "output");

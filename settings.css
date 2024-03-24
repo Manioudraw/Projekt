@@ -13,17 +13,18 @@
   --colorMenu: #ccbe9f;
   --colorButton: #abc3c9;
   --colorButtonHover: #94acb3; */
+  /* --colorMenuFocus: #3C3C3C; */
   --colorDark: #020202;
   --colorMiddle: #212121;
   --colorLight: #ffffff;
   --colorMenu: #d0d0d0;
-  /* --colorMenuFocus: #3C3C3C; */
   --colorMenuFocus: #505050;
   --colorBorder: #c4c4c4;
   --colorButton: #4DBB8D;
   --colorButtonHover: #409D76;
   --colorReset: #B95252;
   --colorResetHover: #A84A4A;
+  --borderDepth: 3px;
 }
 
 
@@ -85,6 +86,7 @@ body {
     width: 60px;
     height: 60px;
     float: right;
+    margin-top: 1%;
     user-select: none;
     cursor: pointer;
 }
@@ -116,7 +118,7 @@ li a {
 
 li a:hover:not(.active), li a:focus {
   background-color: var(--colorMenuFocus);
-  border: 2px solid var(--colorDark);
+  border: var(--borderDepth) solid var(--colorDark);
   color: var(--colorLight);
 }
 
@@ -145,7 +147,6 @@ li a:hover:not(.active), li a:focus {
     background-color: var(--colorLight);
     width: 100%;
     padding: 12px;
-    border: 1px solid var(--);
     border-radius: 4px;
     resize: vertical;
     font-size: var(--fontsize);
@@ -154,7 +155,7 @@ li a:hover:not(.active), li a:focus {
   }
 
   input[type=text]:hover, select:hover, input[type=text]:focus, select:focus {
-    border: 3px solid var(--colorDark);
+    border: var(--borderDepth) solid var(--colorDark);
     background-color: var(--colorMenu);
   }
   
@@ -167,7 +168,7 @@ li a:hover:not(.active), li a:focus {
   button {
     background-color: var(--colorButton);
     padding: 12px 20px;
-    border: none;
+    border: var(--borderDepth) solid var(--colorDark);
     border-radius: 4px;
     cursor: pointer;
     float: right;
@@ -177,7 +178,7 @@ li a:hover:not(.active), li a:focus {
   .button {
     background-color: var(--colorButton);
     padding: 12px 20px;
-    border: none;
+    border: var(--borderDepth) solid var(--colorDark);
     border-radius: 4px;
     cursor: pointer;
     font-size: var(--fontsize);
@@ -186,17 +187,18 @@ li a:hover:not(.active), li a:focus {
   
   button:hover, .button:hover {
     background-color: var(--colorButtonHover);
+    border: var(--borderDepth) solid var(--colorDark);
   }
 
   button:focus, .button:focus {
-    border: 3px solid var(--colorDark);
+    border: var(--borderDepth) solid var(--colorDark);
     background-color: var(--colorButtonHover);
   }
 
   input[type=reset] {
     background-color: var(--colorReset);
     padding: 12px 20px;
-    border: none;
+    border: var(--borderDepth) solid var(--colorDark);
     border-radius: 4px;
     cursor: pointer;
     font-size: var(--fontsize);
@@ -204,10 +206,11 @@ li a:hover:not(.active), li a:focus {
 
   input[type=reset]:hover {
     background-color: var(--colorResetHover);
+    border: var(--borderDepth) solid var(--colorDark);
   }
 
   input[type=reset]:focus {
-    border: 3px solid var(--colorDark);
+    border: var(--borderDepth) solid var(--colorDark);
     background-color: var(--colorResetHover);
   }
 
@@ -259,11 +262,12 @@ li a:hover:not(.active), li a:focus {
 .slider:hover {
   opacity: 1;
   cursor: pointer;
+  border: var(--borderDepth) solid var(--colorDark);
 }
 
 .slider:focus {
   opacity: 1;
-  border: 2px solid var(--colorDark);
+  border: var(--borderDepth) solid var(--colorDark);
 }
 
 .slider::-webkit-slider-thumb {

@@ -13,8 +13,8 @@ class Boss extends Enemy {
 
         //Bullet-Management
         this.bullets = [];
-        this.bulletWidth = 80;
-        this.bulletHeight = 80;
+        this.bulletWidth = 50;
+        this.bulletHeight = 50;
         this.bulletSpeed = 3.5;
         this.speedX = 0;
         this.speedY = 0;

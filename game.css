@@ -36,7 +36,7 @@
     user-select: none;
 }
 
-#settings, #backToGame, #gamerules{
+#settings, #backToGame {
     width: 60px;
     height: 60px;
     position: absolute;
@@ -47,7 +47,14 @@
 }
 
 #gamerules {
+    width: 50px;
+    height: 70px;
+    position: absolute;
+    right: 1.5%;
     bottom: 2%;
+    float: right;
+    user-select: none;
+    cursor: pointer;
 }
 
 #timer {

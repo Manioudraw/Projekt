@@ -64,7 +64,7 @@
 
                         <br>
 
-                        <!-- <fieldset>
+                        <fieldset>
                             <legend>Kontrast</legend>
 
                             <div class="row">
@@ -72,10 +72,13 @@
                                     <label for="contrast">Kontrast</label>
                                 </div>
                                 <div class="input">
-                                    <input type="text" id="contrast" name="kontrast" placeholder="Kontrast auswählen">
-                                </div>
+                                    <select id="contrast" name="contrast" onchange="updateContrast()">
+                                        <option value="Standard">Standard</option>
+                                        <option value="Hoch">Hoher Kontrast</option>
+                                    </select>
+                                </div>  
                             </div>
-                        </fieldset> -->
+                        </fieldset>
 
                         <br>
 
@@ -91,6 +94,7 @@
                     <form action="">
                         <fieldset>
                             <legend>Musik</legend>
+
                             <div class="row">
                                 <div class="label">
                                     <label for="volume">Hintergrundmusik</label>
@@ -98,7 +102,7 @@
                                 <div class="input">
                                     <span id="output" class="output"></span>
                                     <div class="slidecontainer">
-                                        <input type="range" id="volume" name="volume" min="0" max="100" class="slider" id="myRange" onchange="updateBackgroundSettings()"/>
+                                        <input type="range" id="volume" name="volume" min="0" max="100" class="slider" onchange="updateBackgroundSettings()"/>
                                     </div>
                                 </div>
                             </div>
@@ -134,6 +138,9 @@
                     <h2>Spielmechanik</h2>
 
                     <form action="">
+                        <div class="row">
+                            Kommt noch.
+                        </div>
                         <!-- <div class="row">
                             <div class="label">
                                 <label for="fname">Schwierigkeitsgrad</label>
