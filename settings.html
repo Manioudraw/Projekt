@@ -9,7 +9,7 @@
 
     <body>
         <div class="header">
-            <img src="./images/back.png" alt="backToGame" id="backToGame" onclick="window.open('index.html', '_self');"/>
+            <img tabindex="1" src="./images/back.png" alt="backToGame" id="backToGame" onclick="window.open('index.html', '_self');"/>
             <h1>Einstellungen</h1>
         </div>
 
@@ -19,20 +19,21 @@
                 <ul> <li><a href="#audio" id="audio-menu" class="menu" onclick="showSettings('audio')">Audio</a></li> </ul>
                 <ul> <li><a href="#gamesettings" id="gamesettings-menu" class="menu" onclick="showSettings('gamesettings')">Spielmechanik</a></li> </ul>
                 <ul> <li><a href="#controls" id="controls-menu" class="menu" onclick="showSettings('controls')">Tastenbelegung</a></li> </ul>
-                <ul> <li><a href="#backToGame" id="backToGame-menu" class="menu" onclick="showSettings('backToGame')">Zurück zum Spiel</a></li> </ul>
+                <ul> <li><a href="#navBack" id="navBack-menu" class="menu" onclick="showSettings('navBack')">Zurück zum Spiel</a></li> </ul>
             </div>
             
             <div class="column middle">
                 <div id="visual-settings" class="settings-container visible"> 
-                    <h2>Visuelles</h2>
+                    <h2 tabindex="0">Visuelles</h2>
                     
                     <form action="">
                         <fieldset>
-                            <legend>Text</legend>
+                            <legend id="visual-legend" tabindex="0">Text</legend>
 
                             <div class="row">
                                 <div class="label">
                                     <label for="fontSize">Schriftgröße</label>
+                                    <span class="tooltiptext">Ändert die Schriftgröße.</span>
                                 </div>
                                 <div class="input">
                                     <select id="fontSize" name="fontSize" onchange="updateFontSize()">
@@ -49,6 +50,7 @@
                             <div class="row">
                                 <div class="label">
                                     <label for="fontStyle">Schriftart</label>
+                                    <span class="tooltiptext">Ändert die Schriftart.</span>
                                 </div>
                                 <div class="input">
                                     <select id="fontStyle" name="fontStyle" onchange="updateFontStyle()">
@@ -65,11 +67,12 @@
                         <br>
 
                         <fieldset>
-                            <legend>Kontrast</legend>
+                            <legend tabindex="0">Kontrast</legend>
 
                             <div class="row">
                                 <div class="label">
                                     <label for="contrast">Kontrast</label>
+                                    <span class="tooltiptext">Ändert den Kontrast. <br> Standard-Modus oder Modus mit hohem Kontrast möglich.</span>
                                 </div>
                                 <div class="input">
                                     <select id="contrast" name="contrast" onchange="updateContrast()">
@@ -89,15 +92,16 @@
                 </div>
                 
                 <div id="audio-settings" class="settings-container">
-                    <h2>Audio</h2>
+                    <h2 tabindex="0">Audio</h2>
 
                     <form action="">
                         <fieldset>
-                            <legend>Musik</legend>
+                            <legend id="audio-legend" tabindex="0">Musik</legend>
 
                             <div class="row">
                                 <div class="label">
                                     <label for="volume">Hintergrundmusik</label>
+                                    <span class="tooltiptext">Ändert die Lautstärke der Hintergrundmusik.</span>
                                 </div>
                                 <div class="input">
                                     <span id="output" class="output"></span>
@@ -111,11 +115,12 @@
                         <br>
 
                         <fieldset>
-                            <legend>Sound-Effekte</legend>
+                            <legend tabindex="0">Sound-Effekte</legend>
 
                             <div class="row">
                                 <div class="label">
                                     <label for="soundEffects">Sound-Effekte</label>
+                                    <span class="tooltiptext">Ändert die Lautstärke aller Sound-Effekte.</span>
                                 </div>
                                 <div class="input">
                                     <span id="outputEffects" class="output"></span>
@@ -135,39 +140,46 @@
                 </div>
 
                 <div id="gamesettings-settings" class="settings-container">
-                    <h2>Spielmechanik</h2>
+                    <h2 tabindex="0" class="tabBegin">Spielmechanik</h2>
 
                     <form action="">
-                        <div class="row">
-                            Kommt noch.
-                        </div>
-                        <!-- <div class="row">
-                            <div class="label">
-                                <label for="fname">Schwierigkeitsgrad</label>
-                            </div>
-                            <div class="input">
-                                <input type="text" id="fname" name="schwierigkeit" placeholder="Schwierigkeitsgrad eingeben">
-                            </div>
-                        </div>
+                        <fieldset>
+                            <legend id="gamesettings-legend" tabindex="0">Schwierigkeitsgrad</legend>
+
+                            <!-- <div class="row">
+                                <div class="label">
+                                    <label for="contrast">Kontrast</label>
+                                    <span class="tooltiptext">Ändert den Kontrast. <br> Standard-Modus oder Modus mit hohem Kontrast möglich.</span>
+                                </div>
+                                <div class="input">
+                                    <input type="text" id="fname" name="schwierigkeit" placeholder="Schwierigkeitsgrad eingeben">
+                                </div>
+                            </div> -->
+
+                            <br>
+                            Coming Soon...
+                            <br>
+                        </fieldset>
 
                         <br>
 
                         <div class="row">
-                            <input type="submit" value="Änderungen speichern">
-                        </div> -->
+                            <button type="button" onclick="">Änderungen speichern</button>
+                        </div>
                     </form>
                 </div>
 
                 <div id="controls-settings" class="settings-container">
-                    <h2>Tastenbelegung</h2>
+                    <h2 tabindex="0">Tastenbelegung</h2>
 
                     <form action="">
                         <fieldset>
-                            <legend>Bewegen</legend>
+                            <legend id="controls-legend" tabindex="0">Bewegen</legend>
 
                             <div class="row">
                                 <div class="label">
-                                    <label for="up">Hoch:</label>
+                                    <label for="up">Hoch</label>
+                                    <span class="tooltiptext">Ändert die Navigation, um sich nach oben zu bewegen.</span>
                                 </div>
                                 <div class="input">
                                     <input type="text" id="up" name="up" value="w" onfocus="this.value=''" oninput="updateKeySettings('up')" maxlength="1">
@@ -176,7 +188,8 @@
 
                             <div class="row">
                                 <div class="label">
-                                    <label for="down">Runter:</label>
+                                    <label for="down">Runter</label>
+                                    <span class="tooltiptext">Ändert die Navigation, um sich nach unten zu bewegen.</span>
                                 </div>
                                 <div class="input">
                                     <input type="text" id="down" name="down" value="s" onfocus="this.value=''" oninput="updateKeySettings('down')" maxlength="1">
@@ -185,7 +198,8 @@
 
                             <div class="row">
                                 <div class="label">
-                                    <label for="right">Rechts:</label>
+                                    <label for="right">Rechts</label>
+                                    <span class="tooltiptext">Ändert die Navigation, um sich nach rechts zu bewegen.</span>
                                 </div>
                                 <div class="input">
                                     <input type="text" id="right" name="right" value="d" onfocus="this.value=''" oninput="updateKeySettings('right')" maxlength="1">
@@ -194,7 +208,8 @@
 
                             <div class="row">
                                 <div class="label">
-                                    <label for="left">Links:</label>
+                                    <label for="left">Links</label>
+                                    <span class="tooltiptext">Ändert die Navigation, um sich nach links zu bewegen.</span>
                                 </div>
                                 <div class="input">
                                     <input type="text" id="left" name="left" value="a" onfocus="this.value=''" oninput="updateKeySettings('left')" maxlength="1">
@@ -205,11 +220,12 @@
                         <br>
 
                         <fieldset>
-                            <legend>Schießen</legend>
+                            <legend tabindex="0">Schießen</legend>
                             
                             <div class="row">
                                 <div class="label">
-                                    <label for="upShot">Nach oben schießen:</label>
+                                    <label for="upShot">Nach oben</label>
+                                    <span class="tooltiptext">Ändert die Navigation, um nach oben zu schießen.</span>
                                 </div>
                                 <div class="input">
                                     <input type="text" id="upShot" name="upShot" value="ArrowUp" onfocus="this.value=''" oninput="updateKeySettings('upShot')" maxlength="1">
@@ -218,7 +234,8 @@
 
                             <div class="row">
                                 <div class="label">
-                                    <label for="downShot">Nach unten schießen:</label>
+                                    <label for="downShot">Nach unten</label>
+                                    <span class="tooltiptext">Ändert die Navigation, um nach unten zu schießen.</span>
                                 </div>
                                 <div class="input">
                                     <input type="text" id="downShot" name="downShot" value="ArrowDown" onfocus="this.value=''" oninput="updateKeySettings('downShot')" maxlength="1">
@@ -227,7 +244,8 @@
 
                             <div class="row">
                                 <div class="label">
-                                    <label for="rightShot">Nach rechts schießen:</label>
+                                    <label for="rightShot">Nach rechts</label>
+                                    <span class="tooltiptext">Ändert die Navigation, um nach rechts zu schießen.</span>
                                 </div>
                                 <div class="input">
                                     <input type="text" id="rightShot" name="rightShot" value="ArrowRight" onfocus="this.value=''" oninput="updateKeySettings('rightShot')" maxlength="1">
@@ -236,7 +254,8 @@
 
                             <div class="row">
                                 <div class="label">
-                                    <label for="leftShot">Nach links schießen:</label>
+                                    <label for="leftShot">Nach links</label>
+                                    <span class="tooltiptext">Ändert die Navigation, um nach links zu schießen.</span>
                                 </div>
                                 <div class="input">
                                     <input type="text" id="leftShot" name="leftShot" value="ArrowLeft" onfocus="this.value=''" oninput="updateKeySettings('leftShot')" maxlength="1">
@@ -254,8 +273,8 @@
                     </form>
                 </div>
 
-                <div id="backToGame-settings" class="settings-container">
-                    <h2>Wo möchtest du hin?</h2>
+                <div id="navBack-settings" class="settings-container">
+                    <h2 tabindex="0" id="navBack-legend" class="tabBegin">Wo möchtest du hin?</h2>
                     <br>
                     <div>
                         <div class="row">
@@ -267,7 +286,7 @@
                             <br>
                             <br>
                             <br>
-                            <a href="#visual" onclick="showSettings('visual')" class="button">In den Einstellungen bleiben</a>
+                            <a href="#visual" id="tabEnd" onclick="showSettings('visual')" class="button">In den Einstellungen bleiben</a>
                         </div>
                     </div>
                 </div>

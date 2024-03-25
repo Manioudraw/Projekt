@@ -10,6 +10,13 @@ function showSettings(category) {
         container.classList.remove('visible');
     });
     document.getElementById(`${category}-menu`).classList.add('visible');
+
+    
+
+    setTimeout(function() {
+        var element = document.getElementById(`${category}-legend`);
+        element.focus();
+    }, 10);
 }
 
 // Visuelles
@@ -255,3 +262,17 @@ function loadCurrentKeyBindings() {
 }
 
 loadCurrentKeyBindings();
+
+
+
+
+// Button-Abfrage, um Fokus nach einem Button wieder zum Menü zu führen
+document.addEventListener("keydown", function(event) {
+    if(event.key == 'Tab') {
+        var focusOn = document.activeElement;
+        if (focusOn.tagName == "BUTTON" && focusOn.type == "button" || focusOn == document.getElementById("tabEnd")) {
+            var element = document.querySelector('[tabindex="1"]');
+            element.focus();
+        }
+    }
+});
