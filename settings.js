@@ -19,6 +19,19 @@ function showSettings(category) {
     }, 10);
 }
 
+//Zurück-Button
+
+function navigateToHome() {
+    window.open('index.html', '_self');
+}
+
+function handleKeyDown_Home(event) {
+    if (event.key == 'Enter') {
+        event.preventDefault(); // Verhindert den Standard-Tab-Fokus
+        navigateToIndex(); // Führt die Aktion aus
+    }
+}
+
 // Visuelles
 
 function updateFontSize() {

@@ -50,3 +50,36 @@ window.onload = function () {
     updateFontStyle();
     updateContrast();
 }   
+
+function navigateToHome() {
+    window.open('index.html', '_self');
+}
+
+function handleKeyDown_Home(event) {
+    if (event.key == 'Enter') {
+        event.preventDefault(); 
+        navigateToIndex(); 
+    }
+}
+
+function navigateToSettings() {
+    window.open('settings.html', '_self');
+}
+
+function handleKeyDown_Settings(event) {
+    if (event.key == 'Enter') {
+        event.preventDefault(); 
+        navigateToSettings(); 
+    }
+}
+
+function navigateToGamerules() {
+    window.open('gamerules.html', '_self');
+}
+
+function handleKeyDown_Gamerules(event) {
+    if (event.key == 'Enter') {
+        event.preventDefault(); 
+        navigateToGamerules(); 
+    }
+}

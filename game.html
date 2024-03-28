@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport", content="width=device-width, initial-scale=1.0">
@@ -30,7 +30,7 @@
         <audio id="losing"> <source src="./audio/soundFiles/losing.mp3" type="audio/mpeg"> </audio>
         <audio id="border"> <source src="./audio/soundFiles/border.mp3" type="audio/mpeg"> </audio>
 
-        <button type="button" id="buttonAudio">Play Audio</button>
+        <button tabindex="0" type="button" id="buttonAudio">Play Audio</button>
         
         <script>
             function loadAudio(element) {
@@ -105,7 +105,7 @@
         <img src="./images/boss.png" alt="boss" id="boss"/>
         <img src="./images/heart.png" alt="heart" id="heart"/>
         <img src="./images/bossShot.png" alt="heartDamage" id="heartDamage"/>
-        <img src="./images/settings.png" alt="settings" id="settings" onclick="window.open('settings.html', '_self')"/>
-        <img src="./images/gamerules.png" alt="gamerules" id="gamerules" onclick="window.open('gamerules.html', '_self')"/>
+        <img src="./images/settings.png" tabindex="0" alt="settings" id="settings" onclick="navigateToSettings()" onkeydown="handleKeyDown_Settings(event)"/>
+        <img src="./images/gamerules.png" tabindex="0" alt="gamerules" id="gamerules" onclick="navigateToGamerules()" onkeydown="handleKeyDown_Gamerules(event)"/>
     </body>
 </html>
