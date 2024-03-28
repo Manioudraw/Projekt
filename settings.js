@@ -98,9 +98,9 @@ function updateContrast() {
         colorMenuFocus = '#505050';
         colorBorder = '#c4c4c4';
         colorButton = '#4DBB8D';
-        colorButtonHover = '#409D76';
+        colorButtonHover = '#007c48';
         colorReset = '#B95252';
-        colorResetHover = '#A84A4A';
+        colorResetHover = '#bf0000';
         borderDepth = '3px';
     } 
     else if(contrast == "Hoch") {
