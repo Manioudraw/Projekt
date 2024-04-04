@@ -8,12 +8,13 @@ class Zombie extends Enemy {
         this.borderX = game.width;
         this.borderY = game.height;
         this.speed = 0.7;
-        this.health = 15;
+        this.health = 6;
         this.zombies = [];
         this.zombieSpawnInterval = 2000;
         this.lastZombieSpawnTime = 0;
         this.canCollide = true;
         super.spawn(this.width, this.height);
+        this.difficultyAdjustments();
     }
 
     draw(context, image){
@@ -77,6 +78,29 @@ class Zombie extends Enemy {
                 setTimeout(() => {
                     this.canCollide = true;
                 }, 1000);
+            }
+        }
+    }
+
+    difficultyAdjustments() {
+        if(localStorage.getItem("difficulty") != null) {
+            var difficulty = localStorage.getItem("difficulty");
+
+            if(difficulty == "easy"){
+                this.health = 3;
+                this.zombieSpawnInterval = 3000;
+            } else if(difficulty == "normal") {
+                this.health = 6;
+                this.zombieSpawnInterval = 2000;
+            } else if(difficulty == "medium") {
+                this.health = 7;
+                this.zombieSpawnInterval = 2000;
+            } else if(difficulty == "advanced") {
+                this.health = 8;
+                this.zombieSpawnInterval = 1500;
+            } else if(difficulty == "challenging") {
+                this.health = 8.5;
+                this.zombieSpawnInterval = 1500;
             }
         }
     }

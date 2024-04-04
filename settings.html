@@ -146,25 +146,29 @@
                         <fieldset>
                             <legend id="gamesettings-legend" tabindex="0">Schwierigkeitsgrad</legend>
 
-                            <!-- <div class="row">
+                            <div class="row">
                                 <div class="label">
-                                    <label for="contrast">Kontrast</label>
-                                    <span class="tooltiptext">Ändert den Kontrast. <br> Standard-Modus oder Modus mit hohem Kontrast möglich.</span>
+                                    <label for="difficulty">Schwierigkeitsgrad</label>
+                                    <span class="tooltiptext">Ändert die Schwierigkeit des Spiels. Es gibt vier Auswahlmöglichkeiten. 
+                                        <br> Es können sich die Leben der Gegner sowie die eigene Lebensanzahl ändern. 
+                                        Ebenso ist die Spawn-Rate der Gegner abhängig vom Schwierigkeitsgrad.</span>
                                 </div>
                                 <div class="input">
-                                    <input type="text" id="fname" name="schwierigkeit" placeholder="Schwierigkeitsgrad eingeben">
-                                </div>
-                            </div> -->
-
-                            <br>
-                            Coming Soon...
-                            <br>
+                                    <select id="difficulty" name="difficulty" onchange="updateDifficulty()">
+                                        <option value="easy">Leicht</option>
+                                        <option value="normal" selected>Normal</option>
+                                        <option value="medium">Mittel</option>
+                                        <option value="advanced">Fortgeschritten</option>
+                                        <option value="challenging">Herausfordernd</option>
+                                    </select>
+                                </div>    
+                            </div>
                         </fieldset>
 
                         <br>
 
                         <div class="row">
-                            <button type="button" onclick="">Änderungen speichern</button>
+                            <button type="button" onclick="updateDifficulty()">Änderungen speichern</button>
                         </div>
                     </form>
                 </div>

@@ -8,7 +8,8 @@ class Boss extends Enemy {
         this.borderX = game.width;
         this.borderY = game.height;
         this.speed = 0.5;
-        this.health = 10;
+        this.health = 13;
+        this.difficultyAdjustments();
         super.spawn(this.width, this.height);
 
         //Bullet-Management
@@ -172,6 +173,24 @@ class Boss extends Enemy {
             audio.play();
         } else if (button.innerHTML == "Play Audio"){
             audio.pause();
+        }
+    }
+
+    difficultyAdjustments() {
+        if(localStorage.getItem("difficulty") != null) {
+            var difficulty = localStorage.getItem("difficulty");
+
+            if(difficulty == "easy"){
+                this.health = 10;
+            } else if(difficulty == "normal") {
+                this.health = 13;
+            } else if(difficulty == "medium") {
+                this.health = 15;
+            } else if(difficulty == "advanced") {
+                this.health = 18;
+            } else if(difficulty == "challenging") {
+                this.health = 20;
+            }
         }
     }
 }

@@ -11,6 +11,7 @@ class Warrior{
         this.health = 5;
         this.keyPressed = {};
         this.controlSetup();
+        this.difficultyAdjustments();
 
         //Bullet-Management
         this.bullets = [];
@@ -211,7 +212,7 @@ class Warrior{
                 this.canCollide = false;
                 setTimeout(() => {
                     this.canCollide = true;
-                }, 500);
+                }, 550);
 
                 if(enemy.health <= 0){
                     enemy.bullets = [];
@@ -239,7 +240,7 @@ class Warrior{
                     this.canCollide = false;
                     setTimeout(() => {
                         this.canCollide = true;
-                    }, 50);
+                    }, 230);
 
                     if(enemy.health <= 0){
                         zombieArray.splice(zombieArray.indexOf(enemy), 1);
@@ -281,6 +282,18 @@ class Warrior{
             audio.play();
         } else if (button.innerHTML == "Play Audio"){
             audio.pause();
+        }
+    }
+
+    difficultyAdjustments() {
+        if(localStorage.getItem("difficulty") != null) {
+            var difficulty = localStorage.getItem("difficulty");
+
+            if(difficulty == "easy" || difficulty == "normal"){
+                this.health = 5;
+            } else if(difficulty == "medium" || difficulty == "advanced" || difficulty == "challenging") {
+                this.health = 4;
+            } 
         }
     }
 }

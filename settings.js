@@ -19,7 +19,7 @@ function showSettings(category) {
     }, 10);
 }
 
-//Zurück-Button
+//Home-Button
 
 function navigateToHome() {
     window.open('index.html', '_self');
@@ -46,47 +46,6 @@ function updateFontStyle() {
     var fontStyle = document.getElementById("fontStyle").value;
     localStorage.setItem("fontStyle", fontStyle);
     document.querySelector(':root').style.setProperty('--fontStyle', fontStyle);
-}
-
-function loadCurrentVisualSettings() {
-    if(localStorage.getItem("fontSize") != null) {
-        var textSize = localStorage.getItem("fontSize");
-        document.getElementById("fontSize").value = textSize; 
-        document.querySelector(':root').style.setProperty('--fontsize', textSize + "px");
-        document.querySelector(':root').style.setProperty('--fontHeadline', (textSize * 1.6) + "px");
-        document.querySelector(':root').style.setProperty('--fontTitel', (textSize * 1.2) + "px");
-    }
-
-    if(localStorage.getItem("fontStyle") != null) {
-        var fontStyle = localStorage.getItem("fontStyle");
-        document.getElementById("fontStyle").value = fontStyle; 
-        document.querySelector(':root').style.setProperty('--fontStyle', fontStyle);
-    }
-
-    if(localStorage.getItem("colorDark") != null) {
-        var colorDark = localStorage.getItem("colorDark");
-        var colorMiddle = localStorage.getItem("colorMiddle");
-        var colorLight = localStorage.getItem("colorLight");
-        var colorMenu = localStorage.getItem("colorMenu");
-        var colorMenuFocus = localStorage.getItem("colorMenuFocus");
-        var colorBorder = localStorage.getItem("colorBorder");
-        var colorButton = localStorage.getItem("colorButton");
-        var colorButtonHover = localStorage.getItem("colorButtonHover");
-        var colorReset = localStorage.getItem("colorReset");
-        var colorResetHover = localStorage.getItem("colorResetHover");
-        var borderDepth = localStorage.getItem("borderDepth");
-
-        if(colorDark == '#020202') {
-            document.getElementById("contrast").value = "Standard"; 
-        } 
-        else if(colorDark == '#000000') {
-            document.getElementById("contrast").value = "Hoch"; 
-        } 
-
-        changeContrastValues(colorDark, colorMiddle, colorLight, colorMenu, colorMenuFocus, colorBorder, colorButton,
-            colorButtonHover, colorReset, colorResetHover, borderDepth);
-    }
-
 }
 
 function updateContrast() {
@@ -167,6 +126,49 @@ function updateVisual() {
     updateContrast();
 }
 
+
+function loadCurrentVisualSettings() {
+    if(localStorage.getItem("fontSize") != null) {
+        var textSize = localStorage.getItem("fontSize");
+        document.getElementById("fontSize").value = textSize; 
+        document.querySelector(':root').style.setProperty('--fontsize', textSize + "px");
+        document.querySelector(':root').style.setProperty('--fontHeadline', (textSize * 1.6) + "px");
+        document.querySelector(':root').style.setProperty('--fontTitel', (textSize * 1.2) + "px");
+    }
+
+    if(localStorage.getItem("fontStyle") != null) {
+        var fontStyle = localStorage.getItem("fontStyle");
+        document.getElementById("fontStyle").value = fontStyle; 
+        document.querySelector(':root').style.setProperty('--fontStyle', fontStyle);
+    }
+
+    if(localStorage.getItem("colorDark") != null) {
+        var colorDark = localStorage.getItem("colorDark");
+        var colorMiddle = localStorage.getItem("colorMiddle");
+        var colorLight = localStorage.getItem("colorLight");
+        var colorMenu = localStorage.getItem("colorMenu");
+        var colorMenuFocus = localStorage.getItem("colorMenuFocus");
+        var colorBorder = localStorage.getItem("colorBorder");
+        var colorButton = localStorage.getItem("colorButton");
+        var colorButtonHover = localStorage.getItem("colorButtonHover");
+        var colorReset = localStorage.getItem("colorReset");
+        var colorResetHover = localStorage.getItem("colorResetHover");
+        var borderDepth = localStorage.getItem("borderDepth");
+
+        if(colorDark == '#020202') {
+            document.getElementById("contrast").value = "Standard"; 
+        } 
+        else if(colorDark == '#000000') {
+            document.getElementById("contrast").value = "Hoch"; 
+        } 
+
+        changeContrastValues(colorDark, colorMiddle, colorLight, colorMenu, colorMenuFocus, colorBorder, colorButton,
+            colorButtonHover, colorReset, colorResetHover, borderDepth);
+    }
+
+}
+
+
 loadCurrentVisualSettings();
 
 
@@ -174,6 +176,7 @@ loadCurrentVisualSettings();
 
 
 //Audio
+
 var sliderValue;
 
 function confSlider(idSlider, idOutput) {
@@ -203,6 +206,11 @@ function updateSoundEffects() {
     localStorage.setItem("soundEffect", soundEffect);
 }
 
+function updateAudio() {
+    updateBackgroundSettings();
+    updateSoundEffects();
+}
+
 function loadCurrentAudioSettings(elementId, sliderId, outputId) {
     if(localStorage.getItem(elementId) != null){
         var element = localStorage.getItem(elementId);
@@ -214,23 +222,27 @@ function loadCurrentAudioSettings(elementId, sliderId, outputId) {
     }
 }
 
-function updateAudio() {
-    updateBackgroundSettings();
-    updateSoundEffects();
-}
-
 loadCurrentAudioSettings("backgroundMusic", "volume", "output");
 loadCurrentAudioSettings("soundEffect", "soundEffects", "outputEffects");
 
 
 
 
-
-
 //Spieleinstellungen
 
+function updateDifficulty() {
+    var difficulty = document.getElementById("difficulty").value;
+    localStorage.setItem("difficulty", difficulty);
+}
 
+function loadCurrentDifficultySettings() {
+    if(localStorage.getItem("difficulty") != null) {
+        var difficulty = localStorage.getItem("difficulty");
+        document.getElementById("difficulty").value = difficulty;
+    }
+}
 
+loadCurrentDifficultySettings();
 
 
 //Tastenbelegungen
@@ -277,9 +289,8 @@ function loadCurrentKeyBindings() {
 loadCurrentKeyBindings();
 
 
-
-
 // Button-Abfrage, um Fokus nach einem Button wieder zum Menü zu führen
+
 document.addEventListener("keydown", function(event) {
     if(event.key == 'Tab') {
         var focusOn = document.activeElement;
