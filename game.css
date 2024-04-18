@@ -21,7 +21,6 @@
     translate: -50% -50%;
     background-color: #ffffff;
     border-radius: 11px;
-    /* background: url("./images/background.png"); */
 }
 
 #warrior, #zombie, #boss, #heart, #heartDamage, #warriorBullet {
@@ -36,11 +35,23 @@
     user-select: none;
 }
 
-#settings, #backToGame {
+#backToGame {
     width: 60px;
     height: 60px;
     position: absolute;
-    right: 1%;
+    right: 1.5%;
+    top: 4%;
+    float: right;
+    user-select: none;
+    cursor: pointer;
+}
+
+#settings {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    right: 1.5%;
+    bottom: 4%;
     float: right;
     user-select: none;
     cursor: pointer;
@@ -50,8 +61,8 @@
     width: 50px;
     height: 70px;
     position: absolute;
-    right: 1.5%;
-    bottom: 2%;
+    right: 1.8%;
+    bottom: 47%;
     float: right;
     user-select: none;
     cursor: pointer;

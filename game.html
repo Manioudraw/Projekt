@@ -8,6 +8,11 @@
     </head>
 
     <body id="body">
+        <!-- Steuerungselemente -->
+        <img src="./images/back_black.png" tabindex="0" alt="Zurück zum Hauptmenü" id="backToGame" onclick="navigateToHome()" onkeydown="handleKeyDown_Home(event)"/>
+        <img src="./images/gamerules.png" tabindex="0" alt="gamerules" id="gamerules" onclick="navigateToGamerules()" onkeydown="handleKeyDown_Gamerules(event)"/>
+        <img src="./images/settings.png" tabindex="0" alt="settings" id="settings" onclick="navigateToSettings()" onkeydown="handleKeyDown_Settings(event)"/>
+
         <!-- Canvas -->
         <canvas id="canvas"></canvas>
 
@@ -105,7 +110,5 @@
         <img src="./images/boss.png" alt="boss" id="boss"/>
         <img src="./images/heart.png" alt="heart" id="heart"/>
         <img src="./images/bossShot.png" alt="heartDamage" id="heartDamage"/>
-        <img src="./images/settings.png" tabindex="0" alt="settings" id="settings" onclick="navigateToSettings()" onkeydown="handleKeyDown_Settings(event)"/>
-        <img src="./images/gamerules.png" tabindex="0" alt="gamerules" id="gamerules" onclick="navigateToGamerules()" onkeydown="handleKeyDown_Gamerules(event)"/>
     </body>
 </html>
