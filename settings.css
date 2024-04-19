@@ -3,17 +3,6 @@
   --fontHeadline: 26px;
   --fontTitel: 26px;
   --fontStyle: "Arial";
-  /* --colorDark: #130627;
-  --colorLight: #f8f6fa;
-  --colorMenu: #d1cee1;
-  --colorButton: #9C89B7;
-  --colorButtonHover: #816e9b; */
-  /* --colorDark: #382119;
-  --colorLight: #e0dcd3;
-  --colorMenu: #ccbe9f;
-  --colorButton: #abc3c9;
-  --colorButtonHover: #94acb3; */
-  /* --colorMenuFocus: #3C3C3C; */
   --colorDark: #020202;
   --colorMiddle: #212121;
   --colorLight: #ffffff;
@@ -300,11 +289,6 @@ li a:hover:not(.active), li a:focus {
 }
 
 /* Tool-Tips / genauere Beschreibungen */
-
-/* .tooltip {
-  position: relative;
-  display: inline-block;
-} */
 
 .label .tooltiptext {
   visibility: hidden;

@@ -109,15 +109,10 @@ window.addEventListener("load", function(){
 
     //Der Warrior wird gelöscht und danach neu gerendert/gezeichnet
     function update(){
-        canvContext.clearRect(0, 0, gameCanvas.width, gameCanvas.height)
+        canvContext.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
         game.render(canvContext);
         game.gui.deleteWarriorHearts(this.warrior.health);
         requestAnimationFrame(update);
-
-        // if(game.warrior.health <= 0){
-        //     console.log("drinnen");
-        //     canvContext.clearRect(0, 0, this.width, this.height);
-        // }
     }
     update();
     
