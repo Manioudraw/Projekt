@@ -23,6 +23,13 @@ class GUI{
             this.healthCounter -= 1;
         }
     }
+
+    clearGUI(){
+        for(let i = 0; i < this.warrior.health; i++){
+            let heart = document.getElementById("warriorHeart" + i);
+            heart.remove();
+        }
+    }
     
     timer(countdownSec){
         var timer = document.getElementById("timer");

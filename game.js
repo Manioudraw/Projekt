@@ -30,6 +30,7 @@ class Game{
             this.warrior.move(context);
             this.warrior.drawBullet(context, "warriorBullet");
             this.warrior.bulletShoot();
+
             if(!this.bossSpawned) {
                 this.zombie.draw(context, "zombie");
                 this.zombie.move();
@@ -37,8 +38,6 @@ class Game{
                 this.warrior.checkBulletCollisionZombie(this.zombie.zombies);
             }
             
-    
-            // var bossTime = (4*60+50);
             localStorage.setItem("bossTime", this.bossTime);
 
             if(this.gui.countdown == (this.bossTime+7)) {
@@ -59,17 +58,6 @@ class Game{
                 this.boss.checkBodyCollision(this.warrior);
                 this.warrior.checkBulletCollisionBoss(this.boss);
             }
-            
-
-            // if(this.gui.countdown <= bossAppearance && this.boss.health > 0) {
-            //     this.boss.draw(context, "boss");
-            //     this.boss.move();
-            //     this.boss.drawBullet(context, "heartDamage");
-            //     this.boss.bulletShoot();
-            //     this.boss.checkBulletCollision(this.warrior);
-            //     this.boss.checkBodyCollision(this.warrior);
-            //     this.warrior.checkBulletCollisionBoss(this.boss);
-            // }
         }
     }
 

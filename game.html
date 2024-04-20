@@ -9,6 +9,7 @@
 
     <body id="body">
         <!-- Steuerungselemente -->
+        <button tabindex="0" type="button" id="buttonAudio">Play Audio</button>
         <img src="./images/back_black.png" tabindex="0" alt="Zurück zum Hauptmenü" id="backToGame" onclick="navigateToHome()" onkeydown="handleKeyDown_Home(event)"/>
         <img src="./images/gamerules.png" tabindex="0" alt="gamerules" id="gamerules" onclick="navigateToGamerules()" onkeydown="handleKeyDown_Gamerules(event)"/>
         <img src="./images/settings.png" tabindex="0" alt="settings" id="settings" onclick="navigateToSettings()" onkeydown="handleKeyDown_Settings(event)"/>
@@ -34,66 +35,7 @@
         <audio id="winning"> <source src="./audio/soundFiles/win.mp3" type="audio/mpeg"> </audio>
         <audio id="losing"> <source src="./audio/soundFiles/losing.mp3" type="audio/mpeg"> </audio>
         <audio id="border"> <source src="./audio/soundFiles/border.mp3" type="audio/mpeg"> </audio>
-
-        <button tabindex="0" type="button" id="buttonAudio">Play Audio</button>
         
-        <script>
-            function loadAudio(element) {
-                var audioElement = document.getElementById(element);
-                audioElement.volume = 0;
-                if(parseFloat(localStorage.getItem(element)) != null) {
-                    audioElement.volume = localStorage.getItem(element);
-                }
-                localStorage.setItem(element, audioElement.volume);
-            }
-
-            loadAudio("backgroundMusic");
-            loadAudio("punchWarrior");
-            loadAudio("warriorHit");
-            loadAudio("bossShot");
-            loadAudio("bossAppearance");
-            loadAudio("bossCountdown");
-            loadAudio("winning");
-            loadAudio("losing");
-            loadAudio("enemyDeath");
-            loadAudio("enemyHit");
-            loadAudio("border");
-            
-
-
-            var audio = document.getElementById("backgroundMusic");
-            var button = document.getElementById("buttonAudio");
-            var audioVolume = parseFloat(localStorage.getItem("backgroundMusic"));
-
-            if(audioVolume != null) {
-                audio.volume = audioVolume;
-            } else {
-                audio.volume = 0.2;
-            }
-
-            function switchState() {
-                if (audio.paused == true) {
-                    audio.play();
-                    button.innerHTML = "Pause Audio";
-                } else {
-                    audio.pause();
-                    button.innerHTML = "Play Audio";
-                }
-            }
-
-            function checkKey(e) {
-                if (e.keycode == 32 ) {
-                    switchState();
-                }
-            }
-
-            button.addEventListener('click', function() {
-                switchState();
-            }, false);
-
-            window.addEventListener("keypress", checkKey, false);
-        </script>
-
         <!-- JS-Dateien -->
         <script src="warrior.js"></script>
         <script src="enemy.js"></script>
@@ -102,6 +44,7 @@
         <script src="game.js"></script>
         <script src="gui.js"></script>
         <script src="settingUpdate.js"></script>
+        <script src="audioButton.js"></script>
 
         <!-- IMG-Dateien -->
         <img src="./images/warrior.png" alt="warrior" id="warrior"/>
