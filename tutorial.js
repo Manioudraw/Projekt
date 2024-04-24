@@ -118,6 +118,15 @@ function modeSelection(button, mode, currentVideoNumber, videoURLs, canvasContex
                 requestAnimationFrame(draw);
             }
             draw();
+
+            var audio = document.getElementById("tutorialEnd");
+            var button = document.getElementById("buttonAudio");
+            if (button.innerHTML == "Pause Audio") {
+                audio.play();
+            } else if (button.innerHTML == "Play Audio"){
+                audio.pause();
+            }
+
             button.remove();
         }
     });
@@ -156,14 +165,14 @@ function warriorMechanics(canvas, canvasContext, tutorial){
 }
 
 function zombieMechanics(canvas, canvasContext, tutorial){
-    // tutorial.gui.clearGUI();
+    tutorial.gui.clearGUI();
 
     function update(){
         canvasContext.clearRect(0, 0, canvas.width, canvas.height);
-        // tutorial.render(canvasContext);
-        // if(gameCounter > 0){
-        //     tutorial.gui.deleteWarriorHearts(tutorial.warrior.health);
-        // }
+        tutorial.render(canvasContext);
+        if(gameCounter > 0){
+            tutorial.gui.deleteWarriorHearts(tutorial.warrior.health);
+        }
         requestAnimationFrame(update);
     }
     update();

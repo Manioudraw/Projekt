@@ -25,10 +25,12 @@ class GUI{
     }
 
     clearGUI(){
-        for(let i = 0; i < this.warrior.health; i++){
-            let heart = document.getElementById("warriorHeart" + i);
-            heart.remove();
-        }
+        if (!(this.warrior.health !== undefined)){
+            for(let i = 0; i < this.warrior.health; i++){
+                let heart = document.getElementById("warriorHeart" + i);
+                heart.remove();
+            }
+        } 
     }
     
     timer(countdownSec){
