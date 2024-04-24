@@ -64,10 +64,14 @@ window.addEventListener("load", function(){
     const canvContext = gameCanvas.getContext("2d");
     windowDimensions(gameCanvas);
     canvContext.font = "500% Georgia";
-    canvContext.fillText("Willkommen im Tutorial!", gameCanvas.width*0.22, gameCanvas.height/2);
+    const textWidth = canvContext.measureText("Willkommen im Tutorial!").width;
+    const textHeight = canvContext.measureText("M").width;
+    const posX = (gameCanvas.width - textWidth) / 2;
+    const posY = (gameCanvas.height + textHeight) / 2;
+    canvContext.fillText("Willkommen im Tutorial!", posX, posY);
 
     const buttonFurther = document.getElementById("buttonFurther");
-    const videoURLs = ["./videos/test_video.mp4", "./videos/test_video2.mp4", "./videos/test_video.mp4", "./videos/test_video2.mp4", "./videos/test_video.mp4"];
+    const videoURLs = ["./videos/test_video.mp4", "./videos/test_video2.mp4", "./videos/test_video.mp4"];
     let currentVideoNumber = 0;
     let mode = false;
     modeSelection(buttonFurther, mode, currentVideoNumber, videoURLs, canvContext);
@@ -87,8 +91,8 @@ function modeSelection(button, mode, currentVideoNumber, videoURLs, canvasContex
         const tutorial = new Tutorial(canvas);
 
         if(mode == false && videoURLs.length > currentVideoNumber){
-            canvas.width = 1440;
-            canvas.height = 810;
+            canvas.width = window.innerWidth - 200;
+            canvas.height = window.innerHeight - 150;
             playVideo(currentVideoNumber, videoURLs, canvas, canvasContext);
             currentVideoNumber += 1;
             mode = true;
@@ -106,7 +110,11 @@ function modeSelection(button, mode, currentVideoNumber, videoURLs, canvasContex
             let draw = function(){
                 canvasContext.clearRect(0, 0, canvas.width, canvas.height);
                 canvasContext.font = "500% Georgia";
-                canvasContext.fillText("Du hast das Tutorial beendet!", canvas.width*0.2, canvas.height/2);
+                const textWidth = canvasContext.measureText("Du hast das Tutorial beendet!").width;
+                const textHeight = canvasContext.measureText("M").width;
+                const posX = (canvas.width - textWidth) / 2;
+                const posY = (canvas.height + textHeight) / 2;
+                canvasContext.fillText("Du hast das Tutorial beendet!", posX, posY);
                 requestAnimationFrame(draw);
             }
             draw();
@@ -127,6 +135,8 @@ function playVideo(currentVideoNumber, videoURLs, canvas, canvasContext){
     draw();
 }
 
+
+
 //Funktionen für Spielumgebungen des Tutorials
 
 function warriorMechanics(canvas, canvasContext, tutorial){
@@ -146,8 +156,8 @@ function warriorMechanics(canvas, canvasContext, tutorial){
 }
 
 function zombieMechanics(canvas, canvasContext, tutorial){
-    tutorial.gui.clearGUI();
-    
+    // tutorial.gui.clearGUI();
+
     function update(){
         canvasContext.clearRect(0, 0, canvas.width, canvas.height);
         // tutorial.render(canvasContext);
