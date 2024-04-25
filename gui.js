@@ -25,7 +25,7 @@ class GUI{
     }
 
     clearGUI(){
-        if (!(this.warrior.health !== undefined)){
+        if (!(this.warrior.health == undefined)){
             for(let i = 0; i < this.warrior.health; i++){
                 let heart = document.getElementById("warriorHeart" + i);
                 heart.remove();

@@ -93,7 +93,7 @@ function modeSelection(button, mode, currentVideoNumber, videoURLs, canvasContex
         if(mode == false && videoURLs.length > currentVideoNumber){
             canvas.width = window.innerWidth - 200;
             canvas.height = window.innerHeight - 150;
-            playVideo(currentVideoNumber, videoURLs, canvas, canvasContext);
+            playVideo(currentVideoNumber, videoURLs, canvas, canvasContext, tutorial);
             currentVideoNumber += 1;
             mode = true;
         } else if (mode == true && videoURLs.length > gameCounter){
@@ -118,21 +118,18 @@ function modeSelection(button, mode, currentVideoNumber, videoURLs, canvasContex
                 requestAnimationFrame(draw);
             }
             draw();
-
-            var audio = document.getElementById("tutorialEnd");
-            var button = document.getElementById("buttonAudio");
-            if (button.innerHTML == "Pause Audio") {
-                audio.play();
-            } else if (button.innerHTML == "Play Audio"){
-                audio.pause();
-            }
-
+            playSound("tutorialEnd");
+            tutorial.gui.clearGUI();
             button.remove();
         }
     });
 }
 
-function playVideo(currentVideoNumber, videoURLs, canvas, canvasContext){
+function playVideo(currentVideoNumber, videoURLs, canvas, canvasContext, tutorial){
+    if(currentVideoNumber == 2 || currentVideoNumber == 3){
+        tutorial.gui.clearGUI();
+    }
+
     var video = document.createElement("video");
     video.setAttribute("src",  videoURLs[currentVideoNumber]);
     video.play();
@@ -144,6 +141,26 @@ function playVideo(currentVideoNumber, videoURLs, canvas, canvasContext){
     draw();
 }
 
+function playSound(soundID){
+    if(soundID == "tutorialWelcome" && (!sessionStorage.getItem("soundPlayed"))){
+        var audio = document.getElementById(soundID);
+        audio.play();
+        sessionStorage.setItem("soundPlayed", true);
+    } else if(!(soundID == "tutorialWelcome")) {
+        var audio = document.getElementById(soundID);
+        var button = document.getElementById("buttonAudio");
+        if (button.innerHTML == "Pause Audio") {
+            audio.play();
+        } else if (button.innerHTML == "Play Audio"){
+            audio.pause();
+        }
+    }
+}
+
+window.addEventListener("beforeunload", function() {
+    sessionStorage.removeItem("soundPlayed");
+});
+
 
 
 //Funktionen für Spielumgebungen des Tutorials
@@ -152,7 +169,7 @@ function warriorMechanics(canvas, canvasContext, tutorial){
     function update(){
         canvasContext.clearRect(0, 0, canvas.width, canvas.height);
         tutorial.render(canvasContext);
-        if(gameCounter == 1){
+        if(gameCounter == 2){
             tutorial.gui.deleteWarriorHearts(tutorial.warrior.health);
         }
         requestAnimationFrame(update);
@@ -165,8 +182,6 @@ function warriorMechanics(canvas, canvasContext, tutorial){
 }
 
 function zombieMechanics(canvas, canvasContext, tutorial){
-    tutorial.gui.clearGUI();
-
     function update(){
         canvasContext.clearRect(0, 0, canvas.width, canvas.height);
         tutorial.render(canvasContext);
@@ -176,4 +191,9 @@ function zombieMechanics(canvas, canvasContext, tutorial){
         requestAnimationFrame(update);
     }
     update();
+
+    if(gameCounter == 2){
+        tutorial.gui.warriorHearts(tutorial.warrior.health);
+        tutorial.gui.timer(2 * 60);
+    }
 }
