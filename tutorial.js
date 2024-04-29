@@ -19,7 +19,7 @@ class Tutorial{
         if(gameCounter == 1){
             const spawnSingleZombie = () => {
                 this.zombie.createZombie();
-                setTimeout(spawnSingleZombie, 6000);
+                setTimeout(spawnSingleZombie, 9000);
             }
             spawnSingleZombie();
         }
@@ -31,7 +31,6 @@ class Tutorial{
             }
             spawnZombie();
         }
-
     }
 
     render(context){
@@ -46,6 +45,16 @@ class Tutorial{
                 this.zombie.move();
                 this.zombie.checkBodyCollision(this.warrior);
                 this.warrior.checkBulletCollisionZombie(this.zombie.zombies);
+            }
+
+            if(gameCounter-1 == 3){
+                this.boss.draw(context, "boss");
+                this.boss.move();
+                this.boss.drawBullet(context, "heartDamage");
+                this.boss.bulletShoot();
+                this.boss.checkBulletCollision(this.warrior);
+                this.boss.checkBodyCollision(this.warrior);
+                this.warrior.checkBulletCollisionBoss(this.boss);
             }
         }
     }
@@ -71,7 +80,7 @@ window.addEventListener("load", function(){
     canvContext.fillText("Willkommen im Tutorial!", posX, posY);
 
     const buttonFurther = document.getElementById("buttonFurther");
-    const videoURLs = ["./videos/test_video.mp4", "./videos/test_video2.mp4", "./videos/test_video.mp4"];
+    const videoURLs = ["./videos/test_video.mp4", "./videos/test_video2.mp4", "./videos/test_video.mp4", "./videos/test_video2.mp4"];
     let currentVideoNumber = 0;
     let mode = false;
     modeSelection(buttonFurther, mode, currentVideoNumber, videoURLs, canvContext);
@@ -100,10 +109,11 @@ function modeSelection(button, mode, currentVideoNumber, videoURLs, canvasContex
             windowDimensions(canvas);
             if(gameCounter < 2){
                 warriorMechanics(canvas, canvasContext, tutorial);
-            } else if (gameCounter >= 2){
+            } else if (gameCounter == 2){
                 zombieMechanics(canvas, canvasContext, tutorial);
+            } else if (gameCounter == 3){
+                bossMechanics(canvas, canvasContext, tutorial);
             }
-            
             gameCounter += 1;
             mode = false;
         } else {
@@ -128,6 +138,9 @@ function modeSelection(button, mode, currentVideoNumber, videoURLs, canvasContex
 function playVideo(currentVideoNumber, videoURLs, canvas, canvasContext, tutorial){
     if(currentVideoNumber == 2 || currentVideoNumber == 3){
         tutorial.gui.clearGUI();
+    }
+    if(currentVideoNumber == 3 || currentVideoNumber == 4){
+        tutorial.gui.clearTimer();
     }
 
     var video = document.createElement("video");
@@ -164,7 +177,6 @@ window.addEventListener("beforeunload", function() {
 
 
 //Funktionen für Spielumgebungen des Tutorials
-
 function warriorMechanics(canvas, canvasContext, tutorial){
     function update(){
         canvasContext.clearRect(0, 0, canvas.width, canvas.height);
@@ -192,8 +204,20 @@ function zombieMechanics(canvas, canvasContext, tutorial){
     }
     update();
 
-    if(gameCounter == 2){
-        tutorial.gui.warriorHearts(tutorial.warrior.health);
-        tutorial.gui.timer(2 * 60);
+    tutorial.gui.warriorHearts(tutorial.warrior.health);
+    tutorial.gui.timer(2 * 60);
+}
+
+function bossMechanics(canvas, canvasContext, tutorial){
+    function update(){
+        canvasContext.clearRect(0, 0, canvas.width, canvas.height);
+        tutorial.render(canvasContext);
+        if(gameCounter > 0){
+            tutorial.gui.deleteWarriorHearts(tutorial.warrior.health);
+        }
+        requestAnimationFrame(update);
     }
+    update();
+
+    tutorial.gui.warriorHearts(tutorial.warrior.health);
 }

@@ -4,6 +4,7 @@ class GUI{
         this.gameCanvas = gameCanvas;
         this.countdown = 0;
         this.healthCounter = this.warrior.health;
+        this.timerClear = false;
     }
 
     warriorHearts(warriorHealth){
@@ -27,10 +28,17 @@ class GUI{
     clearGUI(){
         if (!(this.warrior.health == undefined)){
             for(let i = 0; i < this.warrior.health; i++){
-                let heart = document.getElementById("warriorHeart" + i);
-                heart.remove();
+                if(!(document.getElementById("warriorHeart" + i) == undefined)){
+                    let heart = document.getElementById("warriorHeart" + i);
+                    heart.remove();
+                }
             }
-        } 
+        }
+    }
+
+    clearTimer(){
+        var timer = document.getElementById("timer");
+        timer.remove();
     }
     
     timer(countdownSec){
@@ -43,7 +51,7 @@ class GUI{
 
             timer.textContent = this.timerDraw(seconds, minutes);
             countdownSec -= 1;
-        
+            
             if(countdownSec <= 0){
                 timer.textContent = "Time is Over!";
                 this.playSound("losing");
@@ -65,7 +73,7 @@ class GUI{
         }, 1000);
     }
 
-    //timerDraw() fügt eine "0" vor eine einstellige Zahl
+    //timerDraw() fügt eine "0" vor eine einstellige Zahl hinzu
     timerDraw(seconds, minutes){
         if(seconds < 10 && minutes < 10){
             return "0" + minutes + " : 0" + seconds;
