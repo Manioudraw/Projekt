@@ -290,7 +290,6 @@ loadCurrentKeyBindings();
 
 
 // Button-Abfrage, um Fokus nach einem Button wieder zum Menü zu führen
-
 document.addEventListener("keydown", function(event) {
     if(event.key == 'Tab') {
         var focusOn = document.activeElement;

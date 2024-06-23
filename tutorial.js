@@ -100,6 +100,12 @@ function modeSelection(button, mode, currentVideoNumber, videoURLs, canvasContex
         const tutorial = new Tutorial(canvas);
 
         if(mode == false && videoURLs.length > currentVideoNumber){
+            // var video = document.createElement("video");
+            // video.setAttribute("src",  videoURLs[currentVideoNumber]);
+            // const videoWidth = video.videoWidth;
+            // const videoHeight = video.videoHeight;
+            // canvas.width = videoWidth * 0.9;
+            // canvas.height = videoHeight * 0.9;
             canvas.width = window.innerWidth - 200;
             canvas.height = window.innerHeight - 150;
             playVideo(currentVideoNumber, videoURLs, canvas, canvasContext, tutorial);

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Audio Spiel</title>
+</head>
+<body>
+    <button id="play-sound">Sound Abspielen</button>
+
+    <script>
+        // Initialisiere den AudioContext
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+        // Funktion zum Laden und Dekodieren der Audiodatei
+        async function loadSound(url) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const arrayBuffer = await response.arrayBuffer();
+                return await audioContext.decodeAudioData(arrayBuffer);
+            } catch (error) {
+                console.error('Fehler beim Laden der Audiodatei:', error);
+            }
+        }
+
+        // Funktion zum Abspielen des Sounds an einer bestimmten Position
+        async function playSoundAtPosition(url, x, y, z) {
+            const soundBuffer = await loadSound(url);
+            if (!soundBuffer) {
+                console.error('Sound Buffer konnte nicht geladen werden.');
+                return;
+            }
+            const source = audioContext.createBufferSource();
+            source.buffer = soundBuffer;
+
+            // Erstelle einen PannerNode für die räumliche Positionierung
+            const panner = audioContext.createPanner();
+            panner.panningModel = 'HRTF';
+            panner.distanceModel = 'inverse';
+            panner.refDistance = 1;
+            panner.maxDistance = 10000;
+            panner.rolloffFactor = 1;
+            panner.coneInnerAngle = 360;
+            panner.coneOuterAngle = 0;
+            panner.coneOuterGain = 0;
+            
+            // Setze die Position der Audioquelle
+            panner.setPosition(x, y, z);
+
+            // Verbinde die AudioNodes
+            source.connect(panner);
+            panner.connect(audioContext.destination);
+
+            // Spiele den Sound ab
+            source.start();
+        }
+
+        // Beispielhafte Event-Listener für den Button
+        document.getElementById('play-sound').addEventListener('click', () => {
+            // Beispiel: Spiele den Sound von der Position (5, 0, -5)
+            playSoundAtPosition("./audio/music/backgroundMusic.mp3", 5, 0, -5);
+        });
+
+        // Funktion, die aufgerufen wird, wenn ein Gegner auftaucht
+        // function enemyAppears(x, y, z) {
+        //     playSoundAtPosition('./audio/music/backgroundMusic.mp3', x, y, z);
+        // }
+
+        // Beispielaufruf der Funktion (x, y, z Position des Gegners)
+        // Diese Funktion sollte aufgerufen werden, wenn ein Gegner im Spiel erscheint
+        // enemyAppears(10, 0, -10);
+    </script>
+</body>
+</html>
