@@ -73,12 +73,12 @@
             const y = parseFloat(document.getElementById('y-coord').value);
             const z = parseFloat(document.getElementById('z-coord').value);
 
-            playSoundAtPosition("./audio/music/backgroundMusic.mp3", x, y, z);
+            playSoundAtPosition("./audio/soundFiles/enemies/zombieWalking.mp3", x, y, z);
         });
 
         // Funktion, die aufgerufen wird, wenn ein Gegner auftaucht
         function enemyAppears(x, y, z) {
-            playSoundAtPosition('./audio/music/backgroundMusic.mp3', x, y, z);
+            playSoundAtPosition('./audio/soundFiles/enemies/zombieWalking.mp3', x, y, z);
         }
 
         // Beispielaufruf der Funktion (x, y, z Position des Gegners)
