@@ -20,7 +20,7 @@ class Zombie extends Enemy {
         this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
         this.listener = this.audioContext.listener;
         this.zombieSounds = {
-            walking: './audio/soundFiles/enemies/zombieWalking.mp3'
+            walking: './audio/soundFiles/enemies/enemyFootsteps.mp3'
         };
         this.audioBuffers = {};
         this.soundCooldown = false;
@@ -159,6 +159,6 @@ class Zombie extends Enemy {
         zombie.soundCooldown = true;
         setTimeout(() => {
             zombie.soundCooldown = false;
-        }, 2000);
+        }, 1000);
     }
 }
