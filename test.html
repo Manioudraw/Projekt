@@ -67,23 +67,26 @@
             source.start();
         }
 
+        // Setze die Position und Orientierung des AudioListeners
+        function setListenerPositionAndOrientation() {
+            const listener = audioContext.listener;
+
+            // Setze die Position des Listeners (Standardmäßig bei (0, 0, 0))
+            listener.setPosition(0, 0, 0);
+
+            // Setze die Orientierung des Listeners (nach vorne und oben)
+            listener.setOrientation(0, 0, -1, 0, 1, 0); // Blickrichtung: vorne (z-Achse), Oben: y-Achse
+        }
+
         // Event-Listener für den Button
         document.getElementById('play-sound').addEventListener('click', () => {
             const x = parseFloat(document.getElementById('x-coord').value);
             const y = parseFloat(document.getElementById('y-coord').value);
             const z = parseFloat(document.getElementById('z-coord').value);
 
+            setListenerPositionAndOrientation();
             playSoundAtPosition("./audio/soundFiles/enemies/zombieWalking.mp3", x, y, z);
         });
-
-        // Funktion, die aufgerufen wird, wenn ein Gegner auftaucht
-        function enemyAppears(x, y, z) {
-            playSoundAtPosition('./audio/soundFiles/enemies/zombieWalking.mp3', x, y, z);
-        }
-
-        // Beispielaufruf der Funktion (x, y, z Position des Gegners)
-        // Diese Funktion sollte aufgerufen werden, wenn ein Gegner im Spiel erscheint
-        enemyAppears(10, 0, -10);
     </script>
 </body>
 </html>

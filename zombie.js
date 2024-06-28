@@ -104,4 +104,19 @@ class Zombie extends Enemy {
             }
         }
     }
+    
+//     playMovingSound(){
+//         var xZombie = this.x;
+//         var yZombie = this.y;
+//         var zZombie = 0;
+
+//         var xWarrior = this.warrior.x;
+//         var yWarrior = this.warrior.y;
+//         var zWarrior = 0;
+
+//         setListenerPositionAndOrientation(xWarrior, yWarrior, zWarrior);
+//         playSoundAtPosition("./audio/soundFiles/enemies/zombieWalking.mp3", xZombie, yZombie, zZombie);
+
+//         console.log(33333333333333333);
+//     }'
 }
