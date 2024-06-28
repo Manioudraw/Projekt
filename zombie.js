@@ -15,6 +15,16 @@ class Zombie extends Enemy {
         this.canCollide = true;
         super.spawn(this.width, this.height);
         this.difficultyAdjustments();
+
+
+        //Sounds
+        this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        this.listener = this.audioContext.listener;
+        this.zombieSounds = {
+            walking: './audio/soundFiles/enemies/zombieWalking.mp3'
+        };
+        this.audioBuffers = {};
+        this.loadSounds();
     }
 
     draw(context, image){
@@ -45,6 +55,7 @@ class Zombie extends Enemy {
     move() {
         for (const zombie of this.zombies) {
             this.updateZombiePosition(zombie);
+            this.playMovingSound(zombie);
         }
     }
 
@@ -103,6 +114,36 @@ class Zombie extends Enemy {
                 this.zombieSpawnInterval = 1500;
             }
         }
+    }
+
+    async loadSounds() {
+        for (let sound in this.zombieSounds) {
+            const response = await fetch(this.zombieSounds[sound]);
+            const arrayBuffer = await response.arrayBuffer();
+            const audioBuffer = await this.audioContext.decodeAudioData(arrayBuffer);
+            this.audioBuffers[sound] = audioBuffer;
+        }
+    }
+
+    playMovingSound(zombie) {
+        const distance = Math.sqrt(
+            Math.pow(zombie.x - this.warrior.x, 2) + Math.pow(zombie.y - this.warrior.y, 2)
+        );
+
+        const volume = 1.0 - Math.min(1.0, distance / 500); // Je weiter weg, desto leiser
+        const panning = (zombie.x - this.warrior.x) / this.game.width; // Panning abhängig von der X-Position
+
+        const sound = this.audioContext.createBufferSource();
+        sound.buffer = this.audioBuffers.walking;
+
+        const gainNode = this.audioContext.createGain();
+        gainNode.gain.value = volume;
+
+        const panner = this.audioContext.createStereoPanner();
+        panner.pan.value = panning;
+
+        sound.connect(gainNode).connect(panner).connect(this.audioContext.destination);
+        sound.start(0);
     }
     
 //     playMovingSound(){
