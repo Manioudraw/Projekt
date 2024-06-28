@@ -57,7 +57,9 @@
             panner.coneOuterGain = 0;
             
             // Setze die Position der Audioquelle
-            panner.setPosition(x, y, z);
+            panner.positionX.value = x;
+            panner.positionY.value = y;
+            panner.positionZ.value = z;
 
             // Verbinde die AudioNodes
             source.connect(panner);

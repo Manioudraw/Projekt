@@ -21,11 +21,23 @@ class Boss extends Enemy {
         this.speedY = 0;
         this.canCollide = true;
         this.bulletControlSetup();
+
+        //Sounds
+        this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        this.listener = this.audioContext.listener;
+        this.bossSounds = {
+            walking: './audio/soundFiles/enemies/zombieWalking.mp3',
+            shooting: './audio/soundFiles/enemies/boss_appearance.mp3'
+        };
+        this.audioBuffers = {};
+        this.soundCooldown = false;
+        this.loadSounds();
     }
 
     draw(context, image){
         const enemyImg = document.getElementById(image);
         context.drawImage(enemyImg, this.x, this.y, this.width, this.height);
+        this.playMovingSound();
     }
 
     checkBodyCollision(warrior){
@@ -112,6 +124,7 @@ class Boss extends Enemy {
             height: this.bulletHeight,
             speedX: xSpeed,
             speedY: ySpeed,
+            soundCooldown: false
         };
         this.bullets.push(newBullet);
     }
@@ -120,6 +133,8 @@ class Boss extends Enemy {
         for (const bullet of this.bullets){
             bullet.x += bullet.speedX * this.bulletSpeed;
             bullet.y += bullet.speedY * this.bulletSpeed;
+
+            this.playShootingSound(bullet);
         }
     }
 
@@ -192,5 +207,88 @@ class Boss extends Enemy {
                 this.health = 20;
             }
         }
+    }
+
+    async loadSounds() {
+        for (let sound in this.bossSounds) {
+            const response = await fetch(this.bossSounds[sound]);
+            const arrayBuffer = await response.arrayBuffer();
+            const audioBuffer = await this.audioContext.decodeAudioData(arrayBuffer);
+            this.audioBuffers[sound] = audioBuffer;
+        }
+    }
+
+    playMovingSound() {
+        if (this.soundCooldown) return;
+
+        const distance = Math.sqrt(
+            Math.pow(this.x - this.warrior.x, 2) + Math.pow(this.y - this.warrior.y, 2)
+        );
+
+        const volume = 1.0 - Math.min(1.0, distance / 500); // Je weiter weg, desto leiser
+        
+        const sound = this.audioContext.createBufferSource();
+        sound.buffer = this.audioBuffers.walking;
+
+        const gainNode = this.audioContext.createGain();
+        gainNode.gain.value = volume;
+
+        const panner = this.audioContext.createPanner();
+        panner.panningModel = 'HRTF'; 
+        panner.distanceModel = 'linear';
+
+        const x = this.x - this.warrior.x;
+        const y = this.y - this.warrior.y;
+        const z = -0.5 * Math.sqrt(x * x + y * y); // Z für etwas Tiefe
+
+        panner.positionX.value = x;
+        panner.positionY.value = y;
+        panner.positionZ.value = z;
+
+        sound.connect(gainNode).connect(panner).connect(this.audioContext.destination);
+        sound.start(0);
+
+        this.soundCooldown = true;
+        setTimeout(() => {
+            this.soundCooldown = false;
+        }, 2000);
+    }
+
+    playShootingSound(bullet) {
+        if (bullet.soundCooldown) return;
+
+        const distance = Math.sqrt(
+            Math.pow(bullet.x - this.warrior.x, 2) + Math.pow(bullet.y - this.warrior.y, 2)
+        );
+
+        const volume = 1.0 - Math.min(1.0, distance / 500); // Je weiter weg, desto leiser
+        
+        const sound = this.audioContext.createBufferSource();
+        sound.buffer = this.audioBuffers.shooting;
+
+        const gainNode = this.audioContext.createGain();
+        gainNode.gain.value = volume;
+
+        const panner = this.audioContext.createPanner();
+        panner.panningModel = 'HRTF'; 
+        panner.distanceModel = 'linear';
+
+        const x = bullet.x - this.warrior.x;
+        const y = bullet.y - this.warrior.y;
+        const z = -0.5 * Math.sqrt(x * x + y * y); // Z für etwas Tiefe
+
+        panner.positionX.value = x;
+        panner.positionY.value = y;
+        panner.positionZ.value = z;
+
+        sound.playbackRate.value = 0.5;
+
+        sound.connect(gainNode).connect(panner).connect(this.audioContext.destination);
+        sound.start(0);
+
+        bullet.soundCooldown = true;
+        setTimeout(() => {
+            bullet.soundCooldown = false;
+        }, 2000);
     }
 }

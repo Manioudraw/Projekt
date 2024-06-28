@@ -16,7 +16,6 @@ class Zombie extends Enemy {
         super.spawn(this.width, this.height);
         this.difficultyAdjustments();
 
-
         //Sounds
         this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
         this.listener = this.audioContext.listener;
@@ -24,6 +23,7 @@ class Zombie extends Enemy {
             walking: './audio/soundFiles/enemies/zombieWalking.mp3'
         };
         this.audioBuffers = {};
+        this.soundCooldown = false;
         this.loadSounds();
     }
 
@@ -42,6 +42,7 @@ class Zombie extends Enemy {
             height: this.height,
             speed: this.speed,
             health: this.health,
+            soundCooldown: false
         };
         
         super.spawn(newZombie.width, newZombie.height);
@@ -126,38 +127,38 @@ class Zombie extends Enemy {
     }
 
     playMovingSound(zombie) {
+        if (zombie.soundCooldown) return;
+
         const distance = Math.sqrt(
             Math.pow(zombie.x - this.warrior.x, 2) + Math.pow(zombie.y - this.warrior.y, 2)
         );
 
         const volume = 1.0 - Math.min(1.0, distance / 500); // Je weiter weg, desto leiser
-        const panning = (zombie.x - this.warrior.x) / this.game.width; // Panning abhängig von der X-Position
-
+        
         const sound = this.audioContext.createBufferSource();
         sound.buffer = this.audioBuffers.walking;
 
         const gainNode = this.audioContext.createGain();
         gainNode.gain.value = volume;
 
-        const panner = this.audioContext.createStereoPanner();
-        panner.pan.value = panning;
+        const panner = this.audioContext.createPanner();
+        panner.panningModel = 'HRTF'; 
+        panner.distanceModel = 'linear';
+
+        const x = zombie.x - this.warrior.x;
+        const y = zombie.y - this.warrior.y;
+        const z = -0.5 * Math.sqrt(x * x + y * y); // Z für etwas Tiefe
+
+        panner.positionX.value = x;
+        panner.positionY.value = y;
+        panner.positionZ.value = z;
 
         sound.connect(gainNode).connect(panner).connect(this.audioContext.destination);
         sound.start(0);
+
+        zombie.soundCooldown = true;
+        setTimeout(() => {
+            zombie.soundCooldown = false;
+        }, 2000);
     }
-    
-//     playMovingSound(){
-//         var xZombie = this.x;
-//         var yZombie = this.y;
-//         var zZombie = 0;
-
-//         var xWarrior = this.warrior.x;
-//         var yWarrior = this.warrior.y;
-//         var zWarrior = 0;
-
-//         setListenerPositionAndOrientation(xWarrior, yWarrior, zWarrior);
-//         playSoundAtPosition("./audio/soundFiles/enemies/zombieWalking.mp3", xZombie, yZombie, zZombie);
-
-//         console.log(33333333333333333);
-//     }'
 }
