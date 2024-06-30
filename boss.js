@@ -27,10 +27,15 @@ class Boss extends Enemy {
         this.listener = this.audioContext.listener;
         this.bossSounds = {
             walking: './audio/soundFiles/enemies/enemyFootsteps.mp3',
-            shooting: './audio/soundFiles/enemies/bossShotPos.mp3'
+            shooting: './audio/soundFiles/enemies/bossShotPos.mp3',
+            fromTop: './audio/soundFiles/enemies/fromTop.mp3',
+            fromBottom: './audio/soundFiles/enemies/fromBottom.mp3',
+            fromLeft: './audio/soundFiles/enemies/fromLeft.mp3',
+            fromRight: './audio/soundFiles/enemies/fromRight.mp3'
         };
         this.audioBuffers = {};
         this.soundCooldown = false;
+        this.closenessSoundCooldown = false;
         this.loadSounds();
     }
 
@@ -40,6 +45,10 @@ class Boss extends Enemy {
 
         if(this.checkForSoundAvailibility()){
             this.playMovingSound();
+
+            if(this.checkClosenessToWarrior()){
+                this.playClosenessSound();
+            }
         }
     }
 
@@ -306,4 +315,48 @@ class Boss extends Enemy {
             bullet.soundCooldown = false;
         }, 2000);
     }
-}
+
+    checkClosenessToWarrior() {
+        const warriorCircleRadius = 200;
+        const warriorCenterX = this.warrior.x + this.warrior.width / 2;
+        const warriorCenterY = this.warrior.y + this.warrior.height / 2;
+        const bossCenterX = this.x + this.width / 2;
+        const bossCenterY = this.y + this.height / 2;
+        const distance = Math.sqrt(
+            Math.pow(bossCenterX - warriorCenterX, 2) + Math.pow(bossCenterY - warriorCenterY, 2)
+        );
+        return distance <= warriorCircleRadius;
+    }
+
+    playClosenessSound() {
+        if (this.closenessSoundCooldown) return;
+
+        const dx = this.x - (this.warrior.x + this.warrior.width / 2);
+        const dy = this.y - (this.warrior.y + this.warrior.height / 2);
+
+        let soundBuffer;
+        if (Math.abs(dx) > Math.abs(dy)) {
+            if (dx > 0) {
+                soundBuffer = this.audioBuffers.fromRight; //Boss kommt von rechts
+            } else {
+                soundBuffer = this.audioBuffers.fromLeft; //Boss kommt von links
+            }
+        } else {
+            if (dy > 0) {
+                soundBuffer = this.audioBuffers.fromBottom; //Boss kommt von unten
+            } else {
+                soundBuffer = this.audioBuffers.fromTop; //Boss kommt von oben
+            }
+        }
+
+        const sound = this.audioContext.createBufferSource();
+        sound.buffer = soundBuffer;
+        sound.connect(this.audioContext.destination);
+        sound.start(0);
+
+        this.closenessSoundCooldown = true;
+        setTimeout(() => {
+            this.closenessSoundCooldown = false;
+        }, sound.buffer.duration * 2000);
+    }
+   }

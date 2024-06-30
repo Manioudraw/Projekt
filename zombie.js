@@ -64,10 +64,10 @@ class Zombie extends Enemy {
             
             if(this.checkForSoundAvailibility()){
                 this.playMovingSound(zombie);
-            }
 
-            if (this.checkForSoundAvailibility() && this.checkClosenessToWarrior(zombie)) {
-                this.playClosenessSound(zombie);
+                if(this.checkClosenessToWarrior(zombie)) {
+                    this.playClosenessSound(zombie);
+                }
             }
         }
     }
@@ -184,16 +184,7 @@ class Zombie extends Enemy {
         }, 1000);
     }
 
-    // checkClosenessToWarrior(zombie) {
-    //     const warriorCircleRadius = 100; 
-    //     const distance = Math.sqrt(
-    //         Math.pow(zombie.x - this.warrior.x, 2) + Math.pow(zombie.y - this.warrior.y, 2)
-    //     );
-    //     return distance <= warriorCircleRadius;
-    // }
-
     checkClosenessToWarrior(zombie) {
-        const circle = document.getElementById("closenessCircle");
         const warriorCircleRadius = 150;
         const warriorCenterX = this.warrior.x + this.warrior.width / 2;
         const warriorCenterY = this.warrior.y + this.warrior.height / 2;
