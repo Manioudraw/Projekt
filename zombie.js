@@ -20,7 +20,11 @@ class Zombie extends Enemy {
         this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
         this.listener = this.audioContext.listener;
         this.zombieSounds = {
-            walking: './audio/soundFiles/enemies/enemyFootsteps.mp3'
+            walking: './audio/soundFiles/enemies/enemyFootsteps.mp3',
+            fromTop: './audio/soundFiles/enemies/fromTop.mp3',
+            fromBottom: './audio/soundFiles/enemies/fromBottom.mp3',
+            fromLeft: './audio/soundFiles/enemies/fromLeft.mp3',
+            fromRight: './audio/soundFiles/enemies/fromRight.mp3'
         };
         this.audioBuffers = {};
         this.soundCooldown = false;
@@ -56,7 +60,14 @@ class Zombie extends Enemy {
     move() {
         for (const zombie of this.zombies) {
             this.updateZombiePosition(zombie);
-            this.playMovingSound(zombie);
+            
+            if(this.checkForSoundAvailibility()){
+                this.playMovingSound(zombie);
+            }
+
+            if (this.checkForSoundAvailibility() && this.checkClosenessToWarrior(zombie)) {
+                this.playClosenessSound(zombie);
+            }
         }
     }
 
@@ -117,6 +128,16 @@ class Zombie extends Enemy {
         }
     }
 
+    checkForSoundAvailibility(){
+        var button = document.getElementById("buttonAudio");
+
+        if (button.innerHTML == "Pause Audio") {
+            return true;
+        } else if (button.innerHTML == "Play Audio"){
+            return false;
+        }
+    }
+
     async loadSounds() {
         for (let sound in this.zombieSounds) {
             const response = await fetch(this.zombieSounds[sound]);
@@ -160,5 +181,38 @@ class Zombie extends Enemy {
         setTimeout(() => {
             zombie.soundCooldown = false;
         }, 1000);
+    }
+
+    checkClosenessToWarrior(zombie) {
+        const warriorCircleRadius = 100; 
+        const distance = Math.sqrt(
+            Math.pow(zombie.x - this.warrior.x, 2) + Math.pow(zombie.y - this.warrior.y, 2)
+        );
+        return distance <= warriorCircleRadius;
+    }
+
+    playClosenessSound(zombie) {
+        const dx = zombie.x - this.warrior.x;
+        const dy = zombie.y - this.warrior.y;
+
+        let soundBuffer;
+        if (Math.abs(dx) > Math.abs(dy)) {
+            if (dx > 0) {
+                soundBuffer = this.audioBuffers.fromRight; //Zombie kommt von rechts
+            } else {
+                soundBuffer = this.audioBuffers.fromLeft; //Zombie kommt von links
+            }
+        } else {
+            if (dy > 0) {
+                soundBuffer = this.audioBuffers.fromBottom; //Zombie kommt von unten
+            } else {
+                soundBuffer = this.audioBuffers.fromTop; //Zombie kommt von oben
+            }
+        }
+
+        const sound = this.audioContext.createBufferSource();
+        sound.buffer = soundBuffer;
+        sound.connect(this.audioContext.destination);
+        sound.start(0);
     }
 }

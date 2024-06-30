@@ -27,6 +27,22 @@ class Warrior{
     draw(context){
         const warriorImg = document.getElementById("warrior");
         context.drawImage(warriorImg, this.x, this.y, this.width, this.height);
+        this.drawCircle();
+    }
+
+    drawCircle(){
+        const circle = document.getElementById("closenessCircle");
+        if (circle != null) {
+            const radius = 100;
+            const warriorCenterX = this.x + this.width;
+            const warriorCenterY = this.y + this.height;
+
+            // circle.style.left = `${warriorCenterX - radius / 2}px`;
+            // circle.style.top = `${warriorCenterY - radius}px`;
+
+            circle.style.left = `${warriorCenterX - radius / 2.5}px`;
+            circle.style.top = `${warriorCenterY - radius / 1.5}px`;
+        }
     }
 
     move(){

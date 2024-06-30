@@ -35,6 +35,17 @@
     user-select: none;
 }
 
+#closenessCircle {
+    position: absolute;
+    border: 2px solid rgb(0, 21, 255);
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    background-color: transparent;
+    pointer-events: none;
+    z-index: 0;
+}
+
 #backToGame {
     width: 60px;
     height: 60px;

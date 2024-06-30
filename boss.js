@@ -37,7 +37,10 @@ class Boss extends Enemy {
     draw(context, image){
         const enemyImg = document.getElementById(image);
         context.drawImage(enemyImg, this.x, this.y, this.width, this.height);
-        this.playMovingSound();
+
+        if(this.checkForSoundAvailibility()){
+            this.playMovingSound();
+        }
     }
 
     checkBodyCollision(warrior){
@@ -134,7 +137,9 @@ class Boss extends Enemy {
             bullet.x += bullet.speedX * this.bulletSpeed;
             bullet.y += bullet.speedY * this.bulletSpeed;
 
-            this.playShootingSound(bullet);
+            if(this.checkForSoundAvailibility()){
+                this.playShootingSound(bullet);
+            }
         }
     }
 
@@ -206,6 +211,16 @@ class Boss extends Enemy {
             } else if(difficulty == "challenging") {
                 this.health = 20;
             }
+        }
+    }
+
+    checkForSoundAvailibility(){
+        var button = document.getElementById("buttonAudio");
+
+        if (button.innerHTML == "Pause Audio") {
+            return true;
+        } else if (button.innerHTML == "Play Audio"){
+            return false;
         }
     }
 
