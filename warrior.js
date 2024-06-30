@@ -27,21 +27,19 @@ class Warrior{
     draw(context){
         const warriorImg = document.getElementById("warrior");
         context.drawImage(warriorImg, this.x, this.y, this.width, this.height);
-        this.drawCircle();
     }
 
     drawCircle(){
         const circle = document.getElementById("closenessCircle");
         if (circle != null) {
-            const radius = 100;
-            const warriorCenterX = this.x + this.width;
-            const warriorCenterY = this.y + this.height;
+            circle.style.display = 'initial';
+            var canvas = document.getElementById('canvas');
+            var rect = canvas.getBoundingClientRect();
+            var canvasLeft = rect.left;
+            var canvasTop = rect.top;
 
-            // circle.style.left = `${warriorCenterX - radius / 2}px`;
-            // circle.style.top = `${warriorCenterY - radius}px`;
-
-            circle.style.left = `${warriorCenterX - radius / 2.5}px`;
-            circle.style.top = `${warriorCenterY - radius / 1.5}px`;
+            circle.style.left = `${this.x + (canvasLeft * 0.35)}px`;
+            circle.style.top = `${this.y + (canvasTop * 0.25)}px`;
         }
     }
 

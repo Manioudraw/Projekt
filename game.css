@@ -36,14 +36,21 @@
 }
 
 #closenessCircle {
+    display: none;
     position: absolute;
-    border: 2px solid rgb(0, 21, 255);
+    border: 5px solid #1b4848d7;
     border-radius: 50%;
     width: 200px;
     height: 200px;
     background-color: transparent;
     pointer-events: none;
     z-index: 0;
+    box-shadow:
+    0 0 5px 1px #b1d4d49a,
+    0 0 10px 1px #92c9c9,
+    0 0 10px 1px #86b2b2,
+    inset 1px 0 10px #98d8d8,
+    inset -1px 0 10px #6cbbbb;
 }
 
 #backToGame {

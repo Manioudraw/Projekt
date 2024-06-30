@@ -27,6 +27,7 @@ class Game{
     render(context){
         if(this.warrior.health > 0 && this.boss.health > 0){
             this.warrior.draw(context);
+            this.warrior.drawCircle();
             this.warrior.move(context);
             this.warrior.drawBullet(context, "warriorBullet");
             this.warrior.bulletShoot();
@@ -58,6 +59,10 @@ class Game{
                 this.boss.checkBodyCollision(this.warrior);
                 this.warrior.checkBulletCollisionBoss(this.boss);
             }
+        }
+        else {
+            const circle = document.getElementById("closenessCircle");
+            circle.style.display = 'none';
         }
     }
 

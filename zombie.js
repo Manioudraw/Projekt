@@ -46,7 +46,8 @@ class Zombie extends Enemy {
             height: this.height,
             speed: this.speed,
             health: this.health,
-            soundCooldown: false
+            soundCooldown: false,
+            closenessSoundCooldown: false
         };
         
         super.spawn(newZombie.width, newZombie.height);
@@ -183,17 +184,32 @@ class Zombie extends Enemy {
         }, 1000);
     }
 
+    // checkClosenessToWarrior(zombie) {
+    //     const warriorCircleRadius = 100; 
+    //     const distance = Math.sqrt(
+    //         Math.pow(zombie.x - this.warrior.x, 2) + Math.pow(zombie.y - this.warrior.y, 2)
+    //     );
+    //     return distance <= warriorCircleRadius;
+    // }
+
     checkClosenessToWarrior(zombie) {
-        const warriorCircleRadius = 100; 
+        const circle = document.getElementById("closenessCircle");
+        const warriorCircleRadius = 150;
+        const warriorCenterX = this.warrior.x + this.warrior.width / 2;
+        const warriorCenterY = this.warrior.y + this.warrior.height / 2;
+        const zombieCenterX = zombie.x + zombie.width / 2;
+        const zombieCenterY = zombie.y + zombie.height / 2;
         const distance = Math.sqrt(
-            Math.pow(zombie.x - this.warrior.x, 2) + Math.pow(zombie.y - this.warrior.y, 2)
+            Math.pow(zombieCenterX - warriorCenterX, 2) + Math.pow(zombieCenterY - warriorCenterY, 2)
         );
         return distance <= warriorCircleRadius;
     }
 
     playClosenessSound(zombie) {
-        const dx = zombie.x - this.warrior.x;
-        const dy = zombie.y - this.warrior.y;
+        if (zombie.closenessSoundCooldown) return;
+
+        const dx = zombie.x - (this.warrior.x + this.warrior.width / 2);
+        const dy = zombie.y - (this.warrior.y + this.warrior.height / 2);
 
         let soundBuffer;
         if (Math.abs(dx) > Math.abs(dy)) {
@@ -214,5 +230,10 @@ class Zombie extends Enemy {
         sound.buffer = soundBuffer;
         sound.connect(this.audioContext.destination);
         sound.start(0);
+
+        zombie.closenessSoundCooldown = true;
+        setTimeout(() => {
+            zombie.closenessSoundCooldown = false;
+        }, sound.buffer.duration * 2500);
     }
 }
